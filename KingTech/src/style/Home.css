@@ -1,0 +1,13 @@
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 90px);
+}
+.home h1 {
+    background-color: black;
+    color: white;
+    padding: 30px;
+    font-size: 3rem;
+}
