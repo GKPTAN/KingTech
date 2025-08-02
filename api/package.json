@@ -1,0 +1,35 @@
+{
+  "name": "kingtech",
+  "version": "1.0.0",
+  "description": "api para marketplaces",
+  "homepage": "https://github.com/GKPTAN/KingTech#readme",
+  "bugs": {
+    "url": "https://github.com/GKPTAN/KingTech/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GKPTAN/KingTech.git"
+  },
+  "license": "MIT",
+  "author": "GKPTAN",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.0.1",
+    "@supabase/supabase-js": "^2.49.4",
+    "axios": "^1.10.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.5.0",
+    "fastify": "^5.3.3",
+    "hibp": "^15.0.1",
+    "nodemailer": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/nodemailer": "^6.4.17"
+  }
+}

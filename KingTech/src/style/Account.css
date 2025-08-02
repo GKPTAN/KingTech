@@ -1,13 +1,15 @@
 .account {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 24px;
     justify-content: center;
-    width: 100vw;
-    height: calc(100vh - 90px);
+    width: 100%;
+    height: 100%;
 }
-.account h1{
-    background-color: black;
-    color: white;
-    padding: 30px;
-    font-size: 3rem;
+h2 {
+    color: #233d4d;
+    font-family: 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;  
 }
