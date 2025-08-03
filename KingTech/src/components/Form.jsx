@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { RingLoader } from "react-spinners"
+import { RingLoader } from "react-spinners";
+import { PiWarning } from "react-icons/pi";
 import Button from "./layout/Button";
 
 const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) => {
@@ -38,7 +39,7 @@ const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) =>
 
   return (
     <form onSubmit={handleSubmit} className={classname}>
-      {message && <p className={error}>{message}</p>}
+      {message && <p className={error}>{error ? <PiWarning /> : ""} {message}</p>}
       {children}
       <Button className="button-form" type="submit" nameAction={loading ? 
       <RingLoader

@@ -1,5 +1,7 @@
+import { request } from "http";
 import registerController from "../controllers/register.js";
 import verifyController from "../controllers/verify.js";
+import loginController from "../controllers/login.js";
 
 const AuthRoutes = async (fastify, options) => {
     fastify.post("/register", async (request, reply) => {
@@ -7,6 +9,9 @@ const AuthRoutes = async (fastify, options) => {
     });
     fastify.post("/verify", async (request, reply) => {
         await verifyController(request, reply, fastify.supabase);
+    });
+    fastify.post("/login", async (request, reply) => {
+        await loginController(request, reply, fastify.supabase);
     });
 };
 

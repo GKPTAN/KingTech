@@ -6,17 +6,25 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
 
     const login = async (email, password) => {
-        const response = await fetch('auth/login', {
-            method: 'POST',
-            headers: {
+        try {
+            const response = await fetch('auth/login', {
+                method: 'POST',
+                headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({email, password}),
-        });
+                },
+                body: JSON.stringify({email, password}),
+            });
 
-        const data = await response.json();
-        setUser(data.user);
-        return data;
+            const data = await response.json();
+            setUser(data.user);
+            return data;
+        } catch (error) {
+            console.error("Erro no login: ", error);
+            return {
+                error: true,
+                message: "Erro ao conectar com o servidor, tente novamente mais tarde",
+            };
+        };
     };
 
     const register = async (userData) => {
