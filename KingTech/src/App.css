@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: calc(100vh + 50px);
+  min-height: 100vh;
 }
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #233d4d;
+  background-color: #012B29;
   width: 100vw;
 }
 .navbar img {

@@ -1,12 +1,28 @@
 .home {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100vw;
+    width: 100%;
+    margin-bottom: 2rem;
 }
-.home h1 {
-    background-color: black;
-    color: white;
-    padding: 30px;
-    font-size: 3rem;
+h2 {
+    color: #233d4d;
+    font-family: 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;  
+}
+.main-store {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.carrossel {
+    width: 100%;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin: 20px 0;
 }

@@ -1,4 +1,3 @@
-import { request } from "http";
 import registerController from "../controllers/register.js";
 import verifyController from "../controllers/verify.js";
 import loginController from "../controllers/login.js";

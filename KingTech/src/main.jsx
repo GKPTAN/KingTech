@@ -14,6 +14,8 @@ import Admin from './routes/Admin';
 import Login from './pages/account/Login';
 import Registro from './pages/account/Registro';
 import Dashboard from './pages/account/Dashboard';
+import ProductPage from './routes/ProductPage';
+import DepartmentPage from './pages/departments/DepartmentPage';
 import './index.css';
 import App from './App.jsx';
 
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
         element: <Departments />,
       },
       {
+        path: "/departments/:department",
+        element: <DepartmentPage />,
+      },
+      {
         path: "/favorites",
         element: <Favorites />,
       },
@@ -73,6 +79,10 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <Admin />,
       },
+      {
+        path: "/product/:id/:name",
+        element: <ProductPage />,
+      }
     ],
   },
 ]);

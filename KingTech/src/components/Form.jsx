@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RingLoader } from "react-spinners";
 import { PiWarning } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 import Button from "./layout/Button";
 
 const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) => {
@@ -8,6 +9,7 @@ const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) =>
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,11 +24,13 @@ const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) =>
         setError("error");
         return;
       }
-      if (result?.field === "email") {
-        
-      }
       setMessage(result?.message || "Operação realizada com sucesso");
       setError(result?.error === true ? "error" : "sucess");
+      if (!error) {
+        if (result.location) {
+          navigate(result.location);
+        }; 
+      }
     } catch (error) {
       setMessage("Ocorreu um erro no servidor!, tente novamente mais tarde.");
     } finally {

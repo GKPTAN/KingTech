@@ -13,7 +13,12 @@ const verifyController = async (request, reply, supabase) => {
     try {
         const result = await AuthClient.verifyAndCreateUser(user_id, code);
         reply.clearCookie("user_id");
-        return reply.status(200).send({ message: "E-mail confirmado com sucesso", error: false });
+        return reply.status(200).send({ 
+            message: "E-mail confirmado com sucesso", 
+            error: false, 
+            technicalError: false, 
+            location: "/account/login",
+        });
     } catch (error) {
         console.error("Erro ao verificar usuário:", error);
         if (error.message === "Usuário não encontrado ou erro ao buscar dados.") {
