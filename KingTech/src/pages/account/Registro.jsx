@@ -5,7 +5,7 @@ import Select from "../../components/layout/form/Select";
 import { useState } from "react";
 import validateData from "../../utils/validateData";
 import { GoInfo } from "react-icons/go";
-import "../../style/pages/registro.css";
+import styles from "../../style/pages/auth/Registro.module.css";
 
 const Registro = () => {
   const [date, setDate] = useState("");
@@ -91,12 +91,13 @@ const Registro = () => {
   return (
     <>
       <h2>Cadastrar conta</h2>
-      <section className="registro">
+      <section className={styles.registro}>
         <Form
           onSubmit={handleRegister}
           buttonAction="Continuar"
-          classname="registro-form"
+          classname={styles.registro_form}
           disabled={disabled}
+          styles={styles}
         >
           <input
             type="text"
@@ -143,10 +144,10 @@ const Registro = () => {
             maxLength="16"
             required
           />
-          <span className="info" onClick={() => setShowModal(true)}><GoInfo /></span>
+          <span className={styles.info} onClick={() => setShowModal(true)}><GoInfo /></span>
           {showModal && (
-            <div className="modal-overlay">
-              <div className="modal-content" onClick={() => setShowModal(false)}>
+            <div className={styles.modal_overlay}>
+              <div className={styles.modal_content} onClick={() => setShowModal(false)}>
                 <h3>Requisitos para a senha:</h3>
                 <ul>
                   <li>É recomendado que a sua senha deva ter números e simbolos</li>
@@ -172,7 +173,7 @@ const Registro = () => {
         <p>
           Já tem uma conta? <Link to="/account/login">Faça Login</Link>
         </p>
-        <Form onSubmit={handleConfirm} buttonAction="Confirmar" classname={disabled ? "confirm-form" : "hidden"}>
+        <Form onSubmit={handleConfirm} buttonAction="Confirmar" classname={disabled ? styles.confirm_form : styles.hidden}>
             <h2>código de confirmação</h2>
             <input 
               type="text"

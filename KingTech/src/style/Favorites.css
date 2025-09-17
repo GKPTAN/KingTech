@@ -1,12 +1,191 @@
 .favorites {
     display: flex;
     align-items: center;
-    justify-content: center;
+    flex-direction: column;
     width: 100vw;
+    min-height: 100vh;
+    padding-bottom: 2rem;
 }
-.favorites h1 {
-    background-color: black;
-    color: white;
-    padding: 30px;
-    font-size: 3rem;
+/* Para usuários anônimos */
+.favorites .anon {
+    width: 50%;
+    margin: 2rem 0;
+    text-align: center;
+}
+.favorites .anon h2 {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 96px;
+    gap: 0.5rem;
+}
+.favorites .anon h2 .emoji {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-self: flex-start;
+}
+.favorites .anon div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.favorites .anon div .login-link {
+    background-color: #012B29;
+    color: #fff;
+    padding: 0.5rem;
+    width: 35%;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+.favorites .anon div .login-link:hover {
+    transform: scale(1.1);
+    color: #F9CB40;
+}
+.favorites .anon div .register-link {
+    background-color: #fff;
+    color: #000;
+    padding: 0.5rem;
+    width: 35%;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+.favorites .anon div .register-link:hover {
+    transform: scale(0.9);
+}
+/* Para clientes da loja */
+.favorites .favorites-box {
+    width: 100%;
+    max-width: 1800px;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.favorites .favorites-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    justify-items: center;
+}
+.favorites .favorites-list .favorite-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.favorites .favorites-list .product-card.landscape {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 1.5rem 2rem;
+    gap: 2rem;
+    width: 100%;
+    max-width: 420px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.favorites .favorites-list .product-card.landscape:hover {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.301);
+    transform: scale(1.01);
+}
+.favorites .favorites-list .product-card.landscape img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #f5f5f5;
+}
+.favorites .favorites-list .product-card.landscape .info-prod {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.favorites .favorites-list .product-card.landscape .name-product {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #012B29;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.favorites .favorites-list .product-card.landscape .royalty {
+    display: none;
+}
+.favorites .favorites-list .product-card.landscape .rating-favorite-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+}
+.favorites .favorites-list .product-card.landscape .prev-price {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+}
+.favorites .favorites-list .product-card.landscape .price-product {
+    color: #047973;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.1rem;
+}
+.favorites .favorites-list .product-card.landscape p {
+    margin: 0.1rem 0;
+    font-size: 1rem;
+    color: #012B29;
+}
+.favorites .favorites-list .product-card.landscape .btn-buy.hidden {
+    display: none;
+}
+/* Aviso de "Sem favoritos" */
+.favorites .aviso {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.2rem;
+    margin: 3rem 0;
+    padding: 2.5rem 2rem;
+    border-radius: 14px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+}
+.favorites .aviso h2 {
+    font-size: 1.5rem;
+    color: #d32f2f;
+    margin: 0;
+}
+.favorites .aviso p {
+    color: #012B29;
+    font-size: 1.1rem;
+}
+.favorites .aviso .btn-aviso {
+    background-color: #047973;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.favorites .aviso .btn-aviso:hover {
+    background-color: #012B29;
 }

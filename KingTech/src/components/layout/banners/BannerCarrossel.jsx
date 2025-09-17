@@ -16,6 +16,7 @@ const SamplePrevArrow = (props) => {
         display: "flex", 
         alignItems: "center", 
         justifyContent: "center", 
+        left: "10px",
         zIndex: "100" 
     }}
       onClick={onClick}
@@ -33,6 +34,7 @@ const SampleNextArrow = (props) => {
         display: "flex", 
         alignItems: "center", 
         justifyContent: "center", 
+        right: "10px",
         zIndex: "100" 
     }}
       onClick={onClick}
@@ -59,11 +61,11 @@ const BannerCarrossel = ({ banners, className }) => {
     <div className={className}>
       <Slider {...settings}>
         {banners.map((banner) => (
-          <div key={banner.id} className="banner-slide-wrapper">
+          <div key={banner.id} className="banner_slide_wrapper">
             <img
               src={banner.src}
               alt="banner promocional"
-              className="banner-slide"
+              className="banner_slide"
             />
           </div>
         ))}

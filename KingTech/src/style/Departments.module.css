@@ -4,7 +4,7 @@
     width: 100vw;
     height: 500px;
 }
-.departments .departments-list {
+.departments .departments_list {
     margin-bottom: 2rem;
     list-style: none;
     display: flex;
@@ -13,16 +13,14 @@
     background-color: #fff;
     padding: 0.5rem 1rem;
 }
-.departments-list .department-item {
-     text-align: center;
+.departments_list .department_item {
+    text-align: center;
+    position: relative;
 }
-.departments-list li h3 {
+.departments_list li h3 {
     width: 100%;
     padding: 0.5rem;
     height: 58px;
-}
-.department-item {
-    position: relative;
 }
 .subcategories {
     list-style: none;
@@ -30,16 +28,17 @@
     padding: 0;
     width: 100%;
 }
-.subcategories li {
+.departments .subcategories li {
     border-bottom: 1px solid #000;
     transition: all 0.3s ease-in-out;
-}
-.subcategories li:hover {
     padding: 0.5rem 0;
 }
-.subcategories li a {
+.departments .subcategories li:hover {
+    padding: 1rem 0;
+}
+.departments .subcategories li a {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     border: none;
     background-color: transparent;
     color: #000;

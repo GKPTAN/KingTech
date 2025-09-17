@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import '../style/Account.css';
+import styles from "../style/Account.module.css";
 
 const Account = () => {
   return (
-    <div className='account'>
+    <div className={styles.account}>
       <title>Conta</title>
         <Outlet />
     </div>

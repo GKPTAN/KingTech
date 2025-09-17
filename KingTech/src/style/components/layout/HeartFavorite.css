@@ -1,0 +1,34 @@
+.heart_bubbly_wrapper {
+    position: relative;
+    display: inline-block;
+}
+.heart_bubbly {
+    position: relative;
+    z-index: 2;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.heart_bubbly.favorite svg {
+    color: red;
+}
+.bubble {
+    position: absolute;
+    background: none;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1000 !important;
+    animation: bubble-pop 0.7s forwards;
+}
+.bubble1 { left: -30px; top: 15px; rotate: 340deg; animation-delay: 0s; }
+.bubble2 { left: 0px; top: 30px; rotate: 0; animation-delay: 0.1s; }
+.bubble3 { left: 30px; top: 15px; rotate: 20deg; animation-delay: 0.2s; }
+.bubble4 { left: -15px; top: 40px; rotate: 350deg; animation-delay: 0.3s; }
+.bubble5 { left: 15px; top: 40px; rotate: 10deg; animation-delay: 0.4s; }
+@keyframes bubble-pop {
+    0% { transform: scale(0.5) translateY(0); opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: scale(1.5) translateY(-40px); opacity: 0; }
+}

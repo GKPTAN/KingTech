@@ -4,7 +4,7 @@ import { PiWarning } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import Button from "./layout/Button";
 
-const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) => {
+const Form = ({ onSubmit, children, classname = "", buttonAction, disabled, styles }) => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -43,7 +43,7 @@ const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }) =>
 
   return (
     <form onSubmit={handleSubmit} className={classname}>
-      {message && <p className={error}>{error ? <PiWarning /> : ""} {message}</p>}
+      {message && <p className={styles ? styles[error] : error}>{error ? <PiWarning /> : ""} {message}</p>}
       {children}
       <Button className="button-form" type="submit" nameAction={loading ? 
       <RingLoader

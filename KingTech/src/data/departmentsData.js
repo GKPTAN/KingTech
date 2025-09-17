@@ -7,8 +7,7 @@ export const departmentsData = {
       { id: 3, name: "Tablets", slug: "tablets" },
       { id: 4, name: "Monitores", slug: "monitores" },
       { id: 5, name: "Teclados e Mouses", slug: "teclados_e_mouses" },
-      { id: 6, name: "Componentes de Hardware", slug: "componentes_de_hardware",
-      },
+      { id: 6, name: "Componentes de Hardware", slug: "componentes_de_hardware"},
       { id: 7, name: "Armazenamento", slug: "armazenamento" },
     ],
   },
@@ -49,8 +48,7 @@ export const departmentsData = {
       { id: 1, name: "Câmeras digitais", slug: "cameras_digitais" },
       { id: 2, name: "Lentes", slug: "lentes" },
       { id: 3, name: "Tripés e Suportes", slug: "tripes_e_suportes" },
-      { id: 4, name: "Acessórios para Câmeras", slug: "acessorios_para_cameras",
-      },
+      { id: 4, name: "Acessórios para Câmeras", slug: "acessorios_para_cameras"},
       { id: 5, name: "Drones", slug: "drones" },
       { id: 6, name: "Equipamentos de iluminação", slug: "equipamentos_de_iluminacao",
       },
@@ -109,3 +107,82 @@ export const departmentsData = {
     ]
   }
 };
+
+export const categoryFilters = [
+  {
+    departments: "all",
+    childrens: [
+      {
+        category: "Promoções",
+        filters: [
+          { id: 1, rowData: "super_desconto", name: "Super desconto" }
+        ]
+      },
+      {
+        category: "Ofertas",
+        filters: [
+          { id: 1, rowData: "offers", name: "Top Ofertas" },
+          { id: 2, rowData: "offers", name: "Campeão de vendas" },
+        ]
+      },
+      {
+        category: "Cupom de desconto",
+        filters: [
+          { id: 1, rowData: "discount_coupon", name: "Setembro premiado" },
+        ]
+      },
+      {
+        category: "Conexões",
+        filters: [
+          { id: 1, rowData: "conections", name: "HDMI 2.1" },
+          { id: 2, rowData: "conections", name: "USB-C" },
+          { id: 3, rowData: "conections", name: "Wi-FI 6E" },
+          { id: 4, rowData: "conections", name: "Bluetooth 5.2" },
+          { id: 5, rowData: "conections", name: "DisplayPort 1.4" },
+        ]
+      },
+    ]
+  },
+  {
+    departments: ["monitores", "televisores", "projetores"],
+    childrens: [
+      {
+        category: "Resolução",
+        filters: [
+          { id: 1, rowData: "hd", name: "HD" },
+          { id: 2, rowData: "full_hd", name: "Full HD" },
+          { id: 3, rowData: "4k", name: "4K" },
+          { id: 4, rowData: "5k", name: "5K" },
+          { id: 6, rowData: "8k", name: "8K" },
+        ]
+      },
+      {
+        category: "Tempo de Resposta",
+        filters: [
+          { id: 1, rowData: "response_time", name: "0,03 ms" },
+          { id: 2, rowData: "response_time", name: "0,5 ms" },
+          { id: 3, rowData: "response_time", name: "1 ms" },
+          { id: 4, rowData: "response_time", name: "1,5 ms" },
+          { id: 5, rowData: "response_time", name: "2 ms" },
+        ]
+      },
+    ]
+  },
+  {
+    departments: ["notebooks", "monitores", "teclados e mouses", "componentes de hardware", "armazenamento"],
+    childrens: [
+      {
+        category: "Sincronização Adaptativa",
+        filters: [
+          { id: 1, rowData: "adaptive_sync", name: "AMD FreeSync" },
+          { id: 2, rowData: "adaptive_sync", name: "AMD FreeSync Premium" },
+          { id: 3, rowData: "adaptive_sync", name: "NVIDIA G-Sync" },
+          { id: 4, rowData: "adaptive_sync", name: "NVIDIA G-Sync Compatible" },
+          { id: 5, rowData: "adaptive_sync", name: "VESA Adaptive-Sync" },
+          { id: 6, rowData: "adaptive_sync", name: "VRR" },
+          { id: 7, rowData: "adaptive_sync", name: "Compatível com PS5/Xbox" },
+        ]
+      },
+    ]
+  },
+]

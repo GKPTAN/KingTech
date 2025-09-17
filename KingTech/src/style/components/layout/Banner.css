@@ -1,34 +1,31 @@
-div[class^="banner-"] {
+div[class*="banner"] {
     position: relative;
     width: 100%;
     overflow: hidden;
 }
-.banner-slide-wrapper {
+div[class*="banner"] .banner_slide_wrapper {
     width: 100%;
     height: 300px;
 }
-.banner-slide {
+div[class*="banner"] .banner_slide_wrapper .banner_slide {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
-.slick-dots {
+div[class*="banner"] .slick-dots {
   bottom: 15px;
 }
-
-.slick-dots li button:before {
+div[class*="banner"] .slick-dots li button:before {
   font-size: 12px;
   color: white; /* cor dos dots */
 }
-
-.slick-dots li.slick-active button:before {
+div[class*="banner"] .slick-dots li.slick-active button:before {
   color: #ff6600; /* cor do dot ativo */
 }
-
 /* customização das setas */
-.slick-prev, 
-.slick-next {
+div[class*="banner"] .slick-prev, 
+div[class*="banner"] .slick-next {
   top: 50%;
   transform: translateY(-50%);
   width: 40px !important;
@@ -36,19 +33,18 @@ div[class^="banner-"] {
   padding: 5px;
   transition: all 0.3s ease-in-out;
 }
-
-.slick-prev:before, 
-.slick-next:before {
+div[class*="banner"] .slick-prev {
+  left: 10px;
+}
+div[class*="banner"] .slick-next {
+  right: 10px;
+}
+div[class*="banner"] .slick-prev:before, 
+div[class*="banner"] .slick-next:before {
   display: none;
 }
 
-div[class^="banner-"] .slick-prev {
-    left: 10px !important;
-}
-div[class^="banner-"] .slick-next {
-    right: 10px !important;
-}
-.slick-prev:hover, .slick-next:hover {
+div[class*="banner"] .slick-prev:hover, div[class*="banner"] .slick-next:hover {
     background-color: rgba(0,0,0,0.5);
     border-radius: 50%;
 }

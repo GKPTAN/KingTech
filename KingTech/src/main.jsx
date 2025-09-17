@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         element: <Departments />,
       },
       {
-        path: "/departments/:department",
+        path: "/departments/:department/:subcategory",
         element: <DepartmentPage />,
       },
       {

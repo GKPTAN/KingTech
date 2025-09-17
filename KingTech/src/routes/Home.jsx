@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TbTopologyStar3, TbCrown } from 'react-icons/tb';
 import { LiaSearchDollarSolid } from 'react-icons/lia';
+import { BsFillLightningChargeFill } from 'react-icons/bs';
 import BannerCarrossel from '../components/layout/banners/BannerCarrossel';
 import CarrosselOffers from '../components/layout/CarrosselOffers';
 import '../style/Home.css';
@@ -25,34 +26,67 @@ const Home = () => {
   return (
     <section className="home">
       <title>Home</title>
-      <main className="main-store">
-        <div className="carrossel" id='promotions' aria-label="Carrossel de promoções">
+      <main className="main_store">
+        <div className="carrossel" id="promotions" aria-label="Carrossel de promoções">
           <BannerCarrossel 
             banners={promotions}
-            className="banner-promotions"
+            className="banner_promotions"
           />
         </div>
         <CarrosselOffers
-          icon={<TbTopologyStar3 />}
-          className="highlights"
-          title="Destaques"
-          ariaLabel="Produtos em destaque"
+          titleHidden={false}
+          icon={<BsFillLightningChargeFill />}
+          className="flash"
+          title="Ofertas Relâmpago"
+          ariaLabel="Ofertas Relâmpago, compre antes de acabar o estoque"
+          dots={false}
+          infinite={false}
+          speed={500}
+          slidesToShow={5}
+          slidesToScroll={5}
+          autoplay={false}
+          autoplaySpeed={0}
+          pauseOnHover={false}
+          cardPreviewMode={"portrait"}
+          button={true}
         />
         <BannerCarrossel 
           banners={offersPromo}
-          className="banner-offers"
+          className="banner_offers"
         />
         <CarrosselOffers 
+          titleHidden={false}
           icon={<LiaSearchDollarSolid />}
           className="most-wanted"
           title="Mais Procurados"
-          ariaLabel="Produtos mais procurados"
+          ariaLabel="Os Produtos mais procurados"
+          dots={false}
+          infinite={false}
+          speed={500}
+          slidesToShow={5}
+          slidesToScroll={5}
+          autoplay={false}
+          autoplaySpeed={0}
+          pauseOnHover={false}
+          cardPreviewMode='portrait'
+          button={true}
         />
         <CarrosselOffers 
+          titleHidden={false}
           icon={<TbCrown />}
           className="recommendations"
           title="Recomendações"
           ariaLabel="Produtos recomendados para você"
+          dots={false}
+          infinite={false}
+          speed={500}
+          slidesToShow={5}
+          slidesToScroll={5}
+          autoplay={false}
+          autoplaySpeed={0}
+          pauseOnHover={false}
+          cardPreviewMode='portrait'
+          button={true}
         />
       </main>
     </section>

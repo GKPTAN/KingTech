@@ -6,11 +6,48 @@ div[class^="offers-"] {
     padding: 1rem 3rem;
     width: 100%;
 }
+/* titulo do carrossel */
+div[class^="offers-"] div[class^="title-"] {
+    background-color: #012B29;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #F9CB40;
+    font-family: "Kulim Park", sans-serif;
+    padding: 1rem;
+}
+div[class^="offers-"] div[class^="title-"] h2 {
+    color: #F9CB40;
+    margin-top: 0;
+}
+div[class^="offers-"] h2 svg {
+    color: #F9CB40;
+    vertical-align: middle;
+}
+div[class^="offers-"] .link {
+    font-size: 1.5rem;
+    opacity: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid transparent;
+    color: #F9CB40;
+    transition: all 0.3s ease-in-out;
+}
+div[class^="offers-"] .link svg {
+    vertical-align: middle;
+}
+div[class^="offers-"] .link:hover {
+    border-bottom: 1px solid #F9CB40;
+}
+/* Caixa de produtos */
 div[class^="products-"] {
     width: 100%;
     /* padding/margin se precisar */
 }
-.product-card{
+/* Card do produto */
+div[class^="offers-"] .product-card{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,51 +58,39 @@ div[class^="products-"] {
     padding: 1rem 0px;
     border-radius: 5px;
 }
-.product-card:hover {
-    background-color: #233D4D;
+div[class^="offers-"] .product-card:hover {
+    background-color: #012B29;
     color: #fff;
 }
-.product-card img {
+div[class^="offers-"] .product-card .rating-favorite-box {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+}
+.offers-flash .product-card:hover .heart_bubbly,
+.offers-most-wanted .product-card:hover .heart_bubbly,
+.offers-recommendations .product-card:hover .heart_bubbly {
+    color: #fff;
+}
+div[class^="offers-"] .product-card img {
     margin-bottom: 15px;
     border-radius: 5px;
 }
-.product-card p {
-    font-size: 0.8rem;
-    color: #333;
-    text-align: center;
-}
-.product-card:hover p {
-    color: #fff;
-}
-.product-card .price-product {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #000;
-}
-.product-card .name-product {
-    margin-bottom: 0.2rem;
-    position: relative;
+div[class^="offers-"] .product-card .info-prod {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 2px;
 }
-.product-card .name-product:after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #000;
-    transition: width 0.6s ease-in-out;
+div[class^="offers-"] .product-card p {
+    font-size: 13px;
+    color: #333;
+    text-align: center;
 }
-.product-card:hover .name-product:after {
-    width: 0;
-    background-color: #fff;
+div[class^="offers-"] .product-card:hover p {
+    color: #fff;
 }
-.product-card .royalty {
+/* Animação do card */
+div[class^="offers-"] .product-card .royalty {
     display: flex;
     align-items: center;
     gap: 2px;
@@ -77,34 +102,51 @@ div[class^="products-"] {
     opacity: 0;
     animation: leftOut 0.3s forwards cubic-bezier(0.77, 0, 0.175, 1);
 }
-.product-card:hover .royalty {
+div[class^="offers-"] .product-card:hover .royalty {
     animation: leftIn 0.3s forwards cubic-bezier(0.77, 0, 0.175, 1);
 }
-.line-left, .line-right {
+div[class^="offers-"] .line-left, div[class^="offers-"] .line-right {
     width: 20.92px;
     height: 2px;
     background-color: #F9CB40;
 }
-.crown {
+div[class^="offers-"] .crown {
     color: #F9CB40;
 }
-div[class^="title-"] {
-    background-color: #233D4D;
+/* Nome do Produto */
+div[class^="offers-"] .product-card .name-product {
+    margin-bottom: 0.5rem;
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    color: #F9CB40;
-    font-family: "Kulim Park", sans-serif;
-    padding: 1rem;
+    justify-content: center;
+    gap: 2px;
+    width: fit-content;
+    font-size: 13px;
 }
-div[class^="title-"] h2 {
-    color: #F9CB40;
+div[class^="offers-"] .product-card .name-product:after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.6s ease-in-out;
 }
-h2 svg {
-    color: #F9CB40;
-    vertical-align: middle;
+div[class^="offers-"] .product-card:hover .name-product:after {
+    width: 0;
+    background-color: #fff;
 }
-.product-card .btn-buy {
+div[class^="offers-"] .product-card .price-product {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+div[class^="offers-"] .product-card .btn-buy {
     background-color: #233D4D;
     color: #fff;
     padding: 5px 10px;
@@ -114,30 +156,13 @@ h2 svg {
     margin-top: 5px;
     transition: all 0.3s ease-in-out;
 }
-.product-card:hover .btn-buy {
+div[class^="offers-"] .product-card:hover .btn-buy {
     background-color: #F9CB40;
     color: #233D4D
 }
-.link {
-    font-size: 1.5rem;
-    opacity: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s ease-in-out;
-}
-.link svg {
-    vertical-align: middle;
-}
-.link:hover {
-    border-bottom: 1px solid #F9CB40;
-}
-
 /* customização das setas */
-.slick-prev, 
-.slick-next {
+div[class^="offers-"] .slick-prev, 
+div[class^="offers-"] .slick-next {
   top: 50%;
   transform: translateY(-50%);
   width: 40px !important;
@@ -146,29 +171,42 @@ h2 svg {
   transition: all 0.3s ease-in-out;
 }
 
-.slick-prev:before, 
-.slick-next:before {
+div[class^="offers-"] .slick-prev:before, 
+div[class^="offers-"] .slick-next:before {
   display: none;
 }
 
-div[class^="products-"] .slick-prev {
+div[class^="offers-"] div[class^="products-"] .slick-prev {
     left: -40px !important;
 }
-div[class^="products-"] .slick-next {
+div[class^="offers-"] div[class^="products-"] .slick-next {
     right: -40px !important;
 }
-.slick-prev:hover, .slick-next:hover {
+div[class^="offers-"] .slick-prev:hover, .slick-next:hover {
     background-color: rgba(0,0,0,0.5);
     color: #fff;
     border-radius: 50%;
 }
-.slick-prev.slick-disabled, 
-.slick-next.slick-disabled {
-  opacity: 0.4;         /* deixa a seta meio apagada */
-  pointer-events: none; /* evita clique */
+div[class^="offers-"] .slick-prev.slick-disabled, 
+div[class^="offers-"] .slick-next.slick-disabled {
+  opacity: 0.4;         
+  pointer-events: none; 
   cursor: default;
 }
-
+/* Carrossel automatizado */
+div[class*="automated"] div[class^="products-"] .product-card:hover {
+    background-color: transparent;
+    color: #000;
+}
+div[class*="automated"] .name-product .royalty {
+    display: none;
+}
+div[class*="automated"] div[class^="products-"] .name-product:after {
+    background-color: transparent;
+}
+div[class*="automated"] div[class^="products-"] .product-card:hover p {
+    color: #000;
+}
 @keyframes leftIn {
     0% {
         opacity: 0;
@@ -177,13 +215,15 @@ div[class^="products-"] .slick-next {
         opacity: 0.2;
     }
     100% {
-        left: 0;
+        left: 50%;
+        transform: transLateX(-50%);
         opacity: 1;
     }
 }
 @keyframes leftOut {
     0% {
-        left: 0;
+        left: 50%;
+        transform: transLateX(-50%);
         opacity: 1;
     }
     50% {

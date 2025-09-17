@@ -17,7 +17,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 1,
@@ -25,7 +25,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 4,
@@ -49,7 +49,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 5,
@@ -57,7 +57,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 6,
@@ -65,7 +65,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 7,
@@ -73,7 +73,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 8,
@@ -81,7 +81,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
     {
         id: 9,
@@ -89,7 +89,7 @@ const products = [
         img: "https://placehold.co/150x150/jpg",
         prevPrice: "",
         price: 999.99,
-        alt: "imagem do produto"
+        alt: "imagem do produto",
     },
 ]
 
@@ -130,20 +130,30 @@ const SampleNextArrow = (props) => {
   );
 };
 
-const CarrosselOffers = ({className, ariaLabel, title, icon}) => {
+/**
+ * @typedef {"portrait" | "landscape"} CardPreviewMode
+ */
+/**
+ * @param {{cardPreviewMode?: CardPreviewMode}} props  
+ */
+
+const CarrosselOffers = ({titleHidden, className, ariaLabel, title, icon, dots, infinite, speed, slidesToShow, slidesToScroll, autoplay, autoplaySpeed, pauseOnHover, cardPreviewMode, button, cart}) => {
     const settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        dots: dots,
+        infinite: infinite,
+        speed: speed,
+        slidesToShow: slidesToShow,
+        slidesToScroll: slidesToScroll,
+        autoplay: autoplay,
+        autoplaySpeed: autoplaySpeed,
+        pauseOnHover: pauseOnHover,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
     }
 
   return (
-    <div className={`offers-${className}`} aria-label={ariaLabel}>
-        <div className={`title-${className}`}>
+    <div className={`offers-${className} ${autoplay ? "automated" : ""}`} aria-label={ariaLabel}>
+        <div className={`title-${className} ${titleHidden ? "hidden" : ""}`}>
             <h2>{icon} {title}</h2>
             <Link className="link" to={`/departments/${className}`}>Ver mais <TbArrowBigRightLines /></Link>
         </div>
@@ -152,12 +162,15 @@ const CarrosselOffers = ({className, ariaLabel, title, icon}) => {
                 {products.map((product) => (
                     <ProductCard 
                         key={product.id}
+                        mode={cardPreviewMode}
                         id={product.id}
                         name={product.name}
                         img={product.img}
                         alt={product.alt}
                         prevPrice={product.prevPrice}
                         price={product.price}
+                        button={button}
+                        cart={cart}
                     />
                 ))}
             </Slider>

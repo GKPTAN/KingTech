@@ -2,7 +2,7 @@ import { useState } from "react";
 import Form from "../../components/Form";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import "../../style/pages/login.css";
+import styles from "../../style/pages/auth/Login.module.css";
 
 const Login = () => {
   const { login } = useAuth();
@@ -31,12 +31,13 @@ const Login = () => {
   return (
     <>
       <h2>Login</h2>
-      <section className="login">
+      <section className={styles.login}>
         <Form
           onSubmit={handleLogin}
-          classname="login-form"
+          classname={styles.login_form}
           buttonAction="Entrar"
           disabled={disabled}
+          styles={styles}
         >
           <input
             type="email"
