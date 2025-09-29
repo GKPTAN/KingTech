@@ -69,7 +69,8 @@ div[class^="offers-"] .product-card .rating-favorite-box {
 }
 .offers-flash .product-card:hover .heart_bubbly,
 .offers-most-wanted .product-card:hover .heart_bubbly,
-.offers-recommendations .product-card:hover .heart_bubbly {
+.offers-recommendations .product-card:hover .heart_bubbly,
+.offers-related .product-card:hover .heart_bubbly {
     color: #fff;
 }
 div[class^="offers-"] .product-card img {
