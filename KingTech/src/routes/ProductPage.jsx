@@ -46,7 +46,7 @@ const ProductPage = () => {
 
   return (
     <div className="product-page">
-      {/* <section className='mini-banner'>
+      <section className='mini-banner'>
         <img src="/image/banner1.webp" alt="banner promocional" />
         <Button 
           type="button"
@@ -56,7 +56,7 @@ const ProductPage = () => {
           onClick={() => setShowPromoModal(true)}
           icon=""
         />
-      </section> */}
+      </section>
 
       <section className="product-card-main">
         {showPromoModal && (

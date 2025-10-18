@@ -15,7 +15,7 @@ const Navbar = () => {
         <Search />
         <ul>
             <li><Link to="/favorites" className={location.pathname === "/favorites" ? "active" : ""}><TbCrown id="crown" /><TbHeartFilled />Favoritos</Link></li>
-            <li><Link to="/account" className={location.pathname.startsWith("/account") ? "active" : ""}><TbCrown id="crown" /><RiAccountBoxFill />Conta</Link></li>
+            <li><Link to="/account/login" className={location.pathname.startsWith("/account") ? "active" : ""}><TbCrown id="crown" /><RiAccountBoxFill />Conta</Link></li>
             <li><Link to="/" className={location.pathname === "/" ? "active" : ""}><TbCrown id="crown" /><TbHomeFilled />Home</Link></li>
             <li><Link to="/cart" className={location.pathname === "/cart" ? "active" : ""}><TbCrown id="crown" /><RiShoppingBasketFill />Cesta</Link></li>
             <li><Link to="/departments" className={location.pathname.startsWith("/departments") ? "active" : ""}><TbCrown id="crown" /><MdList />Departamentos</Link></li>
