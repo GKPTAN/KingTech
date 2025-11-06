@@ -1,0 +1,10 @@
+@media (max-width: 1024px) {
+    .main_store {
+        width: 90%;
+    }
+}
+@media (max-width: 650px) {
+    .main_store {
+        width: 95%;
+    }
+}

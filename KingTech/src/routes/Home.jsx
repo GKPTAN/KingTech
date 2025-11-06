@@ -1,3 +1,4 @@
+import { useWidthWindow } from '../hooks/useWindowWidth';
 import { useState } from 'react';
 import { TbTopologyStar3, TbCrown } from 'react-icons/tb';
 import { LiaSearchDollarSolid } from 'react-icons/lia';
@@ -5,6 +6,7 @@ import { BsFillLightningChargeFill } from 'react-icons/bs';
 import BannerCarrossel from '../components/layout/banners/BannerCarrossel';
 import CarrosselOffers from '../components/layout/CarrosselOffers';
 import '../style/Home.css';
+import '../style/responsive/routes/Home/Home.responsive.css';
 
 const promotionsStore = [
     {id: 1, title: 'Promoção 1', description: "Desconto de 20% em todos os produtos", src: "/image/banner1.webp"},
@@ -19,9 +21,9 @@ const promotionOffers = [
 ];
 
 const Home = () => {
-
   const [promotions, setPromotions] = useState(promotionsStore);
   const [offersPromo, setOffersPromo] = useState(promotionOffers);
+  let widthWindow = useWidthWindow();
 
   return (
     <section className="home">
@@ -42,8 +44,8 @@ const Home = () => {
           dots={false}
           infinite={false}
           speed={500}
-          slidesToShow={5}
-          slidesToScroll={5}
+          slidesToShow={widthWindow <= 650 ? 2 : widthWindow <= 1024 ? 3 : 5 }
+          slidesToScroll={widthWindow <= 650 ? 2 : widthWindow <= 1024 ? 3 : 5}
           autoplay={false}
           autoplaySpeed={0}
           pauseOnHover={false}
@@ -63,8 +65,8 @@ const Home = () => {
           dots={false}
           infinite={false}
           speed={500}
-          slidesToShow={5}
-          slidesToScroll={5}
+          slidesToShow={widthWindow <= 650 ? 2 : widthWindow <= 1024 ? 3 : 5}
+          slidesToScroll={widthWindow <= 650 ? 2 : widthWindow <= 1024 ? 3 : 5}
           autoplay={false}
           autoplaySpeed={0}
           pauseOnHover={false}
@@ -80,8 +82,8 @@ const Home = () => {
           dots={false}
           infinite={false}
           speed={500}
-          slidesToShow={5}
-          slidesToScroll={5}
+          slidesToShow={widthWindow <= 650 ? 2 : widthWindow <= 1024 ? 3 : 5}
+          slidesToScroll={widthWindow <= 650 ? 2 : widthWindow <= 1024 ? 3 : 5}
           autoplay={false}
           autoplaySpeed={0}
           pauseOnHover={false}

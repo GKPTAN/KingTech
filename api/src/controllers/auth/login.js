@@ -13,7 +13,7 @@ const loginController = async (request, reply, supabase) => {
     try {
         const { data: user, error: profileError } = await supabase
             .from("profiles")
-            .select("id, email, password_hash, verified")
+            .select("id, email")
             .eq("email", email)
             .single();
         if (profileError || !user) {
@@ -24,22 +24,13 @@ const loginController = async (request, reply, supabase) => {
             });
         };
 
-        const isPasswordValid = await compare(password, user.password_hash);
-        if (!isPasswordValid) {
-            return reply.status(401).send({
-                message: "E-mail ou senha incorretos.",
-                error: true,
-                technicalError: false,
-            });
-        };
-
-        const { data: authData, error } = await supabase.auth.signInWithPassword({
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email,
             password,
         });
 
-        if (error) {
-            console.error("Erro na autenticação: ", error);
+        if (authError) {
+            console.error("Erro na autenticação: ", authError);
             return reply.status(500).send({
                 message: "Erro ao autenticar usuário.",
                 error: true,
@@ -64,6 +55,33 @@ const loginController = async (request, reply, supabase) => {
         }
 
         const { session } = authData;
+
+        if (session?.access_token) {
+            reply.setCookie("token", session.access_token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+                path: "/",
+                maxAge: session.expires_in || 60 * 60 * 8,
+            });
+        } else {
+            throw new Error("Token de acesso não encontrado na sessão.");
+        }
+
+        console.log("token: ", session?.access_token);
+
+        console.log("Token refresh: ", session?.refresh_token);
+
+        if (session?.refresh_token) {
+            reply.setCookie("refresh_token", session.refresh_token, {
+                path: "/",
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+                maxAge: 60 * 60 * 24 * 30,
+            });
+        };
+
         return reply.status(200).send({
             message: "Login realizado com sucesso.",
             error: false,

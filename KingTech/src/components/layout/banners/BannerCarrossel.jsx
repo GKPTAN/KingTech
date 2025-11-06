@@ -1,11 +1,14 @@
+import { useWidthWindow } from "../../../hooks/useWindowWidth";
 import {
   LiaAngleDoubleLeftSolid,
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
+import { MdEdit } from "react-icons/md";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../style/components/layout/Banner.css";
+import "../../../style/responsive/components/layout/Banner.responsive.css"
 
 const SamplePrevArrow = (props) => {
   const { className, style, onClick } = props;
@@ -57,6 +60,18 @@ const BannerCarrossel = ({ banners, className }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  let widthWindow = useWidthWindow();
+
+  let mediaQuery = 40;
+
+  if (widthWindow <= 768) {
+    mediaQuery = 25;
+  }
+
+  if (widthWindow <= 650) {
+    mediaQuery = 20;
+  }
+
   return (
     <div className={className}>
       <Slider {...settings}>
@@ -70,6 +85,9 @@ const BannerCarrossel = ({ banners, className }) => {
           </div>
         ))}
       </Slider>
+      <span className="edit-adm">
+        <MdEdit fill="#000" size={mediaQuery}/>
+      </span>
     </div>
   );
 };

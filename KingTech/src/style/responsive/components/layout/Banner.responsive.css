@@ -1,0 +1,6 @@
+@media (max-width: 1024px) {
+    div[class*="banner"] .edit-adm {
+        width: 40px;
+        height: 40px;
+    }
+}

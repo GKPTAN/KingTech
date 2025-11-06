@@ -1,3 +1,4 @@
+import { useWidthWindow } from "../../hooks/useWindowWidth";
 import { RiHeartLine, RiHeartFill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -9,6 +10,14 @@ const HeartFavorite = () => {
   const isFavoritesPage = location.pathname === "/favorites";
   const [animate, setAnimate] = useState(false);
   const [isFavorite, setIsFavorite] = useState(isFavoritesPage);
+
+  let widthWindow = useWidthWindow();
+
+  let mediaQuery = 30;
+
+  if (widthWindow <= 650) {
+    mediaQuery = 25;
+  }
 
   useEffect(() => {
     if (isFavoritesPage) {
@@ -32,7 +41,7 @@ const HeartFavorite = () => {
     <div className={`heart_bubbly_wrapper ${animate ? "animate" : ""}`}>
         <Button
             type="button"
-            nameAction={isFavorite ? <RiHeartFill size={30} /> : <RiHeartLine size={30} />}
+            nameAction={isFavorite ? <RiHeartFill size={mediaQuery} /> : <RiHeartLine size={mediaQuery} />}
             className={`heart_bubbly ${isFavorite ? 'favorite' : ''}`}
             disabled={false}
             onClick={handleClick}

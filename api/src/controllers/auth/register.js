@@ -1,10 +1,10 @@
 import { hash } from "bcrypt";
 import { pwnedPassword } from "hibp";
-import validateData from "../utils/validateData.js";
-import getLocationUser from "../services/locationService.js";
-import generateCode from "../utils/generateCode.js";
-import sendEmailToUser from "../services/emailService.js";
-import getEmailTemplate from "../utils/emailTemplate.js";
+import validateData from "../../utils/validateData.js";
+import getLocationUser from "../../services/locationService.js";
+import generateCode from "../../utils/generateCode.js";
+import sendEmailToUser from "../../services/emailService.js";
+import getEmailTemplate from "../../utils/emailTemplate.js";
 
 const registerController = async (request, reply, supabase) => {
   const { full_name, gender, date_birth, email, password } = request.body;
@@ -31,16 +31,16 @@ const registerController = async (request, reply, supabase) => {
   const verification_code = generateCode();
 
   try {
-
     const wasLeaked = await pwnedPassword(password);
 
     if (wasLeaked) {
       return reply.status(400).send({
-        message: "A senha informada foi encontrada em vazamentos de dados. Por favor, escolha uma senha diferente.",
+        message:
+          "A senha informada foi encontrada em vazamentos de dados. Por favor, escolha uma senha diferente.",
         error: true,
         technicalError: false,
       });
-    };
+    }
 
     const { data: existingUser, error: findError } = await supabase
       .from("profiles")
@@ -49,21 +49,40 @@ const registerController = async (request, reply, supabase) => {
       .single();
 
     if (existingUser) {
-      return reply
-        .status(400)
-        .send({
-          message: "E-mail já cadastrado!",
-          error: true,
-          technicalError: false,
-        });
+      return reply.status(400).send({
+        message: "E-mail já cadastrado!",
+        error: true,
+        technicalError: false,
+      });
     }
 
     if (findError && findError.code !== "PGRST116") {
       throw findError;
     }
 
+    const { data: pending, error: pendingErr } = await supabase
+      .from("unverified_profiles")
+      .select("id")
+      .eq("email", email)
+      .maybeSingle();
+    if (pendingErr) {
+      console.error("Erro ao checar unverified_profiles:", pendingErr);
+      return reply.status(500).send({
+        message: "Erro interno ao verificar registro pendente.",
+        error: true,
+        technicalError: false,
+      });
+    }
+    if (pending) {
+      return reply.status(400).send({
+        message:
+          "Já existe um registro pendente para esse e-mail. Verifique seu e-mail.",
+        error: true,
+        technicalError: false,
+      });
+    }
+
     const username = full_name.split(" ")[0];
-    const hashPassword = await hash(password, 10);
     const emailTemplate = await getEmailTemplate(
       username,
       verification_code,
@@ -80,7 +99,7 @@ const registerController = async (request, reply, supabase) => {
           gender,
           date_birth,
           email,
-          password_hash: hashPassword,
+          password_hash: password,
           verification_code,
           ipUser,
           city,
@@ -127,23 +146,19 @@ const registerController = async (request, reply, supabase) => {
       maxAge: 45 * 60,
     });
 
-    return reply
-      .status(200)
-      .send({
-        message:
-          "Aguarde..., Você receberá um e-mail com o código de confirmação",
-        error: false,
-        technicalError: false,
-      });
+    return reply.status(200).send({
+      message:
+        "Aguarde..., Você receberá um e-mail com o código de confirmação",
+      error: false,
+      technicalError: false,
+    });
   } catch (error) {
     console.error("Erro ao registrar usuário: ", error);
-    return reply
-      .status(500)
-      .send({
-        message: "Erro interno no servidor.",
-        error: false,
-        technicalError: false,
-      });
+    return reply.status(500).send({
+      message: "Erro interno no servidor.",
+      error: false,
+      technicalError: false,
+    });
   }
 };
 

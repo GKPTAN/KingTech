@@ -47,6 +47,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart})
                   name={"product-rating"}
                   value={rating}
                   readOnly={true}
+                  className='rating-star'
                 />
                 <HeartFavorite />
               </div>

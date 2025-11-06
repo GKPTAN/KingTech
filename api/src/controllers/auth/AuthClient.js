@@ -7,6 +7,12 @@ class AuthClient {
       process.env.SUPABASE_SERVICE_ROLE_KEY,
     );
   };
+/**
+ * Verifica o código de verificação oferecido pelo usuário e cria o usuário na tabela Auth da Supabase e na tabela profiles
+ * @param {String} userId - id do perfil não verificado
+ * @param {String} verificationCode - código de verificação fornecido pelo usuário
+ * @returns {Object} - resultado da verificação e criação do usuário
+ */
   async verifyAndCreateUser(userId, verificationCode) {
     try {
       // buscar(fetch) perfil não verificado
@@ -23,6 +29,11 @@ class AuthClient {
         if (pendingUser.verification_code !== verificationCode) {
           throw new Error("Código de verificação inválido.");
         }
+
+        if(!pendingUser.password_hash || pendingUser.password_hash.length <= 0) {
+          throw new Error("Senha inválida para o usuário.");
+        };
+
         // criar usuário em auth.users
         const { data: authUser, error: authError } = await this.supabase.auth.admin.createUser({
           email: pendingUser.email,
@@ -38,6 +49,7 @@ class AuthClient {
             country: pendingUser.country,
             loc: pendingUser.loc,
             ip_user: pendingUser.ipUser,
+            role: pendingUser.role || "user"
           }
         });
         if (authError) { throw authError; };
@@ -51,14 +63,23 @@ class AuthClient {
             username: pendingUser.username,
             date_birth: pendingUser.date_birth,
             gender: pendingUser.gender,
-            password_hash: pendingUser.password_hash,
             ip_user: pendingUser.ipUser,
             city: pendingUser.city,
             region: pendingUser.region,
             country: pendingUser.country,
             loc: pendingUser.loc,
+            role: pendingUser.role || "user"
           });
-          if (profileError) { throw profileError; };
+          if (profileError) {
+             
+            try {
+              await this.supabase.auth.admin.deleteUser(authUser.user.id);
+            } catch (deleteErr) {
+              console.error("Erro ao remover usuário Auth após falha na criação do perfil: ", deleteErr);
+            };
+
+            throw profileError; 
+          };
           //remover perfil não verificado da tabela unverified_profiles
           const { error: deleteError } = await this.supabase
             .from("unverified_profiles")

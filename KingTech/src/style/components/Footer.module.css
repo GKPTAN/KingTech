@@ -17,6 +17,7 @@
     list-style: none;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 2rem;
@@ -42,6 +43,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin-bottom: 2rem;
+    gap: 1.5rem;
 }
 .informations .info_list {
     list-style: none;

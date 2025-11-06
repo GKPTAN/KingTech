@@ -1,0 +1,27 @@
+@media (max-width: 1024px) {
+    div[class^="offers-"] div[class^="title-"] h2 {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 650px) {
+    div[class^="offers-"] {
+        padding: 1rem 1rem;
+    }
+    div[class^="offers-"] div[class^="title-"] h2 {
+        font-size: 1rem;
+    }
+    div[class^="offers-"] div[class^="title-"] .link {
+        font-size: 1rem;
+    }
+}
+@media (max-width: 400px) {
+    div[class^="offers-"] div[class^="title-"] {
+        padding: 16px 8px;
+    }
+    div[class^="offers-"] div[class^="title-"] h2 {
+        font-size: 0.9rem;
+    }
+    div[class^="offers-"] div[class^="products-"] .product-card .rating-favorite-box .MuiRating-root {
+       font-size: 20px;
+    }
+}

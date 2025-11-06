@@ -1,8 +1,9 @@
 .App {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .navbar {
   display: flex;
@@ -77,4 +78,41 @@
 }
 a {
   text-decoration: none;
+}
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+  .navbar ul {
+    justify-content: space-between;
+  }
+  .navbar ul li {
+    font-size: 14px;
+  }
+}
+@media (max-width: 650px) {
+  .navbar {
+    padding: 1rem;
+  }
+  .navbar .search {
+    width: 70%;
+  }
+  .navbar .search input {
+    flex: 1;
+  }
+  .navbar ul {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .navbar ul li {
+    font-size: 14px;
+    text-align: center;
+  }
+  .navbar ul li:nth-child(2) {
+    margin-left: 22px;
+    margin-right: 20px;
+  }
+  .navbar ul li:nth-child(4) {
+    margin-left: 5px;
+  }
 }

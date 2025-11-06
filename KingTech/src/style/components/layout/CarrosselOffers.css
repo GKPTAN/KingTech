@@ -11,7 +11,6 @@ div[class^="offers-"] div[class^="title-"] {
     background-color: #012B29;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     color: #F9CB40;
     font-family: "Kulim Park", sans-serif;
     padding: 1rem;
@@ -19,6 +18,16 @@ div[class^="offers-"] div[class^="title-"] {
 div[class^="offers-"] div[class^="title-"] h2 {
     color: #F9CB40;
     margin-top: 0;
+}
+div[class^="offers-"] div[class^="title-"] .header {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+div[class^="offers-"] div[class^="title-"] .edit-adm {
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 div[class^="offers-"] h2 svg {
     color: #F9CB40;
@@ -66,6 +75,7 @@ div[class^="offers-"] .product-card .rating-favorite-box {
     display: flex;
     width: 90%;
     justify-content: space-between;
+    align-items: center;
 }
 .offers-flash .product-card:hover .heart_bubbly,
 .offers-most-wanted .product-card:hover .heart_bubbly,

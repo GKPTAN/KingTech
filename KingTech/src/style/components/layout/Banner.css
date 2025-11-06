@@ -48,3 +48,24 @@ div[class*="banner"] .slick-prev:hover, div[class*="banner"] .slick-next:hover {
     background-color: rgba(0,0,0,0.5);
     border-radius: 50%;
 }
+
+/* Admin */
+div[class*="banner"] .edit-adm {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+div[class*="banner"] .edit-adm:hover {
+  background-color: transparent;
+  border-color: #cc7ce4;
+}
