@@ -1,0 +1,37 @@
+@media (max-width: 768px) {
+    .favorites .anon div {
+        margin-top: 2rem;
+    }
+}
+@media (max-width: 600px) {
+    .favorites .anon h2 {
+        font-size: 1.5rem;
+    }
+    .favorites .anon div {
+        margin-top: 0;
+    }
+    div.favorites div.anon div a {
+        font-size: 1rem !important;
+    }
+}
+@media (max-width: 550px) {
+    .favorites .anon div {
+        margin-top: 1rem;
+    }
+}
+@media (max-width: 450px) {
+    .favorites .anon h2 {
+        font-size: 1.3rem;
+    }
+    .favorites .anon div {
+        margin-top: 0.5rem;
+    }
+    .favorites .anon div a {
+        width: 100% !important;
+    }
+}
+@media (max-width: 400px) {
+    .favorites .anon h2 {
+        font-size: 1.1rem;
+    }
+}

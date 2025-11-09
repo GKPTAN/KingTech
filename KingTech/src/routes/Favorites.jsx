@@ -7,6 +7,7 @@ import { LuCrown } from 'react-icons/lu';
 import { FaHandPaper } from 'react-icons/fa';
 import ProductCard from '../components/layout/ProductCard';
 import '../style/Favorites.css';
+import '../style/responsive/routes/Favorites/Favorites.responsive.css';
 
 const favorites = [
   
@@ -21,12 +22,12 @@ const Favorites = () => {
         <title>Favoritos</title>
         {!user && (
           <div className='anon'>
-          <h2>Calma aí campeão <span className='emoji'><LuCrown /><BsEmojiSmile /></span><FaHandPaper style={{marginLeft: "-8px"}}/></h2>
-          <div>
-            <Link className='login-link' to="/account/login">Faça login</Link>
-            <Link className='register-link' to="/account/register">Não tem uma conta? Registra-se</Link>
+            <h2>Você não iniciou a sua jornada, então...</h2>
+            <div>
+              <Link className='login-link' to="/account/login">Faça login</Link>
+              <Link className='register-link' to="/account/register">Não tem uma conta? Registra-se</Link>
+            </div>
           </div>
-        </div>
         )}
         {user && favorites.length > 0 && (
           <div className='favorites-box'>
