@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useWidthWindow } from "../hooks/useWindowWidth";
 import { MdLocalOffer, MdDeleteSweep } from "react-icons/md";
 import { TbCrown } from "react-icons/tb";
 import { useForm } from "../hooks/useStep";
@@ -19,20 +20,44 @@ const stepTitles = [
 ];
 
 const products = [
-  
+  {
+    id: 0,
+    name: "Adaptador Conversor Hdmi Para Vga 25 Cm",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: 1200.00,
+    price: 999.99,
+    pricePix: 949.99,
+    priceCard: 979.99,
+    alt: "imagem do produto",
+    brand: "KingTech",
+    code: "KT-ADP-HDVGA-001",
+    tags: ["Adaptador", "Conversor", "Hdmi", "Vga"],
+  },
+  {
+    id: 1,
+    name: "B-Clarin For Tattoo Cicatriza Proteção Para Tatuagens 30Ml",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: 1200.00,
+    price: 999.99,
+    pricePix: 949.99,
+    priceCard: 979.99,
+    alt: "imagem do produto",
+    brand: "KingTech",
+    code: "KT-BCF-TAT-002",
+    tags: ["B-Clarin", "Tatuagem", "Cicatrizante"],
+  },
 ];
 
 const Cart = () => {
+  const handleRemove = () => {};
+  let widthWindow = useWidthWindow();
 
-  const handleRemove = () => {
-
-  };
-  
   const formComponents = [
-    <BasketTech handleRemove={handleRemove} products={products} />
+    <BasketTech handleRemove={handleRemove} products={products} />,
   ];
 
-  const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } = useForm(formComponents);
+  const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
+    useForm(formComponents);
 
   const title = stepTitles[currentStep];
 
@@ -55,7 +80,10 @@ const Cart = () => {
         <>
           <Steps currentStep={currentStep} />
           <h1>{title}</h1>
-          <form className="steps-cart" onSubmit={(e) => changeStep(currentStep + 1, e)}>
+          <form
+            className="steps-cart"
+            onSubmit={(e) => changeStep(currentStep + 1, e)}
+          >
             <div className="intro-form">
               <p>
                 Vendido e entregue por <strong>KingTech</strong>
@@ -66,14 +94,12 @@ const Cart = () => {
                 className="btn-remove-all-products"
                 disabled={false}
                 onClick={() => handleRemove}
-                icon={<MdDeleteSweep size={30}/>}
+                icon={<MdDeleteSweep size={30} />}
               />
             </div>
-            <div className="main-steps">
-              {currentComponent}
-            </div>
+            <div className="main-steps">{currentComponent}</div>
             {currentStep > 0 && (
-              <Button 
+              <Button
                 type="button"
                 nameAction="Voltar"
                 className="btn-back"
@@ -81,7 +107,7 @@ const Cart = () => {
                 onClick={() => changeStep(currentStep - 1)}
               />
             )}
-            <Button 
+            <Button
               type="submit"
               nameAction="Continuar"
               className="btn-keep"
@@ -98,7 +124,7 @@ const Cart = () => {
             dots={false}
             infinite={true}
             speed={500}
-            slidesToShow={2}
+            slidesToShow={widthWindow > 800 ? 2 : 1}
             slidesToScroll={1}
             autoplay={true}
             autoplaySpeed={2500}

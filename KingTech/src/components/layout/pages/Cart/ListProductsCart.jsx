@@ -6,6 +6,16 @@ const ListProductsCart = ({products, remove}) => {
     <ul className="list-products-cart">
         {products.map((product) => (
             <li className="item" key={product.id}>
+                <div className="delete">
+                    <Button 
+                        type={"button"}
+                        nameAction={`Remover`}
+                        className="btn-remove-product"
+                        disabled={false}
+                        onClick={remove}
+                        icon={<TiDelete size={30}/>}
+                    />
+                </div>
                 <div className="product-cart">
                     <img src={product.img} alt={product.alt} />
                     <div className="info-prod">
@@ -18,14 +28,6 @@ const ListProductsCart = ({products, remove}) => {
                             ))}
                         </div>
                     </div>
-                    <Button 
-                        type={"button"}
-                        nameAction={`Remover`}
-                        className="btn-remove-product"
-                        disabled={false}
-                        onClick={remove}
-                        icon={<TiDelete size={30}/>}
-                    />
                     {/* <div className="services">
                         <p>Serviços</p>
                         <ul className="list-services">

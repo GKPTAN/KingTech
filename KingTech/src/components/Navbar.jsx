@@ -6,7 +6,7 @@ import { MdList } from "react-icons/md";
 import logo from "../assets/logo.png";
 import Search from "./Search";
 
-const Navbar = ({ img, search, nav }) => {
+const Navbar = ({ img, search, nav, isNavMobile }) => {
 
   const location = useLocation();
   let widthWindow = useWidthWindow();
@@ -17,7 +17,7 @@ const Navbar = ({ img, search, nav }) => {
   }
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isNavMobile ? "nav-bottom" : ""}`}>
       {img && <img src={logo} alt="logomarca da loja KingTech" />}
       {search && <Search />}
       {nav && (

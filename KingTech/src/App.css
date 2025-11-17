@@ -91,8 +91,18 @@ a {
   }
 }
 @media (max-width: 650px) {
+  .App {
+    padding-top: 116px;
+    padding-bottom: 94px;
+  }
   .navbar {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .navbar:not(.nav-bottom) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000;
   }
   .navbar .search {
     width: 70%;
@@ -114,5 +124,26 @@ a {
   }
   .navbar ul li:nth-child(4) {
     margin-left: 5px;
+  }
+  .nav-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+    padding: 1rem 1rem;
+  }
+}
+@media (max-width: 375px) {
+  .navbar .search {
+    width: 60%;
+  }
+}
+@media (max-width: 350px) {
+  .navbar ul li:nth-child(2) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .navbar ul li:nth-child(4) {
+    margin-left: 0px;
   }
 }

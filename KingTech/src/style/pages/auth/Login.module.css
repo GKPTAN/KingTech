@@ -87,3 +87,8 @@
     color: #012B29;
     text-decoration: underline;
 }
+@media (max-width: 350px) {
+    .login div p {
+        font-size: 16px;
+    }
+}

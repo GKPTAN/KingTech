@@ -12,15 +12,15 @@ function App() {
     <>
       <div className="App">
         {widthWindow > 650 ? 
-          (<Navbar img={true} search={true} nav={true}/>) 
+          (<Navbar img={true} search={true} nav={true} isNavMobile={false}/>) 
           :
-          (<Navbar img={true} search={true} nav={false}/>)
+          (<Navbar img={true} search={true} nav={false} isNavMobile={false}/>)
         }
         <Outlet />
         {widthWindow > 650 ? 
           (<Footer />) 
           : 
-          (<Navbar img={false} search={false} nav={true}/>)
+          (<Navbar img={false} search={false} nav={true} isNavMobile={true}/>)
         }
       </div>
     </>

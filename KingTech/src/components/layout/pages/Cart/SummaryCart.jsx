@@ -28,8 +28,8 @@ const SummaryCart = ({products}) => {
         <span id="res">Valor com frete: {valorFrete}</span>
       </div>
       <div className="info-price">
-        <p className="value-pix">Á vista no pix em R$ {priceTotalProducts * 0.70}, economize <span style={{color: "#047973", fontWeight: "bold"}}>R$ {priceTotalProducts - (priceTotalProducts * 0.70)} reais</span></p>
-        <p className="value-card">Á vista no cartão da loja em R$ {priceTotalProducts * 0.85} <br />
+        <p className="value-pix">Á vista no pix em R$ {(priceTotalProducts * 0.70).toLocaleString("pt-BR", {maximumFractionDigits: 2})}, economize <span style={{color: "#047973", fontWeight: "bold"}}>R$ {(priceTotalProducts - (priceTotalProducts * 0.70)).toLocaleString("pt-BR", {maximumFractionDigits: 2})} reais</span></p>
+        <p className="value-card">Á vista no cartão da loja em R$ {(priceTotalProducts * 0.85).toLocaleString("pt-BR", {maximumFractionDigits: 2})} <br />
           ou em 10x de R$ {(Math.floor((priceTotalProducts / 10) * 100) / 100).toLocaleString("pt-BR", {minimumFractionDigits: 2})} sem juros
         </p>
       </div>

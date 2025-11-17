@@ -1,21 +1,26 @@
 .departments {
     display: flex;
     justify-content: center;
-    width: 100vw;
-    height: 500px;
+    width: 100%;
+    min-height: 100vh;
 }
 .departments .departments_list {
     margin-bottom: 2rem;
     list-style: none;
-    display: flex;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    align-content: start;
     width: 95%;
     background-color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    height: fit-content;
 }
 .departments_list .department_item {
     text-align: center;
     position: relative;
+    max-height: 360px;
 }
 .departments_list li h3 {
     width: 100%;
@@ -45,4 +50,55 @@
     cursor: pointer;
     text-align: center;
     opacity: 1;
+}
+@media (max-width: 650px) {
+    .departments .departments_list {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        width: 95%;
+        padding: 0.5rem;
+    }
+    .departments .department_item {
+        max-height: none;
+        padding: 0.25rem 0;
+    }
+    .departments_list .department_item h3 {
+        margin: 0;
+    }
+    .departments_list .department_item .toggle_btn {
+        width: 100%;
+        text-align: left;
+        background-color: transparent;
+        border: none;
+        padding: 0.6rem 0.25rem;
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+    .departments_list .department_item .toggle_btn:focus {
+        outline: 2px solid rgba(1,43,41, 0.15);
+        outline-offset: 2px;
+    }
+    .departments_list .department_item .caret {
+        margin-left: 0.5rem;
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+    .departments .subcategories {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 0.25rem;
+        opacity: 0;
+        transition: max-height 320ms ease, opacity 240ms ease, padding 240ms ease;
+    }
+    .departments_list .department_item.open .subcategories {
+        max-height: 800px;
+        opacity: 1;
+        padding: 0.5rem 0.25rem;
+    }
+    .departments .subcategories li {
+        padding: 0.45rem 0;
+    }
 }
