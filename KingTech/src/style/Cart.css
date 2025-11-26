@@ -315,7 +315,7 @@
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     padding: 2rem 1.5rem;
-    width: 340px;
+    max-width: 340px;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -438,4 +438,18 @@
 }
 .cart div[class*="automated"] div[class^="products"] .product-card.landscape .btn-add-prod:hover {
     background-color: #047973;
+}
+@media (max-width: 425px) {
+    .cart .steps-cart {
+        border-radius: 0px;
+    }
+    .cart div[class*="automated"] {
+        border-radius: 0px;
+    }
+    .cart .summary-cart {
+        padding: 2rem 0.5rem;
+    }
+    .cart .summary-cart .btn-cep {
+        padding: 0.4rem 0rem;
+    }
 }

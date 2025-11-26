@@ -71,7 +71,7 @@
 }
 @media (max-width: 350px) {
     .cart .steps .step p {
-        font-size: 11px;
+        font-size: 10px;
     }
     .cart div[class*="automated"] .product-card .rating-favorite-box {
         display: none;

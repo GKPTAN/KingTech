@@ -24,4 +24,16 @@
     div[class^="offers-"] div[class^="products-"] .product-card .rating-favorite-box .MuiRating-root {
        font-size: 20px;
     }
+    div[class^="offers-"] .product-card img {
+        width: 120px;
+        height: 120px;
+    }
+}
+@media (max-width: 350px) {
+    div[class^="offers-"] div[class^="title-"] h2 {
+        font-size: 0.7rem;
+    }
+    div[class^="offers-"] div[class^="title-"] .link {
+        font-size: 0.7rem;
+    }
 }

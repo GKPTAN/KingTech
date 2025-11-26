@@ -15,8 +15,8 @@ const HeartFavorite = () => {
 
   let mediaQuery = 30;
 
-  if (widthWindow <= 650) {
-    mediaQuery = 25;
+  if (widthWindow <= 1024) {
+    mediaQuery = 20;
   }
 
   useEffect(() => {

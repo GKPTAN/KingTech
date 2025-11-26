@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { useAuth } from '../context/AuthContext'; 
+import { useWidthWindow } from '../hooks/useWindowWidth';
 import { MdLocalOffer } from 'react-icons/md';
 import { BsEmojiSmile } from 'react-icons/bs';
 import { LuCrown } from 'react-icons/lu';
@@ -10,12 +11,78 @@ import '../style/Favorites.css';
 import '../style/responsive/routes/Favorites/Favorites.responsive.css';
 
 const favorites = [
-  
+  {
+    id: 0,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 1,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 2,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 3,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 4,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 5,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 6,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
+  {
+    id: 7,
+    name: "Produto",
+    img: "https://placehold.co/150x150/jpg",
+    prevPrice: "",
+    price: 999.99,
+    alt: "imagem do produto",
+  },
 ]
 
 const Favorites = () => {
 
-  const { user } = useAuth();
+  let widthWindow = useWidthWindow();
+
+  // const { user } = useAuth();
+  const user = true;
 
   return (
     <div className="favorites">
@@ -35,7 +102,7 @@ const Favorites = () => {
               {favorites && favorites.map((favorite) => (
                 <li key={favorite.id} className='favorite-item'>
                   <ProductCard 
-                    mode='landscape'
+                    mode={widthWindow > 900 ? "landscape" : "portrait"}
                     name={favorite.name}
                     id={favorite.id}
                     img={favorite.img}

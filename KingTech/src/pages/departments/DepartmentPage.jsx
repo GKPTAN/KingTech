@@ -10,6 +10,7 @@ import Filter from "../../components/layout/Filter";
 import ProductCard from "../../components/layout/ProductCard";
 import CarrosselOffers from "../../components/layout/CarrosselOffers";
 import '../../style/pages/departments/DepartmentPage.css';
+import '../../style/responsive/pages/departments/DepartmentPage.responsive.css';
 
 const products = [
     {
