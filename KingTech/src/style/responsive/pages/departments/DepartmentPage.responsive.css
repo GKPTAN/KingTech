@@ -5,6 +5,130 @@
     }
     .products-content .catalog .catalog-products .product-card {
         max-width: 250px;
-        height: 320px;
+    }
+}
+@media (max-width: 1100px) {
+    .products-content .catalog .filters {
+        width: 250px;
+    }
+    .products-content .catalog .catalog-products {
+        gap: 2rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .products-content div[class*="automated"] {
+        width: 80%;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape {
+        width: 100%;
+    } 
+}
+@media (max-width: 900px) {
+    .products-content .catalog .catalog-products {
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .products-content .catalog .filters {
+        width: 200px;
+    }
+    .products-content .catalog .catalog-products .product-card {
+        width: 200px;
+    }
+    .products-content div[class*="automated"] {
+        width: 90%;
+    }
+}
+@media (max-width: 768px) {
+    .products-content .catalog {
+        padding: 0 1rem;
+        justify-content: center;
+    }
+    .products-content .catalog .filters {
+        width: 100%;
+        margin-bottom: 2rem;
+        margin-right: 0;
+    }
+    .products-content .catalog .filters .filter-category-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .products-content .catalog .catalog-products {
+        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+    }
+    .products-content .catalog .catalog-products .product-card {
+        width: auto;
+    }
+}
+@media (max-width: 500px) {
+    .products-content .catalog .catalog-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape img {
+        max-width: 120px;
+        height: auto;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .name-product {
+        font-size: 1rem;
+    }
+}
+@media (max-width: 425px) {
+    .products-content .catalog .view-options .view-switching h3,
+    .products-content .catalog .view-options .view-switching div {
+        font-size: 1rem;
+    }
+    .products-content .catalog .view-options .quantity-products {
+        font-size: 0.8rem;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .rating-favorite-box .MuiRating-icon {
+        font-size: 20px;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape img {
+        max-width: 90px;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .name-product {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .products-content .catalog .catalog-products {
+        grid-template-columns: repeat(1, 1fr);
+        justify-items: center;
+        scroll-margin-top: 150px;
+    }
+    .products-content .catalog .view-options .view-switching {
+        display: none;
+    }
+    .products-content .catalog .catalog-products .product-card {
+        max-width: 100%;
+        width: 300px;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape img {
+        max-width: 60px;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .name-product {
+        font-size: 0.8rem;
+    }
+}
+@media (max-width: 320px) {
+    .products-content .catalog .catalog-products .product-card {
+        width: 250px;
+    }
+    .products-content .catalog:has(.catalog-products.list) {
+        width: 100%;
+        padding: 8px;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape {
+        width: 100%;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .name-product {
+        font-size: 0.6rem;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .price-product {
+        font-size: 0.8rem;
+    }
+    .products-content .catalog .catalog-products.list .product-card.landscape .rating-favorite-box .MuiRating-icon {
+        font-size: 15px;
     }
 }

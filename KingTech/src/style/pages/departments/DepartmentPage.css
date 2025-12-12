@@ -41,16 +41,19 @@
 }
 .products-content .catalog {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
     padding: 0 2rem;
     margin-top: 5rem;
     margin-bottom: 5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 .products-content .catalog .filters {
     width: 300px;
     height: auto;
     background-color: cadetblue;
+    margin-right: 2rem;
 }
 .products-content .filters .filter {
     background-color: #fff;
@@ -75,46 +78,48 @@
     gap: 3rem;
     position: relative;
     margin-bottom: 2rem;
+    scroll-margin-top: 80px;
 }
-.products-content .quantity-products{
-    position: absolute;
-    top: -2rem;
+.products-content .catalog .view-options {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
-.products-content .catalog .catalog-products .view-switching {
+.products-content .catalog .view-options .view-switching {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: -3rem;
-    right: 8rem;
     gap: 0.8rem;
 }
-.products-content .catalog .catalog-products .view-switching div {
+.products-content .catalog .view-options .view-switching div {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     font-size: 18px;
 }
-.products-content .catalog .catalog-products .view-switching span {
+.products-content .catalog .view-options .view-switching span {
     padding: 0.3rem;
     border: 1px solid #000;
     border-radius: 11px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
-.products-content .catalog .catalog-products .view-switching span.active {
+.products-content .catalog .view-options .view-switching span.active {
     background-color: #012B29;
     color: #F9CB40;
 }
 .products-content .catalog .catalog-products .product-card {
     max-width: 300px;
-    padding: 1rem 1rem;
+    height: 450px;
+    padding: 1rem 0.8rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     cursor: pointer;
     background-color: #fff;
     border-radius: 17px;
@@ -122,14 +127,13 @@
 }
 .products-content .catalog .catalog-products .product-card .rating-favorite-box {
     display: flex;
-    width: 90%;
+    width: 100%;
     justify-content: space-between;
 }
 .products-content .catalog .catalog-products .product-card .royalty {
     display: none;
 }
 .products-content .catalog .catalog-products .product-card .name-product {
-    margin: 0.5rem 0;
     text-align: center;
     font-size: 13px;
     font-weight: 500;
@@ -146,16 +150,14 @@
 .products-content .catalog .catalog-products .product-card .btn-buy.hidden {
     display: none;
 }
-.products-content .catalog .catalog-products .pagination-nav {
-    position: absolute;
+.products-content .catalog .pagination-nav {
     display: flex;
     list-style: none;
-    bottom: -4rem;
-    left: 43%;
     gap: 0.5rem;
     padding: 0;
+    margin: 0 auto;
 }
-.products-content .catalog .catalog-products .pagination-nav li {
+.products-content .catalog .pagination-nav li {
     border: 1px solid #000;
     border-radius: 4px;
     padding: 0.25rem 0.5rem;
@@ -166,23 +168,25 @@
     text-align: center;
     transition: all 0.3s ease-in-out;
 }
-.products-content .catalog .catalog-products .pagination-nav li:hover {
+.products-content .catalog .pagination-nav li:hover {
     background-color: #012b294d;
 }
-.products-content .catalog .catalog-products .pagination-nav li.active {
+.products-content .catalog .pagination-nav li.active {
     background-color: #012B29;
     color: #fff;
 }
-.products-content .catalog .catalog-products .pagination-nav .prev,
-.products-content .catalog .catalog-products .pagination-nav .next {
+.products-content .catalog .pagination-nav .prev,
+.products-content .catalog .pagination-nav .next {
     cursor: pointer;
 }
 .products-content .catalog .catalog-products.list {
+    display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-.products-content .catalog .catalog-products.list .product-card {
+.products-content .catalog .catalog-products.list .product-card.landscape {
     width: 90%;
+    max-width: 100%;
     height: 200px;
     flex-direction: row;
     justify-content: space-between;
