@@ -19,7 +19,7 @@ const ProductVariants = ({variants}) => {
               <li className={selected[catIdx] === optIdx ? 'active' : ''} key={optIdx} onClick={() => handleSelect(catIdx, optIdx)}>{option}</li>
             ))}
           </ul>
-          <hr />
+          {variants.length - 1 !== catIdx && <hr />}
         </div>
       ))}
     </div>

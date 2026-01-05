@@ -9,10 +9,10 @@
 /* Banner */
 .product-page .mini-banner {
     width: 100%;
-    max-width: 600px;
-    margin: 2rem 0 1rem 3.5rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
     align-self: flex-start;
-    border-radius: 12px;
     overflow: hidden;
 }
 .product-page .mini-banner img {
@@ -33,7 +33,7 @@
 }
 /* Card do produto */
 .product-page .product-card-main {
-    width: 100%;
+    width: 90%;
     max-width: 1800px;
     background-color: #fff;
     border-radius: 16px;
@@ -147,7 +147,7 @@
     z-index: 3000;
     display: grid;
     grid-template-rows: auto 1fr;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 280px 1fr;
     grid-template-areas: 
         "vertical-images mySwiper"
         "info-slide info-slide"
@@ -253,8 +253,8 @@
 }
 .product-page .product-card-main .slider-modal .mySwiper {
     grid-area: mySwiper;
-    width: 800px;
-    max-width: 80vw;
+    width: 100%;
+    max-width: 800px;
     height: 700px;
     background-color: transparent;
     display: flex;
@@ -289,10 +289,7 @@
     display: grid;
     grid-template-columns: 180px 1fr;
     grid-template-rows: auto auto;
-    grid-template-areas: 
-        "vertical main"
-        "vertical variants"
-    ;
+    grid-template-areas: "vertical main";
     align-items: start;
 }
 .product-page .product-card-main .vertical-images {
@@ -347,15 +344,21 @@
     color: #f9cb40;
 }
 /* imagem do produto */
+.product-page .product-card-main .info-image {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
 .product-page .product-card-main .main-image {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    grid-area: main;
+    justify-content: space-between;
     min-width: 320px;
     max-width: 600px;
     height: 600px;
-    background-color: #f5f7fa;
+    background-color: #fff;
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.2);
     margin-right: 2rem;
@@ -374,10 +377,6 @@
 .product-page .product-card-main .main-image img:hover {
     transform: scale(1.04);
     box-shadow: 0 4px 18px rgba(0,0,0,0.13);
-}
-.product-page .product-card-main .product-variants {
-    grid-area: variants;
-    margin-top: -6rem;
 }
 .product-page .product-card-main .product-variants h3 {
     margin-bottom: 1.5rem;
@@ -551,6 +550,7 @@
 .product-page .product-card-main .product-info .shipping-calc {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 .product-page .product-card-main .product-info .shipping-calc label {
@@ -609,7 +609,7 @@
 }
 /* Vantagens de comprar na loja */ 
 .product-page .store-advantages {
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin: 2rem auto 2.5rem;
 }
@@ -673,7 +673,7 @@
 }
 /* Carrossel de produtos relacionados */
 .product-page .offers-related {
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
     margin: 2.5rem auto 2.5rem;
 }
@@ -683,6 +683,7 @@
     color: #fff;
     background-color: #000;
     margin-bottom: 2rem;
+    padding: 0 1rem;
 }
 .product-page .product-details h2 {
     color: #fff;
@@ -698,13 +699,15 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    width: 1600px;
+    width: 100%;
+    max-width: 1600px;
     padding: 90px 0px 90px 90px;
     margin: auto;
     justify-content: flex-end;
 }
 .product-page .product-details .introduction div {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
 }
 .product-page .product-details .introduction div img {
     width: 100%;
@@ -718,7 +721,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1300px;
+    width: 100%;
+    max-width: 1300px;
     margin: auto;
     margin-bottom: 2rem;
 }
@@ -736,15 +740,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 1600px;
+    width: 100%;
+    max-width: 1600px;
     margin: auto;
 }
 .product-page .product-details .ultrafast div {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     margin-bottom: 1rem;
 }
 .product-page .product-details .ultrafast div p {
     text-align: center;
+}
+.product-page .product-details .ultrafast div img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 .product-page .product-details .realismo {
     background: url(/image/red-center-glow.avif);
@@ -806,8 +817,17 @@
     flex-direction: row;
     align-items: center;
 }
+.product-page .product-details .video-streaming div {
+    flex: 1 1 0;
+}
 .product-page .product-details .video-streaming .video-img {
     max-width: 940px;
+    flex: 2 1 0;
+}
+.product-page .product-details .video-streaming .video-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 /* Ficha do produto */
 .product-page .product-sheet {
@@ -815,7 +835,7 @@
     border-radius: 10px;
     padding: 1rem 1.5rem 1.5rem;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    width: 100%;
+    width: 90%;
     max-width: 1300px;
     margin-bottom: 2rem;
 }
@@ -872,7 +892,7 @@
 }
 /* Carrossel de produtos mais procurados */
 .product-page .offers-most-wanted {
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
     margin: 2.5rem auto;
 }
@@ -883,7 +903,7 @@
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
 }
 .product-page .reviews h2 {
@@ -1033,13 +1053,15 @@
     color: #333;
     line-height: 1.4;
 }
+
+/* DÚVIDAS */
 .product-page .questions-and-answers {
   margin-top: 2rem;
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
 }
 .product-page .questions-and-answers .qna-header {
@@ -1158,13 +1180,15 @@
 .product-page .questions-and-answers .show-answers:hover {
   text-decoration: underline;
 }
+
+/* MÉTODOS DE PAGAMENTO */
 .product-page .payment-methods {
   background: #fff;
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   margin: 2rem 0;
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
 }
 .product-page .payment-methods h2 {

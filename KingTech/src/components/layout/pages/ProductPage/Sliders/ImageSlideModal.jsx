@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { RiShoppingBasketFill, RiCloseFill } from "react-icons/ri";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCoverflow } from "swiper/modules";
+import { useWidthWindow } from "../../../../../hooks/useWindowWidth";
 import Button from "../../../Button";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -9,6 +10,7 @@ import "swiper/css/pagination";
 
 const ImageSlideModal = ({ images, onClose, price, alt }) => {
   const [image, setImage] = useState(0);
+  let widthWindow = useWidthWindow();
   const swiperRef = useRef(null);
 
   return (
@@ -46,7 +48,7 @@ const ImageSlideModal = ({ images, onClose, price, alt }) => {
           className="btn-add-to-cart"
           disabled={false}
           onClick={() => {}}
-          icon={<RiShoppingBasketFill size={30} />}
+          icon={<RiShoppingBasketFill size={widthWindow > 425 ? 30 : 20} />}
         />
       </div>
       <Swiper

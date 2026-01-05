@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWidthWindow } from "../hooks/useWindowWidth.jsx";
 import { SiAmd } from "react-icons/si";
 import { PiShareNetwork } from "react-icons/pi";
 import { RiShoppingBasketFill, RiFlashlightFill } from "react-icons/ri";
@@ -18,8 +19,9 @@ import StoreAdvantages from "../components/layout/pages/ProductPage/StoreAdvanta
 import CarrosselOffers from "../components/layout/CarrosselOffers";
 import QuestionsAndAnswers from "../components/layout/pages/ProductPage/Questions/QuestionsAndAnswers";
 import PaymentMethods from "../components/layout/pages/ProductPage/Payment/PaymentMethods";
-import "../style/ProductPage.css";
 import Reviews from "../components/layout/pages/ProductPage/Reviews/Reviews";
+import "../style/ProductPage.css";
+import "../style/responsive/routes/ProductPage/ProductPage.responsive.css";
 
 const questions = [
   {
@@ -42,6 +44,7 @@ const questions = [
 const ProductPage = () => {
   const [showPromoModal, setShowPromoModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
+  let widthWindow = useWidthWindow();
   const [image, setImage] = useState(0);
 
   return (
@@ -90,10 +93,12 @@ const ProductPage = () => {
               +{product.img.length - 4}
             </div>
           </div>
-          <div className="main-image">
-            <img src={product.img[image]} alt={product.name} />
+          <div className="info-image">
+            <div className="main-image">
+              <img src={product.img[image]} alt={product.name} />
+            </div>
+            <ProductVariants variants={product.variations} />
           </div>
-          <ProductVariants variants={product.variations} />
         </div>
 
         <div className="quick-options">
@@ -102,7 +107,7 @@ const ProductPage = () => {
             nameAction=""
             className="share-btn"
             onClick={() => {}}
-            icon={<PiShareNetwork size={30} />}
+            icon={<PiShareNetwork size={widthWindow > 600 ? 30 : 20} />}
           />
           <HeartFavorite />
         </div>
@@ -149,11 +154,13 @@ const ProductPage = () => {
               })}
             </span>
             <span className="price-card">
-              No cartão da loja: R${" "}
-              {product.priceInCardStore.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-              })}{" "}
-              <span className="discount">-{product.descount}</span>
+              <p>
+                No cartão da loja: R${" "}
+                {product.priceInCardStore.toLocaleString("pt-BR", {
+                  minimumFractionDigits: 2,
+                })}{" "}
+                <span className="discount">-{product.descount}</span>
+              </p>
             </span>
             <span className="price-card-part">
               ou 10x de R${" "}
@@ -230,8 +237,8 @@ const ProductPage = () => {
         dots={false}
         infinite={false}
         speed={500}
-        slidesToShow={4}
-        slidesToScroll={4}
+        slidesToShow={widthWindow > 768 ? 4 : widthWindow <= 768 && widthWindow > 600 ? 3 : 2}
+        slidesToScroll={widthWindow > 768 ? 4 : widthWindow <= 768 && widthWindow > 600 ? 3 : 2}
         autoplay={false}
         autoplaySpeed={2500}
         pauseOnHover={false}
@@ -372,8 +379,8 @@ const ProductPage = () => {
         dots={false}
         infinite={true}
         speed={500}
-        slidesToShow={4}
-        slidesToScroll={4}
+        slidesToShow={widthWindow > 768 ? 4 : widthWindow <= 768 && widthWindow > 600 ? 3 : 2}
+        slidesToScroll={widthWindow > 768 ? 4 : widthWindow <= 768 && widthWindow > 600 ? 3 : 2}
         autoplay={false}
         autoplaySpeed={2500}
         pauseOnHover={false}
