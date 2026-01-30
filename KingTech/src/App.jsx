@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { useWidthWindow } from './hooks/useWindowWidth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,6 +11,7 @@ function App() {
   return (
     <>
       <div className="App">
+        <ScrollRestoration />
         {widthWindow > 650 ? 
           (<Navbar img={true} search={true} nav={true} isNavMobile={false}/>) 
           :
