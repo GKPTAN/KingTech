@@ -324,12 +324,12 @@ KingTech/
 ## API
 
 ### endpoints
-- /auth/register
-- /auth/verify
-- /auth/login
-- /auth/me
-- /auth/logout
-- /auth/refresh
+- POST - /auth/register
+- POST - /auth/verify
+- POST - /auth/login
+- GET - /auth/me
+- POST - /auth/logout
+- POST - /auth/refresh
 
 ## Autor
 - Guilherme Amorim
