@@ -8,3 +8,7 @@
 ## Demonstração
 
 ![Imagem do aplicativo da loja kingtech](./KingTech/public/image/kingtech.png)
+* [Ver o app do projeto](https://kingtech-ashy.vercel.app/)
+
+## Estrutura do projeto 🚧 Atualmente 🚧
+
