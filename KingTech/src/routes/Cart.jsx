@@ -6,7 +6,7 @@ import { useForm } from "../hooks/useStep";
 import BasketTech from "../components/layout/pages/Cart/BasketTech";
 import Button from "../components/layout/Button";
 import Steps from "../components/layout/pages/Cart/Steps";
-import CarrosselOffers from "../components/layout/CarrosselOffers";
+import CarrosselOffers from "../components/layout/CarrosselOffers.tsx";
 import "../style/Cart.css";
 import "../style/responsive/routes/Cart/Cart.responsive.css";
 

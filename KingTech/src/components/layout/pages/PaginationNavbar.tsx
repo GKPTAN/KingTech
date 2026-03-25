@@ -1,11 +1,21 @@
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
+interface PaginationNavbarProps {
+  pages: {
+    id: number;
+    current: boolean;
+  }[];
+  onPageChange?: (pageNumber: number) => void;
+  disablePrev: boolean;
+  disableNext: boolean;
+}
+
 const PaginationNavbar = ({
   pages,
   onPageChange,
   disablePrev,
   disableNext,
-}) => {
+}: PaginationNavbarProps) => {
   const scrollToCatalog = () => {
     const el = document.querySelector(".catalog-products");
     if (el && el.scrollIntoView) {
@@ -35,7 +45,7 @@ const PaginationNavbar = ({
     scrollToCatalog();
   };
 
-  const handleClickPage = (pageNumber) => {
+  const handleClickPage = (pageNumber: number) => {
     onPageChange && onPageChange(pageNumber);
     scrollToCatalog();
   };

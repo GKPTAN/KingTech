@@ -1,9 +1,16 @@
 import { useState } from "react";
 
-const ProductVariants = ({variants}) => {
+interface ProductVariantsProps {
+  variants: {
+    category: string;
+    options: string[];
+  }[];
+}
+
+const ProductVariants = ({variants}: ProductVariantsProps) => {
   const [selected, setSelected] = useState(Array(variants.length).fill(null));
 
-  const handleSelect = (catIdx, optIdx) => {
+  const handleSelect = (catIdx: number, optIdx: number) => {
     const updated = [...selected];
     updated[catIdx] = optIdx;
     setSelected(updated);

@@ -1,16 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
-import { useWidthWindow } from "../hooks/useWindowWidth";
+import { useWidthWindow } from "../hooks/useWindowWidth.jsx";
 import { TbHomeFilled, TbHeartFilled, TbCrown } from "react-icons/tb";
 import { RiAccountBoxFill, RiShoppingBasketFill } from "react-icons/ri";
 import { MdList } from "react-icons/md";
 import logo from "../assets/logo.png";
-import Search from "./Search";
+import Search from "./Search.jsx";
 
-const Navbar = ({ img, search, nav, isNavMobile }) => {
+interface NavbarProps {
+  img?: boolean;
+  search: boolean;
+  nav: boolean;
+  isNavMobile: boolean;
+}
+
+const Navbar = ({ img, search, nav, isNavMobile }: NavbarProps) => {
 
   const location = useLocation();
   let widthWindow = useWidthWindow();
-  let mediaQuery;
+  let mediaQuery = 0;
 
   if (widthWindow <= 768) {
     mediaQuery = 25;

@@ -1,9 +1,21 @@
 import { useState } from "react";
-import ReviewSummary from "./ReviewSummary";
-import ReviewFilters from "./ReviewFilters";
-import ReviewComments from "./ReviewComments";
+import type { Comment } from "./ReviewComments.tsx";
+import ReviewSummary from "./ReviewSummary.tsx";
+import ReviewFilters from "./ReviewFilters.tsx";
+import ReviewComments from "./ReviewComments.tsx";
 
-const Reviews = ({product}) => {
+interface ReviewsProps {
+  product: {
+    rating: number;
+    numberRating: number;
+    compositionRating: {
+      [key: number]: number;
+    };
+    reviewComments: Comment[];
+  }
+}
+
+const Reviews = ({product}: ReviewsProps) => {
   const [filter, setFilter] = useState("recent");
 
   const sortComments = (comments, filter) => {
@@ -13,7 +25,7 @@ const Reviews = ({product}) => {
         case "low":
             return [...comments].sort((a, b) => a.rating - b.rating);
         case "recent":
-            return [...comments].sort((a, b) => new Date(b.date) - new Date(a.date));
+            return [...comments].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         default:
             return comments;
     };

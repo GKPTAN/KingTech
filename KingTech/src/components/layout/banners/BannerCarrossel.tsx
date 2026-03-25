@@ -1,16 +1,34 @@
-import { useWidthWindow } from "../../../hooks/useWindowWidth";
+import { useWidthWindow } from "../../../hooks/useWindowWidth.jsx";
 import {
   LiaAngleDoubleLeftSolid,
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
 import { MdEdit } from "react-icons/md";
-import Slider from "react-slick";
+import SliderSlick from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../style/components/layout/Banner.css";
-import "../../../style/responsive/components/layout/Banner.responsive.css"
+import "../../../style/responsive/components/layout/Banner.responsive.css";
 
-const SamplePrevArrow = (props) => {
+const Slider = (SliderSlick as any) as React.ElementType;
+
+export interface ArrowProps {
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
+
+interface BannerCarrosselProps {
+  banners: {
+    id: number;
+    title?: string;
+    description?: string;
+    src: string;
+  }[];
+  className?: string;
+}
+
+const SamplePrevArrow = (props: ArrowProps) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -28,7 +46,7 @@ const SamplePrevArrow = (props) => {
     </div>
   );
 };
-const SampleNextArrow = (props) => {
+const SampleNextArrow = (props: ArrowProps) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -47,7 +65,7 @@ const SampleNextArrow = (props) => {
   );
 };
 
-const BannerCarrossel = ({ banners, className }) => {
+const BannerCarrossel = ({ banners, className }: BannerCarrosselProps) => {
   const settings = {
     dots: true,
     infinite: true,

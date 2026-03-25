@@ -1,18 +1,31 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay, Pagination, EffectCube } from "swiper/modules";
-import ProductCard from './ProductCard';
+import ProductCard from './ProductCard.tsx';
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "../../style/components/layout/Carrossel3D.css";
 
-const Carrossel3D = ({products = [], settings = {},}) => {
+interface Carrossel3DProps {
+    products: {
+        id: string | number;
+        name: string;
+        img: string;
+        alt: string;
+        price: number;
+        prevPrice: number;
+    }[];
+    settings: {};
+}
+
+const Carrossel3D = ({products = [], settings = {},}: Carrossel3DProps) => {
     
   return (
     <Swiper modules={[EffectCube, EffectCoverflow, Autoplay, Pagination]} {...settings} className='mySwiper'>
         {products.map((product, index) => (
             <SwiperSlide key={index}>
                 <ProductCard 
+                    mode='portrait'
                     id={product.id}
                     name={product.name}
                     img={product.img}

@@ -1,7 +1,20 @@
 import { BiSolidUserCheck } from "react-icons/bi";
 import Rating from "@mui/material/Rating";
 
-const ReviewComments = ({comments}) => {
+export interface Comment {
+  id: number;
+  name: string;
+  date: string;
+  verified: boolean;
+  rating: number;
+  comment: string;
+}
+
+interface ReviewCommentsProps {
+  comments: Comment[];
+}
+
+const ReviewComments = ({comments}: ReviewCommentsProps) => {
   return (
     <article className="comments-wrapper">
       {comments.map(({ id, name, date, verified, rating, comment}) => (

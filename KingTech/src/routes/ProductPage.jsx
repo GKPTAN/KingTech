@@ -16,7 +16,7 @@ import HeartFavorite from "../components/layout/HeartFavorite";
 import Rating from "@mui/material/Rating";
 import ProductVariants from "../components/layout/pages/ProductPage/Product/ProductVariants";
 import StoreAdvantages from "../components/layout/pages/ProductPage/StoreAdvantages";
-import CarrosselOffers from "../components/layout/CarrosselOffers";
+import CarrosselOffers from "../components/layout/CarrosselOffers.tsx";
 import QuestionsAndAnswers from "../components/layout/pages/ProductPage/Questions/QuestionsAndAnswers";
 import PaymentMethods from "../components/layout/pages/ProductPage/Payment/PaymentMethods";
 import Reviews from "../components/layout/pages/ProductPage/Reviews/Reviews";

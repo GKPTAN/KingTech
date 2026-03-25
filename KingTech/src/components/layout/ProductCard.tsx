@@ -3,16 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import Rating from "@mui/material/Rating";
-import HeartFavorite from './HeartFavorite';
-import Button from './Button';
+import HeartFavorite from './HeartFavorite.js';
+import Button from './Button.js';
 
 /**
- * @typedef {"portrait" | "landscape" | "list"} CardMode
- */
+ * Define o tipo de layout do card, podendo ser modo retrato, paisagem ou lista.
+*/
+type CardMode = "portrait" | "landscape" | "list";
+
+interface ProductCardProps {
+  mode: CardMode;
+  name: string;
+  id: string | number;
+  img: string;
+  price: number;
+  alt: string;
+  prevPrice?: number | null;
+  button?: boolean;
+  cart?: boolean;
+}
+
 /**
- * @param {{mode?: CardMode}} props  
+ * componente de card de produto, utilizado para exibir os produtos em diferentes seções do site, como home, categorias e carrinho. O componente recebe as seguintes props:
+ * @param mode: define o layout do card, podendo ser "portrait", "landscape" ou "list"
+ * @param name: nome do produto
+ * @param id: id do produto, utilizado para navegação
+ * @param img: imagem do produto
+ * @param price: preço do produto
+ * @param alt: texto alternativo da imagem do produto
+ * @param prevPrice: preço anterior do produto, utilizado para exibir o desconto
+ * @param button: booleano que define se o botão de compra deve ser exibido
+ * @param cart: booleano que define se o card está sendo exibido no carrinho, caso seja true, o botão de compra é substituído por um botão de adicionar ao carrinho
+ * @returns TSX.Element
  */
-const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}) => {
+const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}: ProductCardProps) => {
   const navigate = useNavigate();
   const rating = 4;
 

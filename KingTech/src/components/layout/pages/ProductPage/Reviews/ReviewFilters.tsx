@@ -1,5 +1,9 @@
 import { useState } from "react";
-import Select from "../../../form/Select";
+import Select from "../../../form/Select.tsx";
+
+interface ReviewFiltersProps {
+  onFilterChange: (value: string) => void;
+}
 
 const options = [
   {value: "recent", label: "Mais recentes"},
@@ -7,10 +11,10 @@ const options = [
   {value: "low", label: "Menor nota"},
 ]
 
-const ReviewFilters = ({ onFilterChange }) => {
+const ReviewFilters = ({ onFilterChange }: ReviewFiltersProps) => {
   const [selected, setSelected] = useState("recent");
 
-  const handleChange = (value) => {
+  const handleChange = (value: string) => {
     setSelected(value);
     onFilterChange(value);
   };
@@ -20,7 +24,7 @@ const ReviewFilters = ({ onFilterChange }) => {
       <label htmlFor="review-filter">Ordenar por:</label>
       <Select 
         id="review-filter"
-        nameDefault={options.find((opt) => opt.value === selected)?.label}
+        nameDefault={options.find((opt) => opt.value === selected)?.label || "Mais recentes"}
         options={options}
         onChange={handleChange}
       />

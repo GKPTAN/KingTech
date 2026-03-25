@@ -2,22 +2,31 @@ import { useState } from "react";
 import { RingLoader } from "react-spinners";
 import { PiWarning } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import Button from "./layout/Button";
+import Button from "./layout/Button.tsx";
 
-const Form = ({ onSubmit, children, classname = "", buttonAction, disabled, styles }) => {
+interface FormProps {
+  onSubmit: (formData: FormData) => Promise<{message: string, error: boolean, technicalError: boolean, location?: string}>;
+  children: React.ReactNode;
+  classname?: string;
+  buttonAction: string | React.ReactNode;
+  disabled: boolean;
+  styles?: {[error: string]: string};
+}
+
+const Form = ({ onSubmit, children, classname = "", buttonAction, disabled, styles }: FormProps) => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
-      const result = await onSubmit(new FormData(e.target));
+      const result = await onSubmit(new FormData(e.currentTarget));
       if (result.technicalError === true) {
         console.log("Resposta da Api: ", result.message);
         setMessage("Ocorreu um erro!, tente novamente mais tarde.");

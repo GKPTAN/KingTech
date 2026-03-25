@@ -1,7 +1,15 @@
 import { Rating, LinearProgress, Box, Typography } from "@mui/material";
 import { FaStar } from "react-icons/fa";
 
-const ReviewSummary = ({rating, numberRating, breakdown}) => {
+interface ReviewSummaryProps {
+  rating: number;
+  numberRating: number;
+  breakdown: {
+    [key: number]: number;
+  }
+}
+
+const ReviewSummary = ({rating, numberRating, breakdown}: ReviewSummaryProps) => {
   return (
     <div className="review-summary">
       <div className="rating-header">
@@ -15,7 +23,7 @@ const ReviewSummary = ({rating, numberRating, breakdown}) => {
         <p className="number-rating">{numberRating} {numberRating === 1 ? "avaliação" : "avaliações"}</p>
       </div>
       <div className="breakdown">
-        {Object.keys(breakdown).sort((a, b) => b - a).map((star) => (
+        {Object.keys(breakdown).sort((a, b) => Number(b) - Number(a)).map((star) => (
           <Box key={star} className="breakdown-row">
             <Typography className="star-label">{star}<FaStar size={20} fill="#FAAF00"/></Typography>
             <LinearProgress 

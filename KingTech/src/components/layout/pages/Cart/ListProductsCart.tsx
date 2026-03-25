@@ -1,7 +1,13 @@
 import { TiDelete } from "react-icons/ti";
-import Button from "../../Button";
+import Button from "../../Button.tsx";
+import type { ProductsInCart } from "../../../../types/products.ts";
 
-const ListProductsCart = ({products, remove}) => {
+interface ListProductsCartProps {
+    products: ProductsInCart[];
+    remove: () => void;
+}
+
+const ListProductsCart = ({products, remove}: ListProductsCartProps) => {
   return (
     <ul className="list-products-cart">
         {products.map((product) => (
@@ -67,4 +73,4 @@ const ListProductsCart = ({products, remove}) => {
   );
 };
 
-export default ListProductsCart
+export default ListProductsCart;

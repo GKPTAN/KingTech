@@ -1,9 +1,19 @@
 import { useState } from 'react';
-import Button from '../Button';
+import Button from '../Button.tsx';
 import { MdArrowDropDown } from 'react-icons/md';
 import '../../../style/components/Select.css';
 
-const Select = ({id = "", options = [], nameDefault, onChange }) => {
+interface SelectProps {
+  id: string;
+  options: {
+    value: string | number;
+    label: string;
+  } [];
+  nameDefault: string;
+  onChange?: (value: string | number) => void;
+}
+
+const Select = ({id = "", options = [], nameDefault, onChange }: SelectProps) => {
 
   const [selected, setSelected] = useState(nameDefault);
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +36,7 @@ const Select = ({id = "", options = [], nameDefault, onChange }) => {
           ))}
         </ul>
       )}
-      <Button type="button" className="button-select" nameAction={<MdArrowDropDown />}/>
+      <Button type="button" className="button-select" nameAction={<MdArrowDropDown />} disabled={false}/>
     </div>
   );
 };

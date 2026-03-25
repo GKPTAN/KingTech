@@ -1,8 +1,8 @@
-import { useWidthWindow } from "../../hooks/useWindowWidth";
+import { useWidthWindow } from "../../hooks/useWindowWidth.jsx";
 import { RiHeartLine, RiHeartFill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Button from "./Button";
+import Button from "./Button.tsx"; // Parei aqui, preciso habilitar o allowImportTsExtensions no tsconfig.json para importar o Button.jsx, ou converter o Button.jsx para Button.tsx
 import "../../style/components/layout/HeartFavorite.css";
 
 const HeartFavorite = () => {

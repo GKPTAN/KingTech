@@ -4,7 +4,7 @@ import { TbTopologyStar3, TbCrown } from 'react-icons/tb';
 import { LiaSearchDollarSolid } from 'react-icons/lia';
 import { BsFillLightningChargeFill } from 'react-icons/bs';
 import BannerCarrossel from '../components/layout/banners/BannerCarrossel';
-import CarrosselOffers from '../components/layout/CarrosselOffers';
+import CarrosselOffers from '../components/layout/CarrosselOffers.tsx';
 import '../style/Home.css';
 import '../style/responsive/routes/Home/Home.responsive.css';
 

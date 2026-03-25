@@ -1,4 +1,4 @@
-import { useWidthWindow } from "../../../../hooks/useWindowWidth";
+import { useWidthWindow } from "../../../../hooks/useWindowWidth.jsx";
 import { useState, useEffect } from "react";
 import { RiShoppingBasketFill } from "react-icons/ri";
 import { TiLocation } from "react-icons/ti";
@@ -7,9 +7,13 @@ import { HiMiniIdentification } from "react-icons/hi2";
 import { BiMoney } from "react-icons/bi";
 import { GiConfirmed } from "react-icons/gi";
 
-const Steps = ({ currentStep }) => {
+interface StepsProps {
+  currentStep: number;
+}
+
+const Steps = ({ currentStep }: StepsProps) => {
   let widthWindow = useWidthWindow();
-  const [sizeIcon, setSizeIcon] = useState();
+  const [sizeIcon, setSizeIcon] = useState<number>(0);
 
   useEffect(() => {
     if (widthWindow > 800) {

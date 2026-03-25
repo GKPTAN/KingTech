@@ -1,4 +1,4 @@
-import { useWidthWindow } from "../../hooks/useWindowWidth";
+import { useWidthWindow } from "../../hooks/useWindowWidth.jsx";
 import { TbTopologyStar3, TbArrowBigRightLines } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import {
@@ -6,19 +6,43 @@ import {
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
 import { MdEdit } from "react-icons/md";
-import ProductCard from "./ProductCard";
-import Slider from "react-slick";
+import ProductCard from "./ProductCard.tsx";
+import SliderSlick from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../style/components/layout/CarrosselOffers.css";
 import "../../style/responsive/components/layout/CarrosselOffers.responsive.css";
+import type { ArrowProps } from "./banners/BannerCarrossel.tsx";
+
+const Slider = (SliderSlick as any) as React.ElementType;
+
+type CardPreviewMode = "portrait" | "landscape";
+
+interface CarrosselOffersProps {
+  titleHidden: boolean;
+  className: string;
+  ariaLabel: string;
+  title: string;
+  icon: React.ReactNode;
+  dots: boolean;
+  infinite: boolean;
+  speed: number;
+  slidesToShow: number;
+  slidesToScroll: number;
+  autoplay: boolean;
+  autoplaySpeed: number;
+  pauseOnHover: boolean;
+  cardPreviewMode: CardPreviewMode;
+  button: boolean;
+  cart: boolean;
+}
 
 const products = [
   {
     id: 0,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -26,7 +50,7 @@ const products = [
     id: 1,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -34,7 +58,7 @@ const products = [
     id: 2,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -42,7 +66,7 @@ const products = [
     id: 3,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -50,7 +74,7 @@ const products = [
     id: 4,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -58,7 +82,7 @@ const products = [
     id: 5,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -66,7 +90,7 @@ const products = [
     id: 6,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -74,7 +98,7 @@ const products = [
     id: 7,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -82,7 +106,7 @@ const products = [
     id: 8,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
@@ -90,13 +114,13 @@ const products = [
     id: 9,
     name: "Produto",
     img: "https://placehold.co/150x150/jpg",
-    prevPrice: "",
+    prevPrice: null,
     price: 999.99,
     alt: "imagem do produto",
   },
 ];
 
-const SamplePrevArrow = (props) => {
+const SamplePrevArrow = (props: ArrowProps) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -115,7 +139,7 @@ const SamplePrevArrow = (props) => {
     </div>
   );
 };
-const SampleNextArrow = (props) => {
+const SampleNextArrow = (props: ArrowProps) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -135,12 +159,7 @@ const SampleNextArrow = (props) => {
   );
 };
 
-/**
- * @typedef {"portrait" | "landscape"} CardPreviewMode
- */
-/**
- * @param {{cardPreviewMode?: CardPreviewMode}} props
- */
+
 
 const CarrosselOffers = ({
   titleHidden,
@@ -159,7 +178,7 @@ const CarrosselOffers = ({
   cardPreviewMode,
   button,
   cart,
-}) => {
+}: CarrosselOffersProps) => {
   let widthWindow = useWidthWindow();
   const settings = {
     dots: dots,

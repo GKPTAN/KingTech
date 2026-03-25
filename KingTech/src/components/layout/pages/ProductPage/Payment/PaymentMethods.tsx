@@ -2,19 +2,32 @@ import { useState } from "react";
 import { CiCreditCard2 } from "react-icons/ci";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPix } from "@fortawesome/free-brands-svg-icons";
-import Button from "../../../Button";
+import Button from "../../../Button.tsx";
+
+interface PaymentMethodsProps {
+  prevPrice: number;
+  priceInCardStore: number;
+  pricePartInCardStore: number;
+  pricePix: number;
+}
+
+interface Installments {
+  number: number;
+  value: string;
+  total: string;
+}
 
 const PaymentMethods = ({
   prevPrice,
   priceInCardStore,
   pricePartInCardStore,
   pricePix,
-}) => {
+}: PaymentMethodsProps) => {
   const [activeMethod, setActiveMethod] = useState("storeCard");
 
   // função para calcular as parcelas
-  const getInstallments = (total, max = 10) => {
-    const result = [];
+  const getInstallments = (total: number, max = 10) => {
+    const result: Installments[] = [];
     for (let i = 1; i <= max; i++) {
       result.push({
         number: i,

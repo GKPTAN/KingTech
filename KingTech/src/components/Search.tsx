@@ -1,18 +1,22 @@
-import { useState } from "react";
-import { MdOutlineSearch } from 'react-icons/md'
+import { useState, type FormEvent, type ReactEventHandler } from "react";
+import { MdOutlineSearch } from 'react-icons/md';
 
-const Search = ({onSearchChange}) => {
+interface SearchProps {
+  onSearchChange?: (search: string) => void;
+}
+
+const Search = ({onSearchChange}: SearchProps) => {
 
   const [search, setSearch] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     if (onSearchChange) {
       onSearchChange(e.target.value);
     };
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 

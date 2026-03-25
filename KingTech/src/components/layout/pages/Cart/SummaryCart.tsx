@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../Button"
+import Button from "../../Button.tsx"
+import type { ProductsInCart } from "../../../../types/products.ts";
 
-const SummaryCart = ({products}) => {
+interface SummaryCartProps {
+  products: ProductsInCart[];
+}
+
+const SummaryCart = ({products}: SummaryCartProps) => {
   const priceTotalProducts = products.map(p => p.price).reduce((a, b) => a + b, 0);
   console.log("Preço total: ", priceTotalProducts)
   const [valorFrete, setValorFrete] = useState(priceTotalProducts);
@@ -14,7 +19,7 @@ const SummaryCart = ({products}) => {
   return (
     <div className="summary-cart">
       <p><strong>Produtos: </strong>{products.length}</p>
-      <p className="subtotal">Subtotal: <span style={{opacity: "0.7"}}>{products.map(p => p.prevPrice).reduce((a, b) => a + b, 0)}</span></p>
+      <p className="subtotal">Subtotal: <span style={{opacity: "0.7"}}>{products.map(p => p.prevPrice || 0).reduce((a, b) => a + b, 0)}</span></p>
       <div className="cep">
         <label htmlFor="cep_dest">Frete</label>
         <input type="text" name="cep" id="cep_dest" placeholder="insira seu cep" minLength={8} maxLength={8} />

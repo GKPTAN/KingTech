@@ -1,17 +1,24 @@
 import { useState, useRef } from "react";
 import { RiShoppingBasketFill, RiCloseFill } from "react-icons/ri";
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, type SwiperClass } from 'swiper/react';
 import { Pagination, EffectCoverflow } from "swiper/modules";
-import { useWidthWindow } from "../../../../../hooks/useWindowWidth";
-import Button from "../../../Button";
+import { useWidthWindow } from "../../../../../hooks/useWindowWidth.jsx";
+import Button from "../../../Button.tsx";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
-const ImageSlideModal = ({ images, onClose, price, alt }) => {
+interface ImageSlideModalProps {
+  images: string[];
+  onClose: () => void;
+  price: number;
+  alt: string;
+}
+
+const ImageSlideModal = ({ images, onClose, price, alt }: ImageSlideModalProps) => {
   const [image, setImage] = useState(0);
   let widthWindow = useWidthWindow();
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   return (
     <div className="slider-modal">

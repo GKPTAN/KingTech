@@ -3,9 +3,13 @@ import { GiPartyPopper } from "react-icons/gi";
 import { PiSealWarningFill } from "react-icons/pi";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Button from "../../../Button";
+import Button from "../../../Button.tsx";
 
-const PromoConditionsModal = ({onClose}) => {
+interface PromoConditionsModalProps {
+  onClose: () => void;
+}
+
+const PromoConditionsModal = ({onClose}: PromoConditionsModalProps) => {
   return (
     <div className='promo-conditions'>
       <h2><BiSolidOffer fill="#f9cb40" size={30}/> Condições da Promoção</h2>

@@ -1,10 +1,32 @@
 import { useState } from "react";
 import { MdCreate } from "react-icons/md";
 import { BiSolidLike, BiSolidDislike, BiLike, BiDislike } from "react-icons/bi";
-import Search from "../../../../Search";
-import Button from "../../../Button";
+import Search from "../../../../Search.tsx";
+import Button from "../../../Button.tsx";
 
-const Answer = ({ answer }) => {
+interface Answer {
+  id: number;
+  author: string;
+  date: string;
+  text: string;
+  likesCount: number;
+  dislikesCount: number;
+}
+
+interface AnswerProps {
+  answer: Answer;
+}
+
+interface QuestionsAndAnswersProps {
+  maxQuestions: number;
+  questions: {
+    id: number;
+    text: string;
+    answers: Answer[];
+  }[];
+}
+
+const AnswerItem = ({ answer }: AnswerProps) => {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
 
@@ -62,7 +84,7 @@ const Answer = ({ answer }) => {
   );
 };
 
-const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }) => {
+const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }: QuestionsAndAnswersProps) => {
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(3);
   const [newQuestion, setNewQuestion] = useState("");
@@ -84,7 +106,7 @@ const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }) => {
     setNewQuestion("");
   };
 
-  const toggleExpand = (id) => {
+  const toggleExpand = (id: number) => {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
@@ -136,13 +158,15 @@ const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }) => {
                 : "sem resposta"}
             </span>
 
-            {q.answers.length > 0 && (
-              <Answer answer={q.answers[0]}/>
-            )}
+            {q.answers.length > 0 && (() => {
+              const firstAnswer = q.answers[0];
+              if (firstAnswer) return (<AnswerItem answer={firstAnswer}/>);
+              return (null);
+            })()}
 
             {expanded[q.id] &&
               q.answers.slice(1).map((ans) => (
-                <Answer key={ans.id} answer={ans}/>
+                <AnswerItem key={ans.id} answer={ans}/>
               ))}
 
             {q.answers.length > 1 && (

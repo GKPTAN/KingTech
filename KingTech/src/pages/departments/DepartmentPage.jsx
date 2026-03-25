@@ -9,7 +9,7 @@ import { TbCrown, TbTopologyStar3 } from "react-icons/tb";
 import PaginationNavbar from "../../components/layout/pages/PaginationNavbar.jsx";
 import Filter from "../../components/layout/Filter";
 import ProductCard from "../../components/layout/ProductCard";
-import CarrosselOffers from "../../components/layout/CarrosselOffers";
+import CarrosselOffers from "../../components/layout/CarrosselOffers.tsx";
 import "../../style/pages/departments/DepartmentPage.css";
 import "../../style/responsive/pages/departments/DepartmentPage.responsive.css";
 

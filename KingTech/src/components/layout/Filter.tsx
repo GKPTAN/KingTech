@@ -1,4 +1,14 @@
-const Filter = ({category, filters}) => {
+
+interface FilterProps {
+    category: string;
+    filters: [{
+        id: number;
+        rowData: string;
+        name: string;
+    }];
+}
+
+const Filter = ({category, filters}: FilterProps) => {
   return (
     <div className="filter">
         <h4>{category}</h4>
