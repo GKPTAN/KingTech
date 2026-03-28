@@ -1,6 +1,7 @@
 import { SiAmd } from "react-icons/si";
+import type { DepartmentsData, CategoryFilters, Product } from "../types/products.ts";
 
-export const departmentsData = {
+export const departmentsData: DepartmentsData = {
   "Computadores e acessórios": {
     id: 1,
     subcategories: [
@@ -38,7 +39,7 @@ export const departmentsData = {
       { id: 5, name: "Projetores", slug: "projetores" },
     ],
   },
-  Gaming: {
+  "Gaming": {
     id: 4,
     subcategories: [
       { id: 1, name: "Consoles", slug: "consoles" },
@@ -89,21 +90,21 @@ export const departmentsData = {
       },
     ],
   },
-  Eletrodomésticos: {
+  "Eletrodomésticos": {
     id: 7,
     subcategories: [
       { id: 1, name: "Aspirador de pó", slug: "aspirador_de_po" },
       { id: 2, name: "Cafeteiras", slug: "cafeteiras" },
     ],
   },
-  Wearables: {
+  "Wearables": {
     id: 8,
     subcategories: [
       { id: 1, name: "Fitness Trackers", slug: "fitness_trackers" },
       { id: 2, name: "Óculos inteligentes", slug: "oculos_inteligentes" },
     ],
   },
-  Automotivo: {
+  "Automotivo": {
     id: 9,
     subcategories: [
       { id: 1, name: "Sistemas de Navegação", slug: "sistemas_de_navegacao" },
@@ -153,7 +154,7 @@ export const departmentsData = {
   },
 };
 
-export const categoryFilters = [
+export const categoryFilters: CategoryFilters[] = [
   {
     departments: "all",
     childrens: [
@@ -236,7 +237,7 @@ export const categoryFilters = [
   },
 ];
 
-export const product = {
+export const product: Product = {
   brand: "amd",
   rating: 4.2,
   numberRating: 217, // número de pessoas que avaliaram o produto
