@@ -1,14 +1,33 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import type { UserDataRegister, User } from "../types/userData.ts";
 import axios from "axios";
 
-const AuthContext = createContext();
+interface AuthContextData {
+    user: User | null;
+    loading: boolean;
+    login: (email: string, password: string) => Promise<{error: boolean; message: string}>;
+    logout: () => void;
+    register: (userData: UserDataRegister) => Promise<{error: boolean; message: string}>;
+    verify: (code: string) => Promise<{error: boolean; message: string}>;
+}
+
+interface AuthProviderProps {
+    children: React.ReactNode;
+}
+
+interface FailedRequest {
+    resolve: (value?: any) => void;
+    reject: (error: any) => void;
+}
+
+const AuthContext = createContext<AuthContextData | null>(null);
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 const API_BASE = "https://localhost:3000";
 
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
     axios.defaults.withCredentials = true;
@@ -43,7 +62,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
 
         let mounted = true;
-        let interceptorId = null;
+        let interceptorId: number | null = null;
 
         const init = async () => {
             try {
@@ -65,7 +84,7 @@ export const AuthProvider = ({ children }) => {
                     if (supaUser && mounted) {
                         setUser({
                             id: supaUser.id,
-                            email: supaUser.email,
+                            email: supaUser.email!,
                             role: supaUser.user_metadata?.role || "user",
                             raw: supaUser,
                         });
@@ -75,13 +94,13 @@ export const AuthProvider = ({ children }) => {
                 };
 
                 const { data: sub } = supabase.auth.onAuthStateChange((event, sess) => {
-                    const newSession = sess?.session ?? null;
+                    const newSession = sess;
                     const u = newSession?.user ?? null;
 
                     if (u) {
                         setUser({
                             id: u?.id,
-                            email: u?.email,
+                            email: u?.email!,
                             role: u?.user_metadata?.role || "user",
                             raw: u,
                         });
@@ -91,9 +110,9 @@ export const AuthProvider = ({ children }) => {
                 });
 
                 let isRefreshing = false;
-                let failedQueue = [];
+                let failedQueue: FailedRequest[] = [];
 
-                const processQueue = (error, result = null) => {
+                const processQueue = (error: any | null, result: any = null) => {
                     failedQueue.forEach(prom => {
                         if (error) prom.reject(error);
                         else prom.resolve(result);
@@ -159,7 +178,7 @@ export const AuthProvider = ({ children }) => {
         };
     }, []);
 
-    const login = async (email, password) => {
+    const login = async (email: string, password: string) => {
         setLoading(true);
         try {
             const response = await axios.post(`${API_BASE}/auth/login`, { email, password });
@@ -192,17 +211,10 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
-    const register = async (userData) => {
+    const register = async (userData: UserDataRegister) => {
         try {
-            const response = await fetch(`${API_BASE}/auth/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                credentials: "include",
-                body: JSON.stringify(userData),
-            });
-
-            const data = await response.json();
-            return data;
+            const response = await axios.post(`${API_BASE}/auth/register`, userData);
+            return response.data;
         } catch (error) {
             console.error("Erro no registro: ", error);
             return {
@@ -212,17 +224,10 @@ export const AuthProvider = ({ children }) => {
         };
     };
 
-    const verify = async (code) => {
+    const verify = async (code: string) => {
         try {
-            const response = await fetch(`${API_BASE}/auth/verify`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', },
-                credentials: "include",
-                body: JSON.stringify({ code })
-            });
-
-            const data = await response.json();
-            return data;
+            const response = await axios.post(`${API_BASE}/auth/verify`, { code});
+            return response.data;
         } catch (error) {
             console.error("Erro na verificação: ", error);
             return {
@@ -240,5 +245,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-    return useContext(AuthContext);
+    return useContext<AuthContextData>(AuthContext);
 };

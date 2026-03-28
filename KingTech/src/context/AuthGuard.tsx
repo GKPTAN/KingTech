@@ -1,7 +1,13 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./AuthContext.tsx";
+import type { UserRole } from "../types/userData.ts";
 
-const AuthGuard = ({children, roles = [] }) => {
+interface AuthGuardProps {
+    children: React.ReactNode;
+    roles?: UserRole[];
+}
+
+const AuthGuard = ({children, roles = [] }: AuthGuardProps) => {
     const { user, loading } = useAuth();
     const location = useLocation();
 
