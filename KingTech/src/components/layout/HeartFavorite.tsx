@@ -1,4 +1,4 @@
-import { useWidthWindow } from "../../hooks/useWindowWidth.jsx";
+import { useWidthWindow } from "../../hooks/useWindowWidth.tsx";
 import { RiHeartLine, RiHeartFill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";

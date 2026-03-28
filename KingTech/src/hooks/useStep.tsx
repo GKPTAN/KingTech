@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export const useForm = (steps) => {
+export const useForm = (steps: React.ReactElement[]) => {
     const [currentStep, setCurrentStep] = useState(0);
 
-    const changeStep = (i, e) => {
+    const changeStep = (i: number, e: React.FormEvent<HTMLFormElement>) => {
         if (e) {
             e.preventDefault();
         };

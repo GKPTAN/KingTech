@@ -1,4 +1,4 @@
-import { useWidthWindow } from "../../hooks/useWindowWidth.jsx";
+import { useWidthWindow } from "../../hooks/useWindowWidth.tsx";
 import { TbTopologyStar3, TbArrowBigRightLines } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import {

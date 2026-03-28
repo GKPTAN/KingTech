@@ -1,4 +1,4 @@
-import { useWidthWindow } from "../../../hooks/useWindowWidth.jsx";
+import { useWidthWindow } from "../../../hooks/useWindowWidth.tsx";
 import {
   LiaAngleDoubleLeftSolid,
   LiaAngleDoubleRightSolid,

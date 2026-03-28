@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { RiShoppingBasketFill, RiCloseFill } from "react-icons/ri";
 import { Swiper, SwiperSlide, type SwiperClass } from 'swiper/react';
 import { Pagination, EffectCoverflow } from "swiper/modules";
-import { useWidthWindow } from "../../../../../hooks/useWindowWidth.jsx";
+import { useWidthWindow } from "../../../../../hooks/useWindowWidth.tsx";
 import Button from "../../../Button.tsx";
 import "swiper/css";
 import "swiper/css/effect-coverflow";

@@ -1,4 +1,4 @@
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "../context/AuthContext.tsx";
 
 interface AdminOnlyProps {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useWidthWindow } from "../hooks/useWindowWidth.jsx";
+import { useWidthWindow } from "../hooks/useWindowWidth.tsx";
 import { TbHomeFilled, TbHeartFilled, TbCrown } from "react-icons/tb";
 import { RiAccountBoxFill, RiShoppingBasketFill } from "react-icons/ri";
 import { MdList } from "react-icons/md";

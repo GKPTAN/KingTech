@@ -1,4 +1,4 @@
-import { useWidthWindow } from "../../../../hooks/useWindowWidth.jsx";
+import { useWidthWindow } from "../../../../hooks/useWindowWidth.tsx";
 import { useState, useEffect } from "react";
 import { RiShoppingBasketFill } from "react-icons/ri";
 import { TiLocation } from "react-icons/ti";
