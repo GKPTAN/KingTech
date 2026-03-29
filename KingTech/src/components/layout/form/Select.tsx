@@ -13,12 +13,17 @@ interface SelectProps {
   onChange?: (value: string | number) => void;
 }
 
+interface Option {
+  value: string | number;
+  label: string;
+}
+
 const Select = ({id = "", options = [], nameDefault, onChange }: SelectProps) => {
 
   const [selected, setSelected] = useState(nameDefault);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: Option) => {
     setSelected(option.label);
     setIsOpen(false);
     if (onChange) {

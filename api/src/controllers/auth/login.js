@@ -87,9 +87,11 @@ const loginController = async (request, reply, supabase) => {
             error: false,
             technicalError: false,
             user: {
-                id: session.user.id,
-                email: session.user.email,
-                ...profileData,
+                id: session?.user.id,
+                name: profileData.username,
+                email: session?.user.email,
+                role: session?.user.user_metadata?.role,
+                raw: profileData
             },
             expiresIn: session.expires_in,
             location: "/account/dashboard",

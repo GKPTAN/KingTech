@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "./layout/Button.tsx";
 
 interface FormProps {
-  onSubmit: (formData: FormData) => Promise<{message: string, error: boolean, technicalError: boolean, location?: string}>;
+  onSubmit: (formData: FormData) => Promise<{message: string, error: boolean, technicalError?: boolean, location?: string, field?: string, issue?: string}>;
   children: React.ReactNode;
   classname?: string;
   buttonAction: string | React.ReactNode;

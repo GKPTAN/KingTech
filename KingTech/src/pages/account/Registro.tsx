@@ -1,17 +1,18 @@
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext.tsx";
 import { Link } from "react-router-dom";
-import Form from "../../components/Form";
-import Select from "../../components/layout/form/Select";
+import Form from "../../components/Form.tsx";
+import Select from "../../components/layout/form/Select.tsx";
 import { useState } from "react";
-import validateData from "../../utils/validateData";
+import validateData from "../../utils/validateData.js";
 import { GoInfo } from "react-icons/go";
 import styles from "../../style/pages/auth/Registro.module.css";
+import type { UserDataRegister } from "../../types/userData.ts";
 
 const Registro = () => {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<string>("");
   const [gender, setGender] = useState("");
-  const [disabled, setDisabled] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const options = [
     { value: "masculino", label: "Masculino" },
@@ -23,7 +24,7 @@ const Registro = () => {
 
   const { register, verify } = useAuth();
 
-  const handleDataChange = (e) => {
+  const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
 
     const numbersOnly = input.replace(/[^\d]/g, "");
@@ -43,12 +44,12 @@ const Registro = () => {
     setDate(formattedDate);
   };
 
-  const handleRegister = async (formData) => {
-    const full_name = formData.get("full_name");
-    const date_birth = formData.get("date_birth");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const confirm_password = formData.get("password_confirm");
+  const handleRegister = async (formData: FormData) => {
+    const full_name = String(formData.get("full_name"));
+    const date_birth = String(formData.get("date_birth"));
+    const email = String(formData.get("email"));
+    const password = String(formData.get("password"));
+    const confirm_password = String(formData.get("password_confirm"));
 
     const userData = {
       full_name,
@@ -60,9 +61,9 @@ const Registro = () => {
 
     console.log("Dados sendo enviados: ", userData);
 
-    const validation = await validateData(userData.full_name, userData.gender, userData.date_birth, userData.email, userData.password, confirm_password);
+    const validation = await validateData(userData, confirm_password);
 
-    if (validation !== true) {
+    if (typeof validation === "object") {
       setDisabled(false);
       return validation;
     }
@@ -78,8 +79,8 @@ const Registro = () => {
     return result;
   };
 
-  const handleConfirm = async (formData) => {
-    const code = formData.get("code");
+  const handleConfirm = async (formData: FormData) => {
+    const code = String(formData.get("code"));
 
     console.log("Código de confirmação sendo analisado!");
 
@@ -110,14 +111,14 @@ const Registro = () => {
             id="gender"
             options={options}
             nameDefault="Gênero"
-            onChange={setGender}
+            onChange={(v) => setGender(String(v))}
           />
           <input
             type="text"
             name="date_birth"
             id="birth_user"
             placeholder="Data de nascimento"
-            maxLength="10"
+            maxLength={10}
             value={date}
             required
             onChange={handleDataChange}
@@ -132,7 +133,7 @@ const Registro = () => {
             name="email"
             id="email_user"
             placeholder="E-mail"
-            maxLength="255"
+            maxLength={255}
             required
           />
           <input
@@ -140,8 +141,8 @@ const Registro = () => {
             name="password"
             id="pass"
             placeholder="Senha"
-            minLength="8"
-            maxLength="16"
+            minLength={8}
+            maxLength={16}
             required
           />
           <span className={styles.info} onClick={() => setShowModal(true)}><GoInfo /></span>
@@ -165,15 +166,15 @@ const Registro = () => {
             name="password_confirm"
             id="confirm_pass"
             placeholder="Confirmar senha"
-            minLength="8"
-            maxLength="16"
+            minLength={8}
+            maxLength={16}
             required
           />
         </Form>
         <p>
           Já tem uma conta? <Link to="/account/login">Faça Login</Link>
         </p>
-        <Form onSubmit={handleConfirm} buttonAction="Confirmar" classname={disabled ? styles.confirm_form : styles.hidden}>
+        <Form onSubmit={handleConfirm} buttonAction="Confirmar" classname={disabled ? styles.confirm_form : styles.hidden} disabled={disabled}>
             <h2>código de confirmação</h2>
             <input 
               type="text"
@@ -184,7 +185,7 @@ const Registro = () => {
                   e.preventDefault();
                 };
               }}
-              maxLength="6"
+              maxLength={6}
               placeholder="Código de confirmação" 
               required
             />

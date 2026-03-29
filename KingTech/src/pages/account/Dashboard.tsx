@@ -4,7 +4,7 @@ import { MdStarRate } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { ImExit } from "react-icons/im";
 import { LuCrown } from "react-icons/lu";
-import AdminOnly from "../../components/AdminOnly";
+import AdminOnly from "../../components/AdminOnly.tsx";
 import styles from "../../style/pages/auth/Dashboard.module.css";
 
 const Dashboard = () => {

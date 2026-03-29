@@ -1,8 +1,18 @@
-const validateName = async (full_name) => {
+import type { UserDataRegister } from "../types/userData.ts";
+
+interface ErrorValidate {
+    error: boolean;
+    field: string;
+    issue: string;
+    message: string;
+    technicalError?: boolean;
+}
+const validateName = async (full_name: string): Promise<boolean | ErrorValidate> => {
     const regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
 
     if (typeof full_name !== "string") {
         return {
+            error: true,
             field: "full_name",
             issue: "ERROR_TYPE_VALUE",
             message: "O valor do campo (nome completo) tem que ser do tipo string!",
@@ -12,6 +22,7 @@ const validateName = async (full_name) => {
 
     if (!full_name || full_name.trim() === "") {
         return {
+            error: true,
             field: "full_name",
             issue: "ERROR_EMPTY_INPUT",
             message: "o campo (nome completo) não pode estar vazio!",
@@ -49,7 +60,7 @@ const validateName = async (full_name) => {
     return true;
 };
 
-const validateGender = async (gender) => {
+const validateGender = async (gender: string): Promise<boolean | ErrorValidate> => {
     const validGenders = ["masculino", "feminino", "binary", "non-binary", "outros"];
 
     if (!gender) {
@@ -63,6 +74,7 @@ const validateGender = async (gender) => {
 
     if (!validGenders.includes(gender)) {
         return {
+            error: true,
             field: "gender",
             issue: "ERROR_VALID_GENDER",
             message: "o gênero informado não é válido!",
@@ -73,7 +85,7 @@ const validateGender = async (gender) => {
     return true;
 };
 
-const validateDateBirth = async (date_birth) => {
+const validateDateBirth = async (date_birth: string): Promise<boolean | ErrorValidate> => {
     const regexDate = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
     if (!date_birth) {
@@ -94,7 +106,10 @@ const validateDateBirth = async (date_birth) => {
         };
     };
 
-    const [day, month, year] = date_birth.split('/').map(Number);
+    const [dia, mes, ano] = date_birth.split('/').map(Number);
+    const day = dia;
+    const month = Number(mes);
+    const year = Number(ano);
     const dateObj = new Date(year, month - 1, day);
 
     const validDate = (
@@ -128,7 +143,7 @@ const validateDateBirth = async (date_birth) => {
     return true;
 };
 
-const validateEmail = async (email) => {
+const validateEmail = async (email: string): Promise<boolean | ErrorValidate> => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     if (!email) {
@@ -161,7 +176,7 @@ const validateEmail = async (email) => {
     return true;
 };
 
-const validatePassword = async (password, confirm_password) => {
+const validatePassword = async (password: string, confirm_password: string): Promise<boolean | ErrorValidate> => {
 
     if (!password) {
         return {
@@ -202,7 +217,9 @@ const validatePassword = async (password, confirm_password) => {
     return true;
 };
 
-const validateData = async (full_name, gender, date_birth, email, password, confirm_password) => {
+const validateData = async (userData: UserDataRegister, confirm_password: string): Promise<ErrorValidate | boolean> => {
+
+    const {full_name, gender, date_birth, email, password} = userData;
 
     const validations = await Promise.all([
         validateName(full_name),
@@ -212,9 +229,9 @@ const validateData = async (full_name, gender, date_birth, email, password, conf
         validatePassword(password, confirm_password),
     ]); 
 
-    const errors = validations.filter(v => v !== true);
+    const errors = validations.filter((v): v is ErrorValidate => v !== true);
 
-    if (errors.length > 0) return errors[0];
+    if (errors.length > 0) return errors[0]!;
 
     return true;
 };

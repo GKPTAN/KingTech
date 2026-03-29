@@ -1,14 +1,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import type { UserDataRegister, User } from "../types/userData.ts";
+import type { UserDataRegister, User, UserDataLogin } from "../types/userData.ts";
 import axios from "axios";
 
 interface AuthContextData {
     user: User | null;
     loading: boolean;
-    login: (email: string, password: string) => Promise<{error: boolean; message: string}>;
+    login: (userData: UserDataLogin) => Promise<{error: boolean; message: string, technicalError?: boolean, location?: string, user?: User, expires_in?: number, log?: any}>;
     logout: () => void;
-    register: (userData: UserDataRegister) => Promise<{error: boolean; message: string}>;
+    register: (userData: UserDataRegister) => Promise<{error: boolean; message: string, technicalError?: boolean, log?: any}>;
     verify: (code: string) => Promise<{error: boolean; message: string}>;
 }
 
@@ -84,6 +84,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                     if (supaUser && mounted) {
                         setUser({
                             id: supaUser.id,
+                            name: supaUser.user_metadata?.username,
                             email: supaUser.email!,
                             role: supaUser.user_metadata?.role || "user",
                             raw: supaUser,
@@ -100,6 +101,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                     if (u) {
                         setUser({
                             id: u?.id,
+                            name: u?.user_metadata?.username,
                             email: u?.email!,
                             role: u?.user_metadata?.role || "user",
                             raw: u,
@@ -178,8 +180,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         };
     }, []);
 
-    const login = async (email: string, password: string) => {
+    const login = async (userData: UserDataLogin) => {
         setLoading(true);
+        const {email, password} = userData;
         try {
             const response = await axios.post(`${API_BASE}/auth/login`, { email, password });
             if (response?.data?.user) {
@@ -187,12 +190,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             };
             setLoading(false);
             return response.data;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Erro no login: ", error);
             setLoading(false);
+            const apiError = error?.response?.data;
             return {
                 error: true,
-                message: error?.response?.data || error.message || "Erro ao conectar com o servidor, tente novamente mais tarde",
+                message: apiError?.message || "Erro ao conectar com o servidor, tente novamente mais tarde",
+                technicalError: apiError?.technicalError ?? false,
+                log: apiError?.error 
             };
         };
     };
@@ -217,9 +223,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             return response.data;
         } catch (error) {
             console.error("Erro no registro: ", error);
+            const apiError = error?.response?.data;
             return {
                 error: true,
-                message: "Erro ao conectar com o servidor, tente novamente mais tarde",
+                message: apiError?.message || "Erro ao conectar com o servidor, tente novamente mais tarde",
+                technicalError: apiError?.technicalError ?? false,
+                log: apiError?.error 
             };
         };
     };

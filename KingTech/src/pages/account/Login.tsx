@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Form from "../../components/Form";
-import { useAuth } from "../../context/AuthContext";
+import Form from "../../components/Form.tsx";
+import { useAuth } from "../../context/AuthContext.tsx";
 import { Link } from "react-router-dom";
 import styles from "../../style/pages/auth/Login.module.css";
 
@@ -8,9 +8,9 @@ const Login = () => {
   const { login } = useAuth();
   const [disabled, setDisabled] = useState(false);
 
-  const handleLogin = async (formData) => {
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const handleLogin = async (formData: FormData) => {
+    const email = String(formData.get("email"));
+    const password = String(formData.get("password"));
 
     const userData = {
       email,
@@ -56,7 +56,7 @@ const Login = () => {
         </Form>
         <div>
           <p>Não tem uma conta? <Link to="/account/register">Registra-se</Link></p>
-          <p><Link>Esqueceu a senha?</Link></p>
+          <p><Link to={"/"}>Esqueceu a senha?</Link></p>
         </div>
       </section>
     </>
