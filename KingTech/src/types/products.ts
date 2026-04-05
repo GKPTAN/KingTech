@@ -19,7 +19,7 @@ export interface Product {
   compositionRating: {
     [key: number]: number;
   }
-  img: string | string[];
+  img: string[];
   name: string;
   code: string;
   variations?: {

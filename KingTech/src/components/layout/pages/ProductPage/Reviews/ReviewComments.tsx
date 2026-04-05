@@ -1,5 +1,5 @@
-import { BiSolidUserCheck } from "react-icons/bi";
 import Rating from "@mui/material/Rating";
+import { BiSolidUserCheck } from "react-icons/bi";
 
 export interface Comment {
   id: number;
@@ -7,7 +7,7 @@ export interface Comment {
   date: string;
   verified: boolean;
   rating: number;
-  comment: string;
+  comment?: string;
 }
 
 interface ReviewCommentsProps {

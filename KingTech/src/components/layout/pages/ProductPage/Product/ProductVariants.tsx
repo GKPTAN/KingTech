@@ -8,7 +8,7 @@ interface ProductVariantsProps {
 }
 
 const ProductVariants = ({variants}: ProductVariantsProps) => {
-  const [selected, setSelected] = useState(Array(variants.length).fill(null));
+  const [selected, setSelected] = useState<(number | null)[]>(Array(variants.length).fill(null));
 
   const handleSelect = (catIdx: number, optIdx: number) => {
     const updated = [...selected];
@@ -18,7 +18,7 @@ const ProductVariants = ({variants}: ProductVariantsProps) => {
 
   return (
     <div className='product-variants'>
-      {variants.map((variant, catIdx) => (
+      {variants && variants.map((variant, catIdx) => (
         <div className='variants' key={catIdx}>
           <h3>{variant.category}</h3>
           <ul className='list-variants'>

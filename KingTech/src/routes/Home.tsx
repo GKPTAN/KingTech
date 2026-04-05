@@ -1,12 +1,16 @@
-import { useWidthWindow } from '../hooks/useWindowWidth';
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
-import { TbTopologyStar3, TbCrown } from 'react-icons/tb';
+import { TbCrown } from 'react-icons/tb';
 import { LiaSearchDollarSolid } from 'react-icons/lia';
 import { BsFillLightningChargeFill } from 'react-icons/bs';
-import BannerCarrossel from '../components/layout/banners/BannerCarrossel';
-import CarrosselOffers from '../components/layout/CarrosselOffers.tsx';
-import '../style/Home.css';
-import '../style/responsive/routes/Home/Home.responsive.css';
+
+import { useWidthWindow } from '@/hooks/useWindowWidth.tsx';
+
+import BannerCarrossel from '@/components/layout/banners/BannerCarrossel.tsx';
+import CarrosselOffers from '@/components/layout/CarrosselOffers.tsx';
+import '@/style/Home.css';
+import '@/style/responsive/routes/Home/Home.responsive.css';
 
 const promotionsStore = [
     {id: 1, title: 'Promoção 1', description: "Desconto de 20% em todos os produtos", src: "/image/banner1.webp"},
@@ -31,7 +35,7 @@ const Home = () => {
       <main className="main_store">
         <div className="carrossel" id="promotions" aria-label="Carrossel de promoções">
           <BannerCarrossel 
-            banners={promotions}
+            banners={promotions ?? []}
             className="banner_promotions"
           />
         </div>

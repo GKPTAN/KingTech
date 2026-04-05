@@ -1,9 +1,15 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-import type { UserDataRegister, User, UserDataLogin } from "../types/userData.ts";
+/* eslint-disable no-unused-vars */
+import React from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { createClient } from "@supabase/supabase-js";
 
-interface AuthContextData {
+import type { User, UserDataLogin, UserDataRegister } from "@/types/userData.ts";
+
+import { AuthContext } from "./useAuth.ts";
+
+
+export interface AuthContextData {
     user: User | null;
     loading: boolean;
     login: (userData: UserDataLogin) => Promise<{error: boolean; message: string, technicalError?: boolean, location?: string, user?: User, expires_in?: number, log?: any}>;
@@ -21,8 +27,6 @@ interface FailedRequest {
     reject: (error: any) => void;
 }
 
-const AuthContext = createContext<AuthContextData | null>(null);
-
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
 const API_BASE = "https://localhost:3000";
 
@@ -32,7 +36,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     axios.defaults.withCredentials = true;
 
-    const fetchUserFromApi = async () => {
+    const fetchUserFromApi = async (): Promise<User | null> => {
         try {
             const resp = await axios.get(`${API_BASE}/auth/me`);
             if (resp?.data?.user) {
@@ -46,7 +50,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         };
     };
 
-    const refreshSession = async () => {
+    const refreshSession = async (): Promise<boolean> => {
         try {
             const response = await axios.post(`${API_BASE}/auth/refresh`);
             if (response?.data?.user) {
@@ -54,7 +58,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 return true;
             };
             return false;
-        } catch (error) {
+        } catch (_error) {
             return false;
         };
     };
@@ -174,7 +178,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const cleanupPromise = init();
 
         return () => {
-            cleanupPromise.then(clean => {
+            cleanupPromise.then(_clean => {
 
             });
         };
@@ -206,13 +210,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const logout = async () => {
         try {
             await axios.post(`${API_BASE}/auth/logout`);
-        } catch (error) {
-
+        } catch (_error) {
+            //
         }
         try {
             await supabase.auth.signOut();
-        } catch (error) {
-
+        } catch (_error) {
+            //
         }
         setUser(null);
     };
@@ -251,8 +255,4 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             {children}
         </AuthContext.Provider>
     );
-};
-
-export const useAuth = () => {
-    return useContext<AuthContextData>(AuthContext);
 };

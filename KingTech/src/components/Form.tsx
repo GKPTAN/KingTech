@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
+import React from "react";
 import { useState } from "react";
-import { RingLoader } from "react-spinners";
 import { PiWarning } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import { RingLoader } from "react-spinners";
+
 import Button from "./layout/Button.tsx";
 
 interface FormProps {
@@ -42,6 +45,7 @@ const Form = ({ onSubmit, children, classname = "", buttonAction, disabled, styl
       }
     } catch (error) {
       setMessage("Ocorreu um erro no servidor!, tente novamente mais tarde.");
+      console.error("Erro no formulário: ", error);
     } finally {
       setLoading(false);
       // setTimeout(() => {

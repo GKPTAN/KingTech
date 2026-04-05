@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { MdCreate } from "react-icons/md";
-import { BiSolidLike, BiSolidDislike, BiLike, BiDislike } from "react-icons/bi";
-import Search from "../../../../Search.tsx";
-import Button from "../../../Button.tsx";
+import { BiDislike, BiLike, BiSolidDislike, BiSolidLike } from "react-icons/bi";
+
+import Search from "@/components/Search.tsx";
+import Button from "@/components/layout/Button.tsx";
 
 interface Answer {
   id: number;
@@ -50,9 +51,9 @@ const AnswerItem = ({ answer }: AnswerProps) => {
 
   return (
     <div className="answer">
-      <p className="answer-text">{answer.text}</p>
+      <p className="answer-text">{answer.text ?? ""}</p>
       <span className="answer-meta">
-        {answer.author} - {answer.date}
+        {answer.author ?? ""} - {answer.date ?? ""}
       </span>
       <div className="feedback">
         <span>Esta resposta foi útil?</span>
@@ -89,7 +90,7 @@ const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }: QuestionsAnd
   const [visibleCount, setVisibleCount] = useState(3);
   const [newQuestion, setNewQuestion] = useState("");
   const [expanded, setExpanded] = useState({});
-  const filteredQuestions = questions.filter((q) =>
+  const filteredQuestions = questions?.filter((q) =>
     q.text.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -146,7 +147,7 @@ const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }: QuestionsAnd
       </div>
 
       <ul className="questions-list">
-        {filteredQuestions.slice(0, visibleCount).map((q) => (
+        {filteredQuestions.length > 0 && filteredQuestions.slice(0, visibleCount).map((q) => (
           <li key={q.id} className="question-item">
             <p className="question">{q.text}</p>
             <span className="answer-count">

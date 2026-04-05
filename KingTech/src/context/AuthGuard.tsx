@@ -1,6 +1,9 @@
+import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "./AuthContext.tsx";
-import type { UserRole } from "../types/userData.ts";
+
+import type { UserRole } from "@/types/userData.ts";
+
+import { useAuth } from "./useAuth.ts";
 
 interface AuthGuardProps {
     children: React.ReactNode;

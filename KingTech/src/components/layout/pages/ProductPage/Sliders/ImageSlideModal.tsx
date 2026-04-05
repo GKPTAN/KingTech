@@ -1,9 +1,11 @@
-import { useState, useRef } from "react";
-import { RiShoppingBasketFill, RiCloseFill } from "react-icons/ri";
-import { Swiper, SwiperSlide, type SwiperClass } from 'swiper/react';
-import { Pagination, EffectCoverflow } from "swiper/modules";
-import { useWidthWindow } from "../../../../../hooks/useWindowWidth.tsx";
-import Button from "../../../Button.tsx";
+import { useRef, useState } from "react";
+import { Swiper, type SwiperClass, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination } from "swiper/modules";
+import { RiCloseFill, RiShoppingBasketFill } from "react-icons/ri";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+
+import Button from "@/components/layout/Button.tsx";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";

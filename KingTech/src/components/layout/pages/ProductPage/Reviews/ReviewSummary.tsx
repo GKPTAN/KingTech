@@ -1,4 +1,4 @@
-import { Rating, LinearProgress, Box, Typography } from "@mui/material";
+import { Box, LinearProgress, Rating, Typography } from "@mui/material";
 import { FaStar } from "react-icons/fa";
 
 interface ReviewSummaryProps {

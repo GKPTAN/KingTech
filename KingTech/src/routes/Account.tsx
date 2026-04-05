@@ -1,5 +1,6 @@
-import { Outlet, Link } from 'react-router-dom';
-import styles from "../style/Account.module.css";
+import { Outlet } from 'react-router-dom';
+
+import styles from "@/style/Account.module.css";
 
 const Account = () => {
   return (

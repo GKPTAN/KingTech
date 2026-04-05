@@ -1,10 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
-import { useWidthWindow } from "../hooks/useWindowWidth.tsx";
-import { TbHomeFilled, TbHeartFilled, TbCrown } from "react-icons/tb";
-import { RiAccountBoxFill, RiShoppingBasketFill } from "react-icons/ri";
 import { MdList } from "react-icons/md";
-import logo from "../assets/logo.png";
+import { RiAccountBoxFill, RiShoppingBasketFill } from "react-icons/ri";
+import { TbCrown, TbHeartFilled, TbHomeFilled } from "react-icons/tb";
+import { Link, useLocation } from "react-router-dom";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+
 import Search from "./Search.jsx";
+
+import logo from "@/assets/logo.png";
 
 interface NavbarProps {
   img?: boolean;

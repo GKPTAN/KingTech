@@ -1,10 +1,11 @@
+import { Autoplay, EffectCoverflow, EffectCube, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Autoplay, Pagination, EffectCube } from "swiper/modules";
+
 import ProductCard from './ProductCard.tsx';
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import "../../style/components/layout/Carrossel3D.css";
+import "@/style/components/layout/Carrossel3D.css";
 
 interface Carrossel3DProps {
     products: {

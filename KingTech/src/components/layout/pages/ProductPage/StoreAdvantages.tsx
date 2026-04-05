@@ -1,5 +1,5 @@
-import { TbTruckDelivery, TbLockCheck } from "react-icons/tb";
-import { BsFillLightningChargeFill, BsCreditCard } from "react-icons/bs";
+import { TbLockCheck, TbTruckDelivery } from "react-icons/tb";
+import { BsCreditCard, BsFillLightningChargeFill } from "react-icons/bs";
 
 const StoreAdvantages = () => {
   const advantages = [

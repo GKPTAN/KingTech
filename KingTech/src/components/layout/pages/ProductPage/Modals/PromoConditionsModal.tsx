@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { BiSolidOffer } from "react-icons/bi";
 import { GiPartyPopper } from "react-icons/gi";
 import { PiSealWarningFill } from "react-icons/pi";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import Button from "../../../Button.tsx";
+
+import Button from "@/components/layout/Button.tsx";
 
 interface PromoConditionsModalProps {
   onClose: () => void;

@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { useAuth } from '../context/AuthContext'; 
-import { useWidthWindow } from '../hooks/useWindowWidth';
+// import { useContext } from 'react';
 import { MdLocalOffer } from 'react-icons/md';
-import { BsEmojiSmile } from 'react-icons/bs';
-import { LuCrown } from 'react-icons/lu';
-import { FaHandPaper } from 'react-icons/fa';
-import ProductCard from '../components/layout/ProductCard';
-import '../style/Favorites.css';
-import '../style/responsive/routes/Favorites/Favorites.responsive.css';
+
+import { useWidthWindow } from '@/hooks/useWindowWidth.tsx';
+
+// import { useAuth } from '@/context/useAuth.ts';
+ 
+import ProductCard from '@/components/layout/ProductCard.tsx';
+import '@/style/Favorites.css';
+import '@/style/responsive/routes/Favorites/Favorites.responsive.css';
 
 const favorites = [
   {
@@ -96,7 +96,7 @@ const Favorites = () => {
             </div>
           </div>
         )}
-        {user && favorites.length > 0 && (
+        {user && favorites && favorites.length > 0 && (
           <div className='favorites-box'>
             <ul className='favorites-list'>
               {favorites && favorites.map((favorite) => (
@@ -108,7 +108,7 @@ const Favorites = () => {
                     img={favorite.img}
                     price={favorite.price}
                     alt={favorite.alt}
-                    prevPrice={favorite.prevPrice}
+                    prevPrice={Number(favorite.prevPrice)}
                     button={false}
                     cart={false}
                   />

@@ -33,7 +33,5 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-}
-.select .button-select svg {
-    font-size: 1rem;
+    padding: 0;
 }

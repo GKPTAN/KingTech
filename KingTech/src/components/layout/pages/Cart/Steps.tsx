@@ -1,11 +1,12 @@
-import { useWidthWindow } from "../../../../hooks/useWindowWidth.tsx";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RiShoppingBasketFill } from "react-icons/ri";
 import { TiLocation } from "react-icons/ti";
 import { TbTruckDelivery } from "react-icons/tb";
 import { HiMiniIdentification } from "react-icons/hi2";
 import { BiMoney } from "react-icons/bi";
 import { GiConfirmed } from "react-icons/gi";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 
 interface StepsProps {
   currentStep: number;

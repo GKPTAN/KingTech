@@ -1,11 +1,11 @@
 
 interface FilterProps {
     category: string;
-    filters: [{
+    filters: {
         id: number;
         rowData: string;
         name: string;
-    }];
+    }[];
 }
 
 const Filter = ({category, filters}: FilterProps) => {

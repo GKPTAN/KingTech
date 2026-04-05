@@ -1,18 +1,22 @@
-import { useAuth } from "../../context/AuthContext.tsx";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Form from "../../components/Form.tsx";
-import Select from "../../components/layout/form/Select.tsx";
-import { useState } from "react";
-import validateData from "../../utils/validateData.js";
 import { GoInfo } from "react-icons/go";
-import styles from "../../style/pages/auth/Registro.module.css";
-import type { UserDataRegister } from "../../types/userData.ts";
+
+import validateData from "@/utils/validateData.js";
+
+import { useAuth } from "@/context/useAuth.ts";
+
+import Form from "@/components/Form.tsx";
+import Select from "@/components/layout/form/Select.tsx";
+
+import styles from "@/style/pages/auth/Registro.module.css";
+
 
 const Registro = () => {
-  const [date, setDate] = useState<string>("");
+  const [date, setDate] = useState("");
   const [gender, setGender] = useState("");
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const options = [
     { value: "masculino", label: "Masculino" },

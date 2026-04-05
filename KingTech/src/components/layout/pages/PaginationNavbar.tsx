@@ -5,6 +5,7 @@ interface PaginationNavbarProps {
     id: number;
     current: boolean;
   }[];
+  // eslint-disable-next-line no-unused-vars
   onPageChange?: (pageNumber: number) => void;
   disablePrev: boolean;
   disableNext: boolean;
@@ -61,7 +62,7 @@ const PaginationNavbar = ({
           pointerEvents: disablePrev ? "none" : "auto",
         }}
       />
-      {pages.map((page, idx) => (
+      {pages && pages.map((page, idx) => (
         <li
           key={idx}
           className={page.current ? "active" : ""}

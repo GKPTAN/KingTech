@@ -1,16 +1,18 @@
-import { useWidthWindow } from "../../../hooks/useWindowWidth.tsx";
+import React from "react";
 import {
   LiaAngleDoubleLeftSolid,
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
 import { MdEdit } from "react-icons/md";
 import SliderSlick from "react-slick";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../../style/components/layout/Banner.css";
-import "../../../style/responsive/components/layout/Banner.responsive.css";
+import "@/style/components/layout/Banner.css";
+import "@/style/responsive/components/layout/Banner.responsive.css";
 
-const Slider = (SliderSlick as any) as React.ElementType;
+const Slider = SliderSlick as any as React.ElementType;
 
 export interface ArrowProps {
   className?: string;
@@ -33,13 +35,14 @@ const SamplePrevArrow = (props: ArrowProps) => {
   return (
     <div
       className={className}
-      style={{ ...style, 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "center", 
+      style={{
+        ...style,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         left: "10px",
-        zIndex: "100" 
-    }}
+        zIndex: "100",
+      }}
       onClick={onClick}
     >
       <LiaAngleDoubleLeftSolid size={40} color="#000" />
@@ -51,13 +54,14 @@ const SampleNextArrow = (props: ArrowProps) => {
   return (
     <div
       className={className}
-      style={{ ...style, 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "center", 
+      style={{
+        ...style,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         right: "10px",
-        zIndex: "100" 
-    }}
+        zIndex: "100",
+      }}
       onClick={onClick}
     >
       <LiaAngleDoubleRightSolid size={40} color="#000" />
@@ -91,22 +95,26 @@ const BannerCarrossel = ({ banners, className }: BannerCarrosselProps) => {
   }
 
   return (
-    <div className={className}>
-      <Slider {...settings}>
-        {banners.map((banner) => (
-          <div key={banner.id} className="banner_slide_wrapper">
-            <img
-              src={banner.src}
-              alt="banner promocional"
-              className="banner_slide"
-            />
-          </div>
-        ))}
-      </Slider>
-      <span className="edit-adm">
-        <MdEdit fill="#000" size={mediaQuery}/>
-      </span>
-    </div>
+    <>
+      {banners && banners.length > 0 && (
+        <div className={className}>
+          <Slider {...settings}>
+            {banners.map((banner) => (
+              <div key={banner.id} className="banner_slide_wrapper">
+                <img
+                  src={banner.src}
+                  alt="banner promocional"
+                  className="banner_slide"
+                />
+              </div>
+            ))}
+          </Slider>
+          <span className="edit-adm">
+            <MdEdit fill="#000" size={mediaQuery} />
+          </span>
+        </div>
+      )}
+    </>
   );
 };
 

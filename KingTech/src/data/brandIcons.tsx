@@ -1,6 +1,6 @@
-import type React from "react";
-import type { JSX } from "react";
 import { SiAmd } from "react-icons/si";
+
+import type React from "react";
 
 interface BrandIcons {
     [key: string]: React.ReactNode;

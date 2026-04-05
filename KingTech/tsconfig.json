@@ -38,6 +38,9 @@
     // Recommended Options
     "strict": false,
     "allowJs": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "checkJs": false,
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx",

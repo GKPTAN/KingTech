@@ -1,8 +1,8 @@
-
-type Button = "button" | "submit" | "reset";
+import React from "react";
+type ButtonType = "button" | "submit" | "reset";
 
 interface ButtonProps {
-  type: Button;
+  type: ButtonType;
   nameAction: string | React.ReactNode;
   className?: string;
   disabled: boolean;

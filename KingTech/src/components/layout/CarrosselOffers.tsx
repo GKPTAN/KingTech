@@ -1,26 +1,32 @@
-import { useWidthWindow } from "../../hooks/useWindowWidth.tsx";
-import { TbTopologyStar3, TbArrowBigRightLines } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import React from "react";
 import {
   LiaAngleDoubleLeftSolid,
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
 import { MdEdit } from "react-icons/md";
-import ProductCard from "./ProductCard.tsx";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { TbArrowBigRightLines, TbTopologyStar3 } from "react-icons/tb";
+import { Link } from "react-router-dom";
 import SliderSlick from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "../../style/components/layout/CarrosselOffers.css";
-import "../../style/responsive/components/layout/CarrosselOffers.responsive.css";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+
 import type { ArrowProps } from "./banners/BannerCarrossel.tsx";
 
-const Slider = (SliderSlick as any) as React.ElementType;
+import ProductCard from "./ProductCard.tsx";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "@/style/components/layout/CarrosselOffers.css";
+import "@/style/responsive/components/layout/CarrosselOffers.responsive.css";
+
+const Slider = SliderSlick as any as React.ElementType;
 
 type CardPreviewMode = "portrait" | "landscape";
 
 interface CarrosselOffersProps {
   titleHidden: boolean;
-  className: string;
+  className?: string;
   ariaLabel: string;
   title: string;
   icon: React.ReactNode;
@@ -34,7 +40,7 @@ interface CarrosselOffersProps {
   pauseOnHover: boolean;
   cardPreviewMode: CardPreviewMode;
   button: boolean;
-  cart: boolean;
+  cart?: boolean;
 }
 
 const products = [
@@ -159,8 +165,6 @@ const SampleNextArrow = (props: ArrowProps) => {
   );
 };
 
-
-
 const CarrosselOffers = ({
   titleHidden,
   className,
@@ -177,7 +181,7 @@ const CarrosselOffers = ({
   pauseOnHover,
   cardPreviewMode,
   button,
-  cart,
+  cart = false,
 }: CarrosselOffersProps) => {
   let widthWindow = useWidthWindow();
   const settings = {
@@ -189,8 +193,8 @@ const CarrosselOffers = ({
     autoplay: autoplay,
     autoplaySpeed: autoplaySpeed,
     pauseOnHover: pauseOnHover,
-    nextArrow: widthWindow <= 650 ? '' : <SampleNextArrow />,
-    prevArrow: widthWindow <= 650 ? '' : <SamplePrevArrow />,
+    nextArrow: widthWindow <= 650 ? "" : <SampleNextArrow />,
+    prevArrow: widthWindow <= 650 ? "" : <SamplePrevArrow />,
   };
 
   let mediaQuery = 40;
@@ -204,42 +208,46 @@ const CarrosselOffers = ({
   }
 
   return (
-    <div
-      className={`offers-${className} ${autoplay ? "automated" : ""}`}
-      aria-label={ariaLabel}
-    >
-      <div className={`title-${className} ${titleHidden ? "hidden" : ""}`}>
-        <div className="header">
-          <h2>
-            {icon} {title}
-          </h2>
-          <Link className="link" to={`/departments/${className}`}>
-            Ver mais <TbArrowBigRightLines />
-          </Link>
+    <>
+      {products && products.length > 0 && (
+        <div
+          className={`offers-${className} ${autoplay ? "automated" : ""}`}
+          aria-label={ariaLabel}
+        >
+          <div className={`title-${className} ${titleHidden ? "hidden" : ""}`}>
+            <div className="header">
+              <h2>
+                {icon} {title}
+              </h2>
+              <Link className="link" to={`/departments/${className}`}>
+                Ver mais <TbArrowBigRightLines />
+              </Link>
+            </div>
+            <span className="edit-adm">
+              <MdEdit fill="#fff" size={mediaQuery} />
+            </span>
+          </div>
+          <div className={`products-${className}`}>
+            <Slider {...settings}>
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  mode={cardPreviewMode}
+                  id={product.id}
+                  name={product.name}
+                  img={product.img}
+                  alt={product.alt}
+                  prevPrice={product.prevPrice}
+                  price={product.price}
+                  button={button}
+                  cart={cart}
+                />
+              ))}
+            </Slider>
+          </div>
         </div>
-        <span className="edit-adm">
-          <MdEdit fill="#fff" size={mediaQuery} />
-        </span>
-      </div>
-      <div className={`products-${className}`}>
-        <Slider {...settings}>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              mode={cardPreviewMode}
-              id={product.id}
-              name={product.name}
-              img={product.img}
-              alt={product.alt}
-              prevPrice={product.prevPrice}
-              price={product.price}
-              button={button}
-              cart={cart}
-            />
-          ))}
-        </Slider>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
-import Select from "../../../form/Select.tsx";
+
+import Select from "@/components/layout/form/Select.tsx";
 
 interface ReviewFiltersProps {
   onFilterChange: (value: string) => void;

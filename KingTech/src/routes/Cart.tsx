@@ -1,14 +1,21 @@
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useWidthWindow } from "../hooks/useWindowWidth";
-import { MdLocalOffer, MdDeleteSweep } from "react-icons/md";
+import { MdDeleteSweep, MdLocalOffer } from "react-icons/md";
 import { TbCrown } from "react-icons/tb";
-import { useForm } from "../hooks/useStep";
-import BasketTech from "../components/layout/pages/Cart/BasketTech";
-import Button from "../components/layout/Button";
-import Steps from "../components/layout/pages/Cart/Steps";
-import CarrosselOffers from "../components/layout/CarrosselOffers.tsx";
-import "../style/Cart.css";
-import "../style/responsive/routes/Cart/Cart.responsive.css";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useForm } from "@/hooks/useStep.tsx";
+
+import BasketTech from "@/components/layout/pages/Cart/BasketTech.tsx";
+import Button from "@/components/layout/Button.tsx";
+import Steps from "@/components/layout/pages/Cart/Steps.tsx";
+import CarrosselOffers from "@/components/layout/CarrosselOffers.tsx";
+import AddressBuy, { type AddressData } from "@/components/layout/pages/Cart/Address/AddressBuy.tsx";
+import DeliveryBuy from "@/components/layout/pages/Cart/Delivery/DeliveryBuy.tsx";
+
+import "@/style/Cart.css";
+import "@/style/responsive/routes/Cart/Cart.responsive.css";
 
 const stepTitles = [
   "Cesta",
@@ -51,11 +58,29 @@ const products = [
 const Cart = () => {
   const handleRemove = () => {};
   let widthWindow = useWidthWindow();
+  const [addressData, setAddressData] = useState({
+    cep: "",
+    street: "",
+    number: "",
+    complement: "",
+    neighborhood: "",
+    state: "",
+    city: "",
+    reference: "",
+    nickname: ""
+  });
+
+  const updateDataAddress = (fields: Partial<AddressData>) => {
+    setAddressData((prev) => ({ ...prev, ...fields }));
+  };
 
   const formComponents = [
     <BasketTech handleRemove={handleRemove} products={products} />,
+    <AddressBuy data={addressData} updateFields={updateDataAddress}/>,
+    <DeliveryBuy />,
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     useForm(formComponents);
 
@@ -84,7 +109,8 @@ const Cart = () => {
             className="steps-cart"
             onSubmit={(e) => changeStep(currentStep + 1, e)}
           >
-            <div className="intro-form">
+            {currentStep === 0 && (
+              <div className="intro-form">
               <p>
                 Vendido e entregue por <strong>KingTech</strong>
               </p>
@@ -97,25 +123,28 @@ const Cart = () => {
                 icon={<MdDeleteSweep size={30} />}
               />
             </div>
-            <div className="main-steps">{currentComponent}</div>
-            {currentStep > 0 && (
-              <Button
-                type="button"
-                nameAction="Voltar"
-                className="btn-back"
-                disabled={false}
-                onClick={() => changeStep(currentStep - 1)}
-              />
             )}
-            <Button
-              type="submit"
-              nameAction="Continuar"
-              className="btn-keep"
-              disabled={false}
-              onClick={() => {}}
-            />
+            <div className="main-steps">{currentComponent}</div>
+            <div className="options-steps">
+              {currentStep > 0 && (
+                <Button
+                  type="button"
+                  nameAction="Voltar"
+                  className="btn-back"
+                  disabled={false}
+                  onClick={() => changeStep(currentStep - 1)}
+                />
+              )}
+              <Button
+                type="submit"
+                nameAction="Continuar"
+                className="btn-keep"
+                disabled={false}
+              />
+            </div>
           </form>
-          <CarrosselOffers
+          {currentStep === 0 && (
+            <CarrosselOffers
             titleHidden={false}
             className="recommend"
             ariaLabel="recomendações para você"
@@ -133,6 +162,7 @@ const Cart = () => {
             button={true}
             cart={true}
           />
+          )}
         </>
       )}
     </div>

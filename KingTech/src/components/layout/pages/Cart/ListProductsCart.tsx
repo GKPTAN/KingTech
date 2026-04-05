@@ -1,6 +1,8 @@
 import { TiDelete } from "react-icons/ti";
-import Button from "../../Button.tsx";
-import type { ProductsInCart } from "../../../../types/products.ts";
+
+import type { ProductsInCart } from "@/types/products.ts";
+
+import Button from "@/components/layout/Button.tsx";
 
 interface ListProductsCartProps {
     products: ProductsInCart[];
@@ -10,7 +12,7 @@ interface ListProductsCartProps {
 const ListProductsCart = ({products, remove}: ListProductsCartProps) => {
   return (
     <ul className="list-products-cart">
-        {products.map((product) => (
+        {products && products.map((product) => (
             <li className="item" key={product.id}>
                 <div className="delete">
                     <Button 

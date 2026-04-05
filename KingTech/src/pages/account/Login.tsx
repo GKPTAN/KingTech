@@ -1,8 +1,11 @@
 import { useState } from "react";
-import Form from "../../components/Form.tsx";
-import { useAuth } from "../../context/AuthContext.tsx";
 import { Link } from "react-router-dom";
-import styles from "../../style/pages/auth/Login.module.css";
+
+import { useAuth } from "@/context/useAuth.ts";
+
+import Form from "@/components/Form.tsx";
+
+import styles from "@/style/pages/auth/Login.module.css";
 
 const Login = () => {
   const { login } = useAuth();

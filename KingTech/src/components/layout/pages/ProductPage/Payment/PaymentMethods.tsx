@@ -2,13 +2,14 @@ import { useState } from "react";
 import { CiCreditCard2 } from "react-icons/ci";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPix } from "@fortawesome/free-brands-svg-icons";
-import Button from "../../../Button.tsx";
+
+import Button from "@/components/layout/Button.tsx";
 
 interface PaymentMethodsProps {
-  prevPrice: number;
-  priceInCardStore: number;
+  prevPrice: number | null;
+  priceInCardStore: number | null;
   pricePartInCardStore: number;
-  pricePix: number;
+  pricePix: number | null;
 }
 
 interface Installments {
@@ -39,9 +40,9 @@ const PaymentMethods = ({
   };
 
   // parcelas cartão da loja
-  const storeCardInstallments = getInstallments(priceInCardStore, 10);
+  //const storeCardInstallments = getInstallments(priceInCardStore, 10);
   // parcelas outros cartões (usando preço original)
-  const otherCardInstallments = getInstallments(prevPrice, 10);
+  const otherCardInstallments = getInstallments(prevPrice ?? 0, 10);
 
   return (
     <div className="payment-methods" id="payment-methods">
@@ -106,10 +107,10 @@ const PaymentMethods = ({
               <tbody>
                 <tr>
                   <td>1x</td>
-                  <td>R$ {priceInCardStore.toFixed(2)}</td>
-                  <td>R$ {priceInCardStore.toFixed(2)}</td>
+                  <td>R$ {priceInCardStore?.toFixed(2) ?? ""}</td>
+                  <td>R$ {priceInCardStore?.toFixed(2) ?? ""}</td>
                 </tr>
-                {Array.from({ length: 9 }, (_, i) => {
+                {priceInCardStore && Array.from({ length: 9 }, (_, i) => {
                   const parcela = i + 2; // começa no 2
                   const valor = (pricePartInCardStore / parcela).toFixed(2);
                   return (
@@ -136,15 +137,17 @@ const PaymentMethods = ({
                   <th>Total</th>
                 </tr>
               </thead>
-              <tbody>
-                {otherCardInstallments.map((item) => (
-                  <tr key={item.number}>
-                    <td>{item.number}x</td>
-                    <td>R$ {item.value}</td>
-                    <td>R$ {item.total}</td>
-                  </tr>
-                ))}
+              {prevPrice && (
+                <tbody>
+                  {otherCardInstallments.map((item) => (
+                    <tr key={item.number}>
+                      <td>{item.number}x</td>
+                      <td>R$ {item.value}</td>
+                      <td>R$ {item.total}</td>
+                    </tr>
+                  ))}
               </tbody>
+              )}
             </table>
           </>
         )}
@@ -153,7 +156,7 @@ const PaymentMethods = ({
           <div className="pix">
             <h3>Pix</h3>
             <p>
-              Valor com desconto: <strong>R$ {pricePix.toFixed(2)}</strong>
+              Valor com desconto: <strong>R$ {pricePix?.toFixed(2) ?? ""}</strong>
             </p>
           </div>
         )}
@@ -162,7 +165,7 @@ const PaymentMethods = ({
           <div className="boleto">
             <h3>Boleto Bancário</h3>
             <p>
-              Valor: <strong>R$ {prevPrice.toFixed(2)}</strong>
+              Valor: <strong>R$ {prevPrice?.toFixed(2) ?? ""}</strong>
             </p>
           </div>
         )}

@@ -1,11 +1,13 @@
-import { CiCreditCard2, CiFacebook } from 'react-icons/ci';
-import { PaymentIcon } from 'react-svg-credit-card-payment-icons/dist/index.mjs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPix } from '@fortawesome/free-brands-svg-icons';
-import { PiInstagramLogoDuotone, PiYoutubeLogo } from 'react-icons/pi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { CiCreditCard2, CiFacebook } from 'react-icons/ci';
 import { LiaWhatsapp } from 'react-icons/lia';
-import Logo from '../assets/logo.png';
-import styles from '../style/components/Footer.module.css';
+import { PiInstagramLogoDuotone, PiYoutubeLogo } from 'react-icons/pi';
+import { PaymentIcon } from 'react-svg-credit-card-payment-icons/dist/index.mjs';
+
+import Logo from '@/assets/logo.png';
+
+import styles from '@/style/components/Footer.module.css';
 
 const Footer = () => {
   return (

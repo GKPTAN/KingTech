@@ -1,24 +1,21 @@
 import { useState } from "react";
+
 import type { Comment } from "./ReviewComments.tsx";
+import type { Product } from "@/types/products.ts";
+
 import ReviewSummary from "./ReviewSummary.tsx";
 import ReviewFilters from "./ReviewFilters.tsx";
 import ReviewComments from "./ReviewComments.tsx";
 
+
 interface ReviewsProps {
-  product: {
-    rating: number;
-    numberRating: number;
-    compositionRating: {
-      [key: number]: number;
-    };
-    reviewComments: Comment[];
-  }
+  product: Partial<Product>;
 }
 
 const Reviews = ({product}: ReviewsProps) => {
   const [filter, setFilter] = useState("recent");
 
-  const sortComments = (comments, filter) => {
+  const sortComments = (comments: Comment[], filter: string) => {
     switch (filter) {
         case "high":
             return [...comments].sort((a, b) => b.rating - a.rating);
@@ -35,12 +32,12 @@ const Reviews = ({product}: ReviewsProps) => {
     <section className="reviews" id="reviews">
       <h2>Avaliações</h2>
       <ReviewSummary
-        rating={product.rating}
-        numberRating={product.numberRating}
-        breakdown={product.compositionRating}
+        rating={product.rating ?? 0}
+        numberRating={product.numberRating ?? 0}
+        breakdown={product.compositionRating ?? []}
       />
       <ReviewFilters onFilterChange={setFilter}/>
-      <ReviewComments comments={sortComments(product.reviewComments, filter)} />
+      <ReviewComments comments={sortComments(product.reviewComments ?? [], filter)} />
     </section>
   );
 };

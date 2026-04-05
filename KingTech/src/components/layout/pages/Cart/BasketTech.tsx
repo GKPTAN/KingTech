@@ -1,6 +1,7 @@
+import type { ProductsInCart } from "@/types/products.ts";
+
 import ListProductsCart from "./ListProductsCart.tsx";
 import SummaryCart from "./SummaryCart.tsx";
-import type { ProductsInCart } from "../../../../types/products.ts";
 
 interface BasketTechProps {
   products: ProductsInCart[];
@@ -11,11 +12,11 @@ const BasketTech = ({products, handleRemove}: BasketTechProps) => {
   return (
     <div className="basket-tech">
         <ListProductsCart
-            products={products}
+            products={products ?? []}
             remove={handleRemove}
         />
         <SummaryCart 
-            products={products}
+            products={products ?? []}
         />
     </div>
   );

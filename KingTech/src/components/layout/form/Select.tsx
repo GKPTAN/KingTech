@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import Button from '../Button.tsx';
 import { MdArrowDropDown } from 'react-icons/md';
-import '../../../style/components/Select.css';
+
+import Button from '@/components/layout/Button.tsx';
+import '@/style/components/Select.css';
 
 interface SelectProps {
   id: string;
@@ -10,6 +11,7 @@ interface SelectProps {
     label: string;
   } [];
   nameDefault: string;
+  // eslint-disable-next-line no-unused-vars
   onChange?: (value: string | number) => void;
 }
 
@@ -36,12 +38,12 @@ const Select = ({id = "", options = [], nameDefault, onChange }: SelectProps) =>
       <div className='selected'>{selected}</div>
       {isOpen && (
         <ul className="options">
-          {options.map((option) => (
+          {options && options.map((option) => (
             <li key={option.value} className='option' onClick={() => handleSelect(option)}>{option.label}</li>
           ))}
         </ul>
       )}
-      <Button type="button" className="button-select" nameAction={<MdArrowDropDown />} disabled={false}/>
+      <Button type="button" className="button-select" nameAction={<MdArrowDropDown fill='#000'/>} disabled={false}/>
     </div>
   );
 };

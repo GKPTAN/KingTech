@@ -60,6 +60,7 @@
   align-items: center;
   width: 35%;
   box-sizing: border-box;
+  position: relative;
 }
 .search input, .search button {
   height: 40.50px;
@@ -84,6 +85,36 @@
 }
 .search button > svg {
   font-size: 1.1rem;
+}
+.navbar .search .suggestions {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  list-style: none;
+  top: 100%;
+  left: 0;
+  gap: 0.5rem;
+  background-color: #fff;
+
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: max-height 320ms ease, opacity 240ms ease;
+}
+.navbar .search .suggestions li {
+  padding: 0.8rem;
+  font-size: 1.2rem;
+}
+.navbar .search .suggestions li:hover {
+  background-color: #dbdada;
+  cursor: pointer;
+}
+.navbar .search .suggestions.open {
+  max-height: 270px;
+  opacity: 1;
+  pointer-events: auto;
 }
 a {
   text-decoration: none;

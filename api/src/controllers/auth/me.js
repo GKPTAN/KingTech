@@ -34,7 +34,7 @@ const meController = async (request, reply, supabase) => {
 
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
-      .select("full_name, username, gender, citym region, country, id, email")
+      .select("full_name, username, gender, city, region, country, id, email")
       .eq("id", user.id)
       .single();
 
@@ -48,9 +48,10 @@ const meController = async (request, reply, supabase) => {
 
     const resultUser = {
       id: user.id,
+      name: profile?.username,
       email: user.email,
       role: user.user_metadata?.role || "user",
-      profile: profile || null,
+      raw: profile || null,
     };
 
     return reply.status(200).send({

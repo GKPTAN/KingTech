@@ -1,10 +1,10 @@
+import Rating from "@mui/material/Rating";
+import { MdAddShoppingCart } from 'react-icons/md';
 import { TbCrown } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { MdAddShoppingCart } from 'react-icons/md';
-import Rating from "@mui/material/Rating";
-import HeartFavorite from './HeartFavorite.js';
+
 import Button from './Button.js';
+import HeartFavorite from './HeartFavorite.js';
 
 /**
  * Define o tipo de layout do card, podendo ser modo retrato, paisagem ou lista.

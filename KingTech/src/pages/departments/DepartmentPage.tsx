@@ -1,17 +1,19 @@
-import { categoryFilters } from "../../data/departmentsData.js";
-import { useParams } from "react-router-dom";
-import { CiBoxList, CiGrid41, CiTrophy } from "react-icons/ci";
 import { useEffect, useState } from "react";
-import { useWidthWindow } from "../../hooks/useWindowWidth.jsx";
-import { BsFillLightningChargeFill, BsRocketTakeoff } from "react-icons/bs";
-import { LiaSearchDollarSolid } from "react-icons/lia";
-import { TbCrown, TbTopologyStar3 } from "react-icons/tb";
-import PaginationNavbar from "../../components/layout/pages/PaginationNavbar.jsx";
-import Filter from "../../components/layout/Filter";
-import ProductCard from "../../components/layout/ProductCard";
-import CarrosselOffers from "../../components/layout/CarrosselOffers.tsx";
-import "../../style/pages/departments/DepartmentPage.css";
-import "../../style/responsive/pages/departments/DepartmentPage.responsive.css";
+import { CiBoxList, CiGrid41, CiTrophy } from "react-icons/ci";
+import { useParams } from "react-router-dom";
+import { BsRocketTakeoff } from "react-icons/bs";
+import { TbTopologyStar3 } from "react-icons/tb";
+
+import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+
+import PaginationNavbar from "@/components/layout/pages/PaginationNavbar.tsx";
+import Filter from "@/components/layout/Filter.tsx";
+import ProductCard from "@/components/layout/ProductCard.tsx";
+import CarrosselOffers from "@/components/layout/CarrosselOffers.tsx";
+
+import { categoryFilters } from "@/data/departmentsData.ts";
+import "@/style/pages/departments/DepartmentPage.css";
+import "@/style/responsive/pages/departments/DepartmentPage.responsive.css";
 
 const products = [
   {
@@ -180,7 +182,7 @@ const DepartmentPage = () => {
   const { subcategory } = useParams();
   const [typeView, setTypeView] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
-  const [widthWindow, setWidthWindow] = useState();
+  const [widthWindow, setWidthWindow] = useState(0);
 
   let widthDevice = useWidthWindow();
 
@@ -288,7 +290,7 @@ const DepartmentPage = () => {
                 name={product.name}
                 id={product.id}
                 img={product.img}
-                prevPrice={product.prevPrice}
+                prevPrice={product.prevPrice === "" ? null : Number(product.prevPrice)}
                 price={product.price}
                 alt={product.alt}
                 button={false}
