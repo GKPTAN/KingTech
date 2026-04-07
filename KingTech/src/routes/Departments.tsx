@@ -8,11 +8,11 @@ import { departmentsData } from "@/data/departmentsData.ts";
 import styles from "@/style/Departments.module.css";
 
 const Departments = () => {
-  const [openDepartment, setOpenDepartment] = useState(null);
+  const [openDepartment, setOpenDepartment] = useState<number | null>(null);
   let widthWindow = useWidthWindow();
   let isMobile = widthWindow <= 650;
 
-  const toggle = (id) => {
+  const toggle = (id: number) => {
     setOpenDepartment((prev) => (prev === id ? null : id));
   };
 
@@ -21,14 +21,13 @@ const Departments = () => {
       <title>Departamentos</title>
       {departmentsData && (
         <ul className={styles.departments_list}>
-          {Object.keys(departmentsData).map((department) => {
-            const dept = departmentsData[department];
-            const id = dept!.id;
+          {Object.entries(departmentsData).map(([deptName, dept]) => {
+            const id = dept.id;
             const isOpen = isMobile && openDepartment === id;
 
             return (
               <li
-                key={departmentsData[department]!.id}
+                key={dept.id}
                 className={`${styles.department_item} ${isOpen ? styles.open : ""}`}
               >
                 {isMobile ? (
@@ -39,19 +38,19 @@ const Departments = () => {
                       aria-controls={`sub-${id}`}
                       onClick={() => toggle(id)}
                     >
-                      {department}
+                      {deptName}
                       <span className={styles.caret}>{isOpen ? "▲" : "▶"}</span>
                     </button>
                   </h3>
                 ) : (
-                  <h3>{department}</h3>
+                  <h3>{deptName}</h3>
                 )}
 
                 <ul id={`sub-${id}`} className={styles.subcategories}>
-                  {dept!.subcategories.map((subcategory) => (
+                  {dept.subcategories.map((subcategory) => (
                     <li key={subcategory.id}>
                       <Link
-                        to={`/departments/${department}/${subcategory.name}`}
+                        to={`/departments/${deptName}/${subcategory.name}`}
                         className={styles.subcategory_btn}
                       >
                         {subcategory.name}

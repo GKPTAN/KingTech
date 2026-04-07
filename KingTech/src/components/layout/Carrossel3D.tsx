@@ -1,7 +1,10 @@
 import { Autoplay, EffectCoverflow, EffectCube, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { CardMode } from "@/types/products.ts";
+
 import ProductCard from './ProductCard.tsx';
+
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -26,7 +29,7 @@ const Carrossel3D = ({products = [], settings = {},}: Carrossel3DProps) => {
         {products.map((product, index) => (
             <SwiperSlide key={index}>
                 <ProductCard 
-                    mode='portrait'
+                    mode={CardMode.PORTRAIT}
                     id={product.id}
                     name={product.name}
                     img={product.img}

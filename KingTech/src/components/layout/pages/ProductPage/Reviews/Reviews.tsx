@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { ReviewSortOrder } from "@/types/filters.ts";
+
 import type { Comment } from "./ReviewComments.tsx";
 import type { Product } from "@/types/products.ts";
 
@@ -13,18 +15,20 @@ interface ReviewsProps {
 }
 
 const Reviews = ({product}: ReviewsProps) => {
-  const [filter, setFilter] = useState("recent");
+  const [filter, setFilter] = useState<ReviewSortOrder>(ReviewSortOrder.RECENT);
 
-  const sortComments = (comments: Comment[], filter: string) => {
+  const sortComments = (comments: Comment[], filter: ReviewSortOrder) => {
+    const sortedComments = [...comments];
+
     switch (filter) {
-        case "high":
-            return [...comments].sort((a, b) => b.rating - a.rating);
-        case "low":
-            return [...comments].sort((a, b) => a.rating - b.rating);
-        case "recent":
-            return [...comments].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        case ReviewSortOrder.HIGH:
+            return sortedComments.sort((a, b) => b.rating - a.rating);
+        case ReviewSortOrder.LOW:
+            return sortedComments.sort((a, b) => a.rating - b.rating);
+        case ReviewSortOrder.RECENT:
+            return sortedComments.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         default:
-            return comments;
+            return sortedComments;
     };
   };
 

@@ -10,6 +10,8 @@ import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 
 import { formatarMoeda } from "@/utils/formatCurrency.ts";
 
+import { CardMode, StockStatus } from "@/types/products.ts";
+
 import PromoConditionsModal from "@/components/layout/pages/ProductPage/Modals/PromoConditionsModal.tsx";
 import ImageSlideModal from "@/components/layout/pages/ProductPage/Sliders/ImageSlideModal.tsx";
 import Button from "@/components/layout/Button.tsx";
@@ -49,6 +51,8 @@ const ProductPage = () => {
   const [showImageModal, setShowImageModal] = useState(false);
   let widthWindow = useWidthWindow();
   const [image, setImage] = useState(0);
+
+  const stockClass = product.stock ? StockStatus.IN_STOCK : StockStatus.OUT_OF_STOCK;
 
   return (
     <div className="product-page">
@@ -176,7 +180,7 @@ const ProductPage = () => {
             </a>
           </div>
 
-          <div className={`stock ${product.stock ? "in-stock" : "out-stock"}`}>
+          <div className={`stock ${stockClass}`}>
             {product.stock ? "Em estoque" : "Esgotado"}
           </div>
 
@@ -238,7 +242,7 @@ const ProductPage = () => {
         autoplay={false}
         autoplaySpeed={2500}
         pauseOnHover={false}
-        cardPreviewMode="portrait"
+        cardPreviewMode={CardMode.PORTRAIT}
         button={false}
         cart={false}
       />
@@ -382,7 +386,7 @@ const ProductPage = () => {
         autoplay={false}
         autoplaySpeed={2500}
         pauseOnHover={false}
-        cardPreviewMode="portrait"
+        cardPreviewMode={CardMode.PORTRAIT}
         button={true}
         cart={false}
       />

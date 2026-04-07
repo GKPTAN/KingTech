@@ -7,8 +7,11 @@ import { BsFillLightningChargeFill } from 'react-icons/bs';
 
 import { useWidthWindow } from '@/hooks/useWindowWidth.tsx';
 
+import { CardMode } from '@/types/products.ts';
+
 import BannerCarrossel from '@/components/layout/banners/BannerCarrossel.tsx';
 import CarrosselOffers from '@/components/layout/CarrosselOffers.tsx';
+
 import '@/style/Home.css';
 import '@/style/responsive/routes/Home/Home.responsive.css';
 
@@ -53,7 +56,7 @@ const Home = () => {
           autoplay={false}
           autoplaySpeed={0}
           pauseOnHover={false}
-          cardPreviewMode={"portrait"}
+          cardPreviewMode={CardMode.PORTRAIT}
           button={true}
         />
         <BannerCarrossel 
@@ -74,7 +77,7 @@ const Home = () => {
           autoplay={false}
           autoplaySpeed={0}
           pauseOnHover={false}
-          cardPreviewMode='portrait'
+          cardPreviewMode={CardMode.PORTRAIT}
           button={true}
         />
         <CarrosselOffers 
@@ -91,7 +94,7 @@ const Home = () => {
           autoplay={false}
           autoplaySpeed={0}
           pauseOnHover={false}
-          cardPreviewMode='portrait'
+          cardPreviewMode={CardMode.PORTRAIT}
           button={true}
         />
       </main>

@@ -8,6 +8,9 @@ import { GiConfirmed } from "react-icons/gi";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 
+import { CartSteps } from "@/types/steps.ts";
+
+
 interface StepsProps {
   currentStep: number;
 }
@@ -30,32 +33,32 @@ const Steps = ({ currentStep }: StepsProps) => {
 
   return (
     <div className="steps">
-      <div className={`step ${currentStep === 0 ? "active" : ""}`}>
+      <div className={`step ${currentStep === CartSteps.BASKET ? "active" : ""}`}>
         <RiShoppingBasketFill size={sizeIcon} />
         <p>Cesta</p>
       </div>
       <div className="divisor"></div>
-      <div className={`step ${currentStep === 1 ? "active" : ""}`}>
+      <div className={`step ${currentStep === CartSteps.ADDRESS ? "active" : ""}`}>
         <TiLocation size={sizeIcon} />
         <p>Endereço</p>
       </div>
       <div className="divisor"></div>
-      <div className={`step ${currentStep === 2 ? "active" : ""}`}>
+      <div className={`step ${currentStep === CartSteps.DELIVERY ? "active" : ""}`}>
         <TbTruckDelivery size={sizeIcon} />
         <p>Entrega</p>
       </div>
       <div className="divisor"></div>
-      <div className={`step ${currentStep === 3 ? "active" : ""}`}>
+      <div className={`step ${currentStep === CartSteps.IDENTIFICATION ? "active" : ""}`}>
         <HiMiniIdentification size={sizeIcon} />
         <p>Identificação</p>
       </div>
       <div className="divisor"></div>
-      <div className={`step ${currentStep === 4 ? "active" : ""}`}>
+      <div className={`step ${currentStep === CartSteps.PAYMENT ? "active" : ""}`}>
         <BiMoney size={sizeIcon} />
         <p>Pagamento</p>
       </div>
       <div className="divisor"></div>
-      <div className={`step ${currentStep === 5 ? "active" : ""}`}>
+      <div className={`step ${currentStep === CartSteps.CONFIRMATION ? "active" : ""}`}>
         <GiConfirmed size={sizeIcon} />
         <p>Confirmação</p>
       </div>

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CiBoxList, CiGrid41, CiTrophy } from "react-icons/ci";
 import { useParams } from "react-router-dom";
 import { BsRocketTakeoff } from "react-icons/bs";
 import { TbTopologyStar3 } from "react-icons/tb";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+
+import { CardMode } from "@/types/products.ts";
 
 import PaginationNavbar from "@/components/layout/pages/PaginationNavbar.tsx";
 import Filter from "@/components/layout/Filter.tsx";
@@ -178,21 +180,21 @@ const products = [
   },
 ];
 
+enum ViewMode {
+  GRID = "grid",
+  LIST = "list"
+}
+
 const DepartmentPage = () => {
   const { subcategory } = useParams();
-  const [typeView, setTypeView] = useState("grid");
+  const [typeView, setTypeView] = useState<ViewMode>(ViewMode.GRID);
   const [currentPage, setCurrentPage] = useState(1);
-  const [widthWindow, setWidthWindow] = useState(0);
 
-  let widthDevice = useWidthWindow();
-
-  useEffect(() => {
-    setWidthWindow(widthDevice);
-  }, [widthDevice]);
+  let widthWindow = useWidthWindow();
 
   let productsPerPage = 20;
 
-  if (typeView === "list") {
+  if (typeView === ViewMode.LIST) {
     productsPerPage = 8;
   }
   const totalPages = Math.ceil(products.length / productsPerPage);
@@ -236,7 +238,7 @@ const DepartmentPage = () => {
           autoplay={true}
           autoplaySpeed={2500}
           pauseOnHover={true}
-          cardPreviewMode="landscape"
+          cardPreviewMode={CardMode.LANDSCAPE}
           button={false}
         />
         <div className="catalog">
@@ -252,14 +254,14 @@ const DepartmentPage = () => {
               <div>
                 Lista
                 <span
-                  className={`list ${typeView === "list" ? "active" : ""}`}
-                  onClick={() => setTypeView("list")}
+                  className={`list ${typeView === ViewMode.LIST ? "active" : ""}`}
+                  onClick={() => setTypeView(ViewMode.LIST)}
                 >
                   <CiBoxList size={widthWindow > 425 ? 20 : 15} />
                 </span>
                 <span
-                  className={`grid ${typeView === "grid" ? "active" : ""}`}
-                  onClick={() => setTypeView("grid")}
+                  className={`grid ${typeView === ViewMode.GRID ? "active" : ""}`}
+                  onClick={() => setTypeView(ViewMode.GRID)}
                 >
                   <CiGrid41 size={widthWindow > 425 ? 20 : 15} />
                 </span>
@@ -280,13 +282,13 @@ const DepartmentPage = () => {
           </aside>
           <div
             className={`catalog-products ${
-              typeView === "list" ? "list" : "grid"
+              typeView === ViewMode.LIST ? "list" : "grid"
             }`}
           >
             {productsToShow.map((product) => (
               <ProductCard
                 key={product.id}
-                mode={typeView === "grid" ? "portrait" : "list"}
+                mode={typeView === ViewMode.GRID ? CardMode.PORTRAIT : CardMode.LIST}
                 name={product.name}
                 id={product.id}
                 img={product.img}
@@ -318,7 +320,7 @@ const DepartmentPage = () => {
           autoplay={true}
           autoplaySpeed={2500}
           pauseOnHover={true}
-          cardPreviewMode="landscape"
+          cardPreviewMode={CardMode.LANDSCAPE}
           button={false}
         />
         <CarrosselOffers
@@ -335,7 +337,7 @@ const DepartmentPage = () => {
           autoplay={true}
           autoplaySpeed={2500}
           pauseOnHover={true}
-          cardPreviewMode="landscape"
+          cardPreviewMode={CardMode.LANDSCAPE}
           button={false}
         />
       </main>

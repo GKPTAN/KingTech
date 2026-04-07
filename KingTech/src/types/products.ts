@@ -82,3 +82,16 @@ export interface CategoryFilters {
     }[];
   }[];
 }
+
+export enum StockStatus {
+  IN_STOCK = "in-stock",
+  OUT_OF_STOCK = "out-of-stock",
+}
+
+// Product Card
+
+export enum CardMode {
+  PORTRAIT = "portrait",
+  LANDSCAPE = "landscape",
+  LIST = "list",
+}

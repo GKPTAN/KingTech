@@ -1,24 +1,28 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 
+import { ReviewSortOrder } from "@/types/filters.ts";
+
 import Select from "@/components/layout/form/Select.tsx";
 
 interface ReviewFiltersProps {
-  onFilterChange: (value: string) => void;
+  onFilterChange: (value: ReviewSortOrder) => void;
 }
 
 const options = [
-  {value: "recent", label: "Mais recentes"},
-  {value: "high", label: "Maior nota"},
-  {value: "low", label: "Menor nota"},
+  {value: ReviewSortOrder.RECENT, label: "Mais recentes"},
+  {value: ReviewSortOrder.HIGH, label: "Maior nota"},
+  {value: ReviewSortOrder.LOW, label: "Menor nota"},
 ]
 
 const ReviewFilters = ({ onFilterChange }: ReviewFiltersProps) => {
-  const [selected, setSelected] = useState("recent");
+  const [selected, setSelected] = useState<ReviewSortOrder>(ReviewSortOrder.RECENT);
 
   const handleChange = (value: string) => {
-    setSelected(value);
-    onFilterChange(value);
+
+    const newValue = value as ReviewSortOrder;
+    setSelected(newValue);
+    onFilterChange(newValue);
   };
 
   return (

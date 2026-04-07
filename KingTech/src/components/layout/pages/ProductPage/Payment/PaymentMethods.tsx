@@ -5,6 +5,13 @@ import { faPix } from "@fortawesome/free-brands-svg-icons";
 
 import Button from "@/components/layout/Button.tsx";
 
+enum PaymentMethod {
+  STORE_CARD = "storeCard",
+  OTHER_CARDS = "otherCards",
+  PIX = "pix",
+  BOLETO = "boleto",
+}
+
 interface PaymentMethodsProps {
   prevPrice: number | null;
   priceInCardStore: number | null;
@@ -24,7 +31,7 @@ const PaymentMethods = ({
   pricePartInCardStore,
   pricePix,
 }: PaymentMethodsProps) => {
-  const [activeMethod, setActiveMethod] = useState("storeCard");
+  const [activeMethod, setActiveMethod] = useState<PaymentMethod>(PaymentMethod.STORE_CARD);
 
   // função para calcular as parcelas
   const getInstallments = (total: number, max = 10) => {
@@ -39,8 +46,6 @@ const PaymentMethods = ({
     return result;
   };
 
-  // parcelas cartão da loja
-  //const storeCardInstallments = getInstallments(priceInCardStore, 10);
   // parcelas outros cartões (usando preço original)
   const otherCardInstallments = getInstallments(prevPrice ?? 0, 10);
 
@@ -53,25 +58,25 @@ const PaymentMethods = ({
         <Button
           type="button"
           nameAction="Cartão da Loja"
-          className={activeMethod === "storeCard" ? "active" : ""}
+          className={activeMethod === PaymentMethod.STORE_CARD ? "active" : ""}
           disabled={false}
-          onClick={() => setActiveMethod("storeCard")}
+          onClick={() => setActiveMethod(PaymentMethod.STORE_CARD)}
           icon={""}
         />
         <Button
           type="button"
           nameAction="Demais Cartões"
-          className={activeMethod === "otherCards" ? "active" : ""}
+          className={activeMethod === PaymentMethod.OTHER_CARDS ? "active" : ""}
           disabled={false}
-          onClick={() => setActiveMethod("otherCards")}
+          onClick={() => setActiveMethod(PaymentMethod.OTHER_CARDS)}
           icon={<CiCreditCard2 size={30} />}
         />
         <Button
           type="button"
           nameAction="Pix"
-          className={activeMethod === "pix" ? "active" : ""}
+          className={activeMethod === PaymentMethod.PIX ? "active" : ""}
           disabled={false}
-          onClick={() => setActiveMethod("pix")}
+          onClick={() => setActiveMethod(PaymentMethod.PIX)}
           icon={
             <FontAwesomeIcon
               icon={faPix}
@@ -82,9 +87,9 @@ const PaymentMethods = ({
         <Button
           type="button"
           nameAction="Boleto"
-          className={activeMethod === "boleto" ? "active" : ""}
+          className={activeMethod === PaymentMethod.BOLETO ? "active" : ""}
           disabled={false}
-          onClick={() => setActiveMethod("boleto")}
+          onClick={() => setActiveMethod(PaymentMethod.BOLETO)}
           icon={
             <img src="/image/boleto-preto.png" alt="Boleto" title="Boleto" />
           }
@@ -93,7 +98,7 @@ const PaymentMethods = ({
 
       {/* Conteúdo do método selecionado */}
       <div className="method-content">
-        {activeMethod === "storeCard" && (
+        {activeMethod === PaymentMethod.STORE_CARD && (
           <>
             <h3>Cartão da Loja</h3>
             <table>
@@ -126,7 +131,7 @@ const PaymentMethods = ({
           </>
         )}
 
-        {activeMethod === "otherCards" && (
+        {activeMethod === PaymentMethod.OTHER_CARDS && (
           <>
             <h3>Demais Cartões</h3>
             <table>
@@ -152,7 +157,7 @@ const PaymentMethods = ({
           </>
         )}
 
-        {activeMethod === "pix" && (
+        {activeMethod === PaymentMethod.PIX && (
           <div className="pix">
             <h3>Pix</h3>
             <p>
@@ -161,7 +166,7 @@ const PaymentMethods = ({
           </div>
         )}
 
-        {activeMethod === "boleto" && (
+        {activeMethod === PaymentMethod.BOLETO && (
           <div className="boleto">
             <h3>Boleto Bancário</h3>
             <p>

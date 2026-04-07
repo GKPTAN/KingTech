@@ -11,6 +11,8 @@ import SliderSlick from "react-slick";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 
+import { CardMode } from "@/types/products.ts";
+
 import type { ArrowProps } from "./banners/BannerCarrossel.tsx";
 
 import ProductCard from "./ProductCard.tsx";
@@ -21,8 +23,6 @@ import "@/style/components/layout/CarrosselOffers.css";
 import "@/style/responsive/components/layout/CarrosselOffers.responsive.css";
 
 const Slider = SliderSlick as any as React.ElementType;
-
-type CardPreviewMode = "portrait" | "landscape";
 
 interface CarrosselOffersProps {
   titleHidden: boolean;
@@ -38,7 +38,7 @@ interface CarrosselOffersProps {
   autoplay: boolean;
   autoplaySpeed: number;
   pauseOnHover: boolean;
-  cardPreviewMode: CardPreviewMode;
+  cardPreviewMode: CardMode.PORTRAIT | CardMode.LANDSCAPE;
   button: boolean;
   cart?: boolean;
 }

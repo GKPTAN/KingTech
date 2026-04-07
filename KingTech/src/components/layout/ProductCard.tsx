@@ -3,13 +3,14 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { TbCrown } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
+import { CardMode } from "@/types/products.ts";
+
 import Button from './Button.js';
 import HeartFavorite from './HeartFavorite.js';
 
 /**
  * Define o tipo de layout do card, podendo ser modo retrato, paisagem ou lista.
 */
-type CardMode = "portrait" | "landscape" | "list";
 
 interface ProductCardProps {
   mode: CardMode;
@@ -41,8 +42,8 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
   const rating = 4;
 
   return (
-    <div className={`product-card ${mode === "portrait" ? "portrait" : "landscape"}`} id={`prod-${id}`} onClick={() => navigate(`/product/${id}/${name}`)}>
-        {mode === "portrait" && (
+    <div className={`product-card ${mode === CardMode.PORTRAIT ? "portrait" : "landscape"}`} id={`prod-${id}`} onClick={() => navigate(`/product/${id}/${name}`)}>
+        {mode === CardMode.PORTRAIT && (
           <div className="rating-favorite-box" onClick={(e) => e.stopPropagation()}>
             <Rating 
               name={"product-rating"}
@@ -53,7 +54,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
           </div>
         )}
         <img src={img} alt={alt} />
-        {(mode === "portrait" || mode === "list") && (
+        {(mode === CardMode.PORTRAIT || mode === CardMode.LIST) && (
           <h3 className="name-product">
             <div className='royalty'>
               <span className='line-left'></span>
@@ -64,7 +65,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
           </h3>
         )}
         <div className="info-prod">
-          {mode === "landscape" && (
+          {mode === CardMode.LANDSCAPE && (
             <>
               <div className="rating-favorite-box" onClick={(e) => e.stopPropagation()}>
                 <Rating 
@@ -86,7 +87,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
             </>
           )}
           <div>
-            {mode === "list" && (
+            {mode === CardMode.LIST && (
               <div className="rating-favorite-box" onClick={(e) => e.stopPropagation()}>
                 <Rating 
                   name={"product-rating"}
@@ -96,7 +97,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
                 <HeartFavorite />
               </div>
             )}
-            <p className="prev-price">{prevPrice}</p>
+            <p className="prev-price">{prevPrice ?? 0}</p>
             <p className="price-product">R$ {price}</p>
             <p>
                 Á vista <br />

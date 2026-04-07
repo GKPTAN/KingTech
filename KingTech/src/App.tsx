@@ -1,7 +1,8 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
-import { useWidthWindow } from './hooks/useWindowWidth';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+
+import { useWidthWindow } from './hooks/useWindowWidth.tsx';
+import Navbar from './components/Navbar.tsx';
+import Footer from './components/Footer.tsx';
 import './App.css';
 
 function App() {

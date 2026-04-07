@@ -1,23 +1,24 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import AuthGuard from './context/AuthGuard';
-import Account from './routes/Account';
-import Cart from './routes/Cart';
-import Departments from './routes/Departments';
-import Error404 from './routes/Error404';
-import Favorites from './routes/Favorites';
-import Home from './routes/Home';
-import Support from './routes/Support';
-import Admin from './routes/Admin';
-import Login from './pages/account/Login';
-import Registro from './pages/account/Registro';
-import Dashboard from './pages/account/Dashboard';
-import ProductPage from './routes/ProductPage';
-import DepartmentPage from './pages/departments/DepartmentPage';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+
+import { AuthProvider } from './context/AuthContext.tsx';
+import AuthGuard from './context/AuthGuard.tsx';
+import Account from './routes/Account.tsx';
+import Cart from './routes/Cart.tsx';
+import Departments from './routes/Departments.tsx';
+import Error404 from './routes/Error404.tsx';
+import Favorites from './routes/Favorites.tsx';
+import Home from './routes/Home.tsx';
+import Support from './routes/Support.tsx';
+import Admin from './routes/Admin.tsx';
+import Login from './pages/account/Login.tsx';
+import Registro from './pages/account/Registro.tsx';
+import Dashboard from './pages/account/Dashboard.tsx';
+import ProductPage from './routes/ProductPage.tsx';
+import DepartmentPage from './pages/departments/DepartmentPage.tsx';
 import './index.css';
-import App from './App.jsx';
+import App from './App.tsx';
 
 const router = createBrowserRouter([
   {
@@ -91,7 +92,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('Root container not found');
+};
+
+createRoot(container).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />

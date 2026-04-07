@@ -7,6 +7,9 @@ import { TbCrown } from "react-icons/tb";
 import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 import { useForm } from "@/hooks/useStep.tsx";
 
+import { CartSteps } from "@/types/steps.ts";
+import { CardMode } from "@/types/products.ts";
+
 import BasketTech from "@/components/layout/pages/Cart/BasketTech.tsx";
 import Button from "@/components/layout/Button.tsx";
 import Steps from "@/components/layout/pages/Cart/Steps.tsx";
@@ -17,14 +20,14 @@ import DeliveryBuy from "@/components/layout/pages/Cart/Delivery/DeliveryBuy.tsx
 import "@/style/Cart.css";
 import "@/style/responsive/routes/Cart/Cart.responsive.css";
 
-const stepTitles = [
-  "Cesta",
-  "Endereço",
-  "Entrega",
-  "Identificação",
-  "Pagamento",
-  "Confirmação",
-];
+const stepTitles: Record<CartSteps, string> = {
+  [CartSteps.BASKET]: "Cesta",
+  [CartSteps.ADDRESS]: "Endereço",
+  [CartSteps.DELIVERY]: "Entrega",
+  [CartSteps.IDENTIFICATION]: "Identificação",
+  [CartSteps.PAYMENT]: "Pagamento",
+  [CartSteps.CONFIRMATION]: "Confirmação",
+};
 
 const products = [
   {
@@ -109,7 +112,7 @@ const Cart = () => {
             className="steps-cart"
             onSubmit={(e) => changeStep(currentStep + 1, e)}
           >
-            {currentStep === 0 && (
+            {currentStep === CartSteps.BASKET && (
               <div className="intro-form">
               <p>
                 Vendido e entregue por <strong>KingTech</strong>
@@ -126,7 +129,7 @@ const Cart = () => {
             )}
             <div className="main-steps">{currentComponent}</div>
             <div className="options-steps">
-              {currentStep > 0 && (
+              {currentStep > CartSteps.BASKET && (
                 <Button
                   type="button"
                   nameAction="Voltar"
@@ -143,7 +146,7 @@ const Cart = () => {
               />
             </div>
           </form>
-          {currentStep === 0 && (
+          {currentStep === CartSteps.BASKET && (
             <CarrosselOffers
             titleHidden={false}
             className="recommend"
@@ -158,7 +161,7 @@ const Cart = () => {
             autoplay={true}
             autoplaySpeed={2500}
             pauseOnHover={true}
-            cardPreviewMode="landscape"
+            cardPreviewMode={CardMode.LANDSCAPE}
             button={true}
             cart={true}
           />

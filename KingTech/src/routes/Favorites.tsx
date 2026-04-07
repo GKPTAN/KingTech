@@ -6,7 +6,10 @@ import { useWidthWindow } from '@/hooks/useWindowWidth.tsx';
 
 // import { useAuth } from '@/context/useAuth.ts';
  
+import { CardMode } from '@/types/products.ts';
+
 import ProductCard from '@/components/layout/ProductCard.tsx';
+
 import '@/style/Favorites.css';
 import '@/style/responsive/routes/Favorites/Favorites.responsive.css';
 
@@ -102,7 +105,7 @@ const Favorites = () => {
               {favorites && favorites.map((favorite) => (
                 <li key={favorite.id} className='favorite-item'>
                   <ProductCard 
-                    mode={widthWindow > 900 ? "landscape" : "portrait"}
+                    mode={widthWindow > 900 ? CardMode.LANDSCAPE : CardMode.PORTRAIT}
                     name={favorite.name}
                     id={favorite.id}
                     img={favorite.img}
