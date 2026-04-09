@@ -23,20 +23,24 @@ const ReviewSummary = ({rating, numberRating, breakdown}: ReviewSummaryProps) =>
         <p className="number-rating">{numberRating} {numberRating === 1 ? "avaliação" : "avaliações"}</p>
       </div>
       <div className="breakdown">
-        {Object.keys(breakdown).sort((a, b) => Number(b) - Number(a)).map((star) => (
+        {Object.keys(breakdown).sort((a, b) => Number(b) - Number(a)).map((star) => {
+          const starRating = Number(star);
+
+          return (
           <Box key={star} className="breakdown-row">
             <Typography className="star-label">{star}<FaStar size={20} fill="#FAAF00"/></Typography>
             <LinearProgress 
               variant="determinate"
-              value={breakdown[star]}
+              value={breakdown[starRating]}
               className="progress"
               color="success"
             />
             <Typography className="percent">
-              {breakdown[star]}%
+              {breakdown[starRating]}%
             </Typography>
           </Box>
-        ))}
+        )
+        })}
       </div>
     </div>
   );

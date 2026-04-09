@@ -52,7 +52,7 @@ const Search = ({
     setIsOpen(false);
   }
 
-  const Tag = asForm ? "form" : "div" as any;
+  const Tag = asForm ? "form" : "div" as React.ElementType;
 
   return (
     <Tag className="search" id={id} onSubmit={asForm ? handleSubmit : undefined}>
@@ -63,7 +63,7 @@ const Search = ({
             placeholder={text}
             value={value !== undefined ? value : search}
             onChange={handleChange}
-            onKeyDown={(e: any) => e.key === 'Enter' && !asForm && e.preventDefault()}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && !asForm && e.preventDefault()}
             disabled={disabled}
             required={required}
         />

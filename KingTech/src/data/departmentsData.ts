@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { SiAmd } from "react-icons/si";
-
 import type { CategoryFilters, DepartmentsData, Product } from "@/types/products.ts";
 
 export const departmentsData: DepartmentsData = {

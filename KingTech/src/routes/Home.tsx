@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { TbCrown } from 'react-icons/tb';
 import { LiaSearchDollarSolid } from 'react-icons/lia';
@@ -28,8 +26,8 @@ const promotionOffers = [
 ];
 
 const Home = () => {
-  const [promotions, setPromotions] = useState(promotionsStore);
-  const [offersPromo, setOffersPromo] = useState(promotionOffers);
+  const [promotions, _setPromotions] = useState(promotionsStore);
+  const [offersPromo, _setOffersPromo] = useState(promotionOffers);
   let widthWindow = useWidthWindow();
 
   return (

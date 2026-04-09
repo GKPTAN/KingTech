@@ -4,8 +4,7 @@ import {
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
 import { MdEdit } from "react-icons/md";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { TbArrowBigRightLines, TbTopologyStar3 } from "react-icons/tb";
+import { TbArrowBigRightLines } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import SliderSlick from "react-slick";
 
@@ -13,6 +12,7 @@ import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 
 import { CardMode } from "@/types/products.ts";
 
+import type { Settings } from "react-slick";
 import type { ArrowProps } from "./banners/BannerCarrossel.tsx";
 
 import ProductCard from "./ProductCard.tsx";
@@ -22,7 +22,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "@/style/components/layout/CarrosselOffers.css";
 import "@/style/responsive/components/layout/CarrosselOffers.responsive.css";
 
-const Slider = SliderSlick as any as React.ElementType;
+const Slider = SliderSlick as Settings as React.ElementType;
 
 interface CarrosselOffersProps {
   titleHidden: boolean;

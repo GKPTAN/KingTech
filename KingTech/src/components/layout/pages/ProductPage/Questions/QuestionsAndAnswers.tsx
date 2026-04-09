@@ -89,7 +89,7 @@ const QuestionsAndAnswers = ({ maxQuestions = 50, questions = [] }: QuestionsAnd
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(3);
   const [newQuestion, setNewQuestion] = useState("");
-  const [expanded, setExpanded] = useState({});
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
   const filteredQuestions = questions?.filter((q) =>
     q.text.toLowerCase().includes(query.toLowerCase())
   );

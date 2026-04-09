@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
 
-import Search from "./Search.jsx";
+import Search from "./Search.tsx";
 
 import logo from "@/assets/logo.png";
 

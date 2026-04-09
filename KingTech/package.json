@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "lint:fix": "eslint . --fix"
@@ -31,8 +31,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@types/node": "^25.5.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.13",
     "@types/slick-carousel": "^1.6.40",
     "@typescript-eslint/eslint-plugin": "^8.58.0",

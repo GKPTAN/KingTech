@@ -18,7 +18,11 @@ const options = [
 const ReviewFilters = ({ onFilterChange }: ReviewFiltersProps) => {
   const [selected, setSelected] = useState<ReviewSortOrder>(ReviewSortOrder.RECENT);
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string | number) => {
+
+    if (typeof value === "number") {
+      return;
+    }
 
     const newValue = value as ReviewSortOrder;
     setSelected(newValue);

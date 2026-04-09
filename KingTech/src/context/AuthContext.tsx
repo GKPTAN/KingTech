@@ -1,30 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { createClient } from "@supabase/supabase-js";
 
 import type { User, UserDataLogin, UserDataRegister } from "@/types/userData.ts";
+import type { FailedRequest} from "@/types/api.ts";
 
 import { AuthContext } from "./useAuth.ts";
 
-
-export interface AuthContextData {
-    user: User | null;
-    loading: boolean;
-    login: (userData: UserDataLogin) => Promise<{error: boolean; message: string, technicalError?: boolean, location?: string, user?: User, expires_in?: number, log?: any}>;
-    logout: () => void;
-    register: (userData: UserDataRegister) => Promise<{error: boolean; message: string, technicalError?: boolean, log?: any}>;
-    verify: (code: string) => Promise<{error: boolean; message: string}>;
-}
-
 interface AuthProviderProps {
     children: React.ReactNode;
-}
-
-interface FailedRequest {
-    resolve: (value?: any) => void;
-    reject: (error: any) => void;
 }
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
@@ -43,9 +29,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 return resp.data.user;
             };
             return null;
-        } catch (error) {
-            if (error?.response?.status === 401) return null;
-            console.error("Erro ao buscar usuário da API: ", error);
+        } catch (error: unknown) {
+            const err = error as AxiosError<any>;
+            if (err?.response?.status === 401) return null;
+            console.error("Erro ao buscar usuário da API: ", err);
             return null;
         };
     };
@@ -58,7 +45,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 return true;
             };
             return false;
-        } catch (_error) {
+        } catch (error: unknown) {
+            const err = error as AxiosError<any>;
+            console.error("Erro ao atualizar sessão: ", err);
             return false;
         };
     };
@@ -98,7 +87,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                     };
                 };
 
-                const { data: sub } = supabase.auth.onAuthStateChange((event, sess) => {
+                const { data: sub } = supabase.auth.onAuthStateChange((_event, sess) => {
                     const newSession = sess;
                     const u = newSession?.user ?? null;
 
@@ -194,10 +183,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             };
             setLoading(false);
             return response.data;
-        } catch (error: any) {
-            console.error("Erro no login: ", error);
+        } catch (error: unknown) {
+            const err = error as AxiosError<any>;
+            console.error("Erro no login: ", err);
             setLoading(false);
-            const apiError = error?.response?.data;
+            const apiError = err?.response?.data;
             return {
                 error: true,
                 message: apiError?.message || "Erro ao conectar com o servidor, tente novamente mais tarde",
@@ -210,12 +200,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const logout = async () => {
         try {
             await axios.post(`${API_BASE}/auth/logout`);
-        } catch (_error) {
+        } catch (_error: unknown) {
+            // const err = error as AxiosError<any>;
             //
         }
         try {
             await supabase.auth.signOut();
-        } catch (_error) {
+        } catch (_error: unknown) {
+            // const err = error as AuthError;
             //
         }
         setUser(null);
@@ -225,9 +217,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         try {
             const response = await axios.post(`${API_BASE}/auth/register`, userData);
             return response.data;
-        } catch (error) {
-            console.error("Erro no registro: ", error);
-            const apiError = error?.response?.data;
+        } catch (error: unknown) {
+            const err = error as AxiosError<any>;
+            console.error("Erro no registro: ", err);
+            const apiError = err?.response?.data;
             return {
                 error: true,
                 message: apiError?.message || "Erro ao conectar com o servidor, tente novamente mais tarde",
@@ -241,8 +234,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         try {
             const response = await axios.post(`${API_BASE}/auth/verify`, { code});
             return response.data;
-        } catch (error) {
-            console.error("Erro na verificação: ", error);
+        } catch (error: unknown) {
+            const err = error as AxiosError<any>;
+            console.error("Erro na verificação: ", err);
             return {
                 error: true,
                 message: "Erro ao conectar com o servidor, tente novamente mais tarde"

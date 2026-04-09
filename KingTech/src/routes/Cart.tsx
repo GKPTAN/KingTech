@@ -83,9 +83,7 @@ const Cart = () => {
     <DeliveryBuy />,
   ];
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
-    useForm(formComponents);
+  const { currentStep, currentComponent, changeStep, isFirstStep } = useForm(formComponents);
 
   const title = stepTitles[currentStep];
 
@@ -112,7 +110,7 @@ const Cart = () => {
             className="steps-cart"
             onSubmit={(e) => changeStep(currentStep + 1, e)}
           >
-            {currentStep === CartSteps.BASKET && (
+            {isFirstStep && (
               <div className="intro-form">
               <p>
                 Vendido e entregue por <strong>KingTech</strong>
@@ -146,7 +144,7 @@ const Cart = () => {
               />
             </div>
           </form>
-          {currentStep === CartSteps.BASKET && (
+          {isFirstStep && (
             <CarrosselOffers
             titleHidden={false}
             className="recommend"

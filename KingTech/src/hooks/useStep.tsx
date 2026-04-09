@@ -1,6 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
-export const useForm = (steps: React.ReactElement[]) => {
+import type { CartSteps } from "@/types/steps";
+
+interface UseFormReturn {
+    currentStep: CartSteps;
+    currentComponent: React.ReactElement;
+    changeStep: (i: number, e?: React.FormEvent<HTMLFormElement>) => void;
+    isLastStep: boolean;
+    isFirstStep: boolean;
+}
+
+export const useForm = (steps: React.ReactElement[]): UseFormReturn => {
     const [currentStep, setCurrentStep] = useState(0);
 
     const changeStep = (i: number, e?: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +27,7 @@ export const useForm = (steps: React.ReactElement[]) => {
 
     return {
         currentStep,
-        currentComponent: steps[currentStep],
+        currentComponent: steps[currentStep] ?? <></>,
         changeStep,
         isLastStep: currentStep + 1 === steps.length ? true : false,
         isFirstStep: currentStep === 0 ? true : false,

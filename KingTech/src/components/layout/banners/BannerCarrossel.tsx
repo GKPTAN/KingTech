@@ -7,12 +7,15 @@ import { MdEdit } from "react-icons/md";
 import SliderSlick from "react-slick";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+
+import type { Settings } from "react-slick";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/style/components/layout/Banner.css";
 import "@/style/responsive/components/layout/Banner.responsive.css";
 
-const Slider = SliderSlick as any as React.ElementType;
+const Slider = SliderSlick as Settings as React.ElementType;
 
 export interface ArrowProps {
   className?: string;

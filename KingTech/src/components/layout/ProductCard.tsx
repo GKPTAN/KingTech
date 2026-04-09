@@ -97,7 +97,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
                 <HeartFavorite />
               </div>
             )}
-            <p className="prev-price">{prevPrice ?? 0}</p>
+            <p className="prev-price">{prevPrice ?? ""}</p>
             <p className="price-product">R$ {price}</p>
             <p>
                 Á vista <br />
