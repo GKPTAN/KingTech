@@ -111,7 +111,7 @@ const Favorites = () => {
                     img={favorite.img}
                     price={favorite.price}
                     alt={favorite.alt}
-                    prevPrice={Number(favorite.prevPrice)}
+                    prevPrice={Number(favorite.prevPrice) === 0 ? null : Number(favorite.prevPrice)}
                     button={false}
                     cart={false}
                   />

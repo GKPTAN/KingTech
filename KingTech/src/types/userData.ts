@@ -1,25 +1,23 @@
-export interface UserDataRegister {
-    full_name: string;
-    gender: string;
-    date_birth: string;
-    email: string;
-    password: string;
-}
+import { z } from "zod";
 
-export interface UserDataLogin {
-    email: string;
-    password: string;
-}
+import { UserDataLoginSchema, UserDataRegisterSchema } from "@/utils/validateData";
+
+export type UserDataRegister = z.infer<typeof UserDataRegisterSchema>;
+
+export type UserDataLogin = z.infer<typeof UserDataLoginSchema>;
 
 export const VALID_ROLES = ["user", "admin"] as const;
 
-export type UserRole = (typeof VALID_ROLES)[number];
+const userRoleSchema = z.enum(VALID_ROLES);
 
-export interface User {
-    id: string;
-    name?: string;
-    email: string;
-    role: UserRole;
-    raw?: any;
-}
+export const UserSchema = z.object({
+    id: z.string(),
+    name: z.string().optional(),
+    email: z.email(),
+    role: userRoleSchema,
+    raw: z.any().optional(),
+})
 
+export type UserRole = z.infer<typeof userRoleSchema>;
+
+export type User = z.infer<typeof UserSchema>;

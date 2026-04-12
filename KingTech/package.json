@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -27,7 +28,8 @@
     "react-spinners": "^0.17.0",
     "react-svg-credit-card-payment-icons": "^4.0.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^12.1.2"
+    "swiper": "^12.1.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
@@ -40,13 +42,16 @@
     "@typescript-eslint/eslint-plugin": "^8.58.0",
     "@typescript-eslint/parser": "^8.58.0",
     "@vitejs/plugin-react-swc": "^3.8.0",
+    "@vitest/coverage-v8": "^4.1.4",
     "eslint": "^9.22.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "jsdom": "^28.1.0",
     "typescript": "^6.0.2",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "vitest": "^4.1.4"
   }
 }

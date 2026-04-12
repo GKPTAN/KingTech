@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoInfo } from "react-icons/go";
 
-import validateData from "@/utils/validateData.js";
+import { validateDataRegister } from "@/utils/validateData.js";
 
 import { useAuth } from "@/context/useAuth.ts";
 
@@ -11,10 +11,11 @@ import Select from "@/components/layout/form/Select.tsx";
 
 import styles from "@/style/pages/auth/Registro.module.css";
 
+type gender = "masculino" | "feminino" | "binary" | "non-binary" | "outros";
 
 const Registro = () => {
   const [date, setDate] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState<gender>("outros");
   const [disabled, setDisabled] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -65,7 +66,7 @@ const Registro = () => {
 
     console.log("Dados sendo enviados: ", userData);
 
-    const validation = await validateData(userData, confirm_password);
+    const validation = await validateDataRegister(userData, confirm_password);
 
     if (typeof validation === "object") {
       setDisabled(false);
@@ -115,7 +116,7 @@ const Registro = () => {
             id="gender"
             options={options}
             nameDefault="Gênero"
-            onChange={(v) => setGender(String(v))}
+            onChange={(v) => setGender(String(v) as gender)}
           />
           <input
             type="text"

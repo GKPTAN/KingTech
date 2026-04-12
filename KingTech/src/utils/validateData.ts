@@ -1,4 +1,6 @@
-import type { UserDataRegister } from "../types/userData.ts";
+import { z } from "zod";
+
+import type { UserDataLogin, UserDataRegister } from "../types/userData.ts";
 
 interface ErrorValidate {
     error: boolean;
@@ -7,233 +9,110 @@ interface ErrorValidate {
     message: string;
     technicalError?: boolean;
 }
-const validateName = async (full_name: string): Promise<boolean | ErrorValidate> => {
-    const regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
 
-    if (typeof full_name !== "string") {
-        return {
-            error: true,
-            field: "full_name",
-            issue: "ERROR_TYPE_VALUE",
-            message: "O valor do campo (nome completo) tem que ser do tipo string!",
-            technicalError: true
-        };
-    };
+const validGenders = ["masculino", "feminino", "binary", "non-binary", "outros"] as const;
+const regexDate = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
-    if (!full_name || full_name.trim() === "") {
-        return {
-            error: true,
-            field: "full_name",
-            issue: "ERROR_EMPTY_INPUT",
-            message: "o campo (nome completo) não pode estar vazio!",
-            technicalError: true
-        };
-    };
+export const UserDataRegisterSchema = z.object({
+    full_name: z.string("formato de nome inválido!").trim().min(3, "o campo (nome completo) precisa ter no mínimo 3 caracteres e no máximo 255 caracteres!").max(255, "o campo (nome completo) precisa ter no mínimo 3 caracteres e no máximo 255 caracteres!").regex(/^((?!\s{3,}).)*$/, "o campo (nome completo) não pode conter mais de dois espaços seguidos!").regex(/^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/, "o campo (nome completo) não pode conter números e símbolos exceto '-"),
+    gender: z.enum(validGenders, {
+        error: () => ({ message: "informe um gênero válido!"})
+    }),
+    date_birth: z.string("formato de data inválido!").min(1, "o campo (data de nascimento) é obrigatório!")
+    .refine((val) => regexDate.test(val), "formato de data inválido, use dd/mm/aaaa")
+    .refine((val) => {
+        const [dia, mes, ano] = val.split('/').map(Number);
+        const dateObj = new Date(ano, mes - 1, dia);
+        const today = new Date();
 
-    if (full_name.length < 3 || full_name.length > 255) {
-        return {
-            field: "full_name",
-            issue: "ERROR_SIZE_REQUIRED",
-            message: "o campo (nome completo) precisa ter no mínimo 3 caracteres e no máximo 255 caracteres!",
-            error: true
-        };
-    };
+        const validDate = (
+            dateObj.getDate() === dia && 
+            dateObj.getMonth() === mes - 1 && 
+            dateObj.getFullYear() === ano
+        );
 
-    if (/\s{3,}/.test(full_name)) {
-        return {
-            field: "full_name",
-            issue: "ERROR_CONSECUTIVE_SPACE",
-            message: "o campo (nome completo) não pode conter mais de dois espaços seguidos!",
-            error: true
-        };
-    };
+        return validDate && dateObj <= today;
+    }, "data inexistente!")
+    .refine((val) => {
+        const [dia, mes, ano] = val.split('/').map(Number);
+        const today = new Date();
+        let age = today.getFullYear() - ano;
+        const hadBirthDayThisYear = (
+            today.getMonth() > (mes - 1) || 
+            (today.getMonth() === (mes - 1) && today.getDate() >= dia)
+        );
+        const realAge = hadBirthDayThisYear ? age : age - 1;
 
-    if (!regexName.test(full_name)) {
-        return {
-            field: "full_name",
-            issue: "ERROR_TYPE_DIGIT",
-            message: "o campo (nome completo) não pode conter números e símbolos exceto '-",
-            error: true
-        };
-    };
+        return realAge >= 18;
+    }, "é preciso ter a idade mínima de 18 anos para comprar produtos nessa loja!"),
+    email: z.email("formato de email inválido!").max(255, "o campo (email) precisa ter no máximo 255 caracteres!"),
+    password: z.string("formato de senha inválida!").min(6, "o campo (senha) precisa ter no mínimo 6 caracteres!").max(255, "o campo (senha) precisa ter no máximo 255 caracteres!").refine((val) => !val.includes(" "), "o campo (senha) não pode conter espaços entre os caracteres!")
+});
 
-    return true;
-};
-
-const validateGender = async (gender: string): Promise<boolean | ErrorValidate> => {
-    const validGenders = ["masculino", "feminino", "binary", "non-binary", "outros"];
-
-    if (!gender) {
-        return {
-            field: "gender",
-            issue: "ERROR_EMPTY_INPUT",
-            message: "Informe um gênero!",
-            error: true
-        };
-    };
-
-    if (!validGenders.includes(gender)) {
-        return {
-            error: true,
-            field: "gender",
-            issue: "ERROR_VALID_GENDER",
-            message: "o gênero informado não é válido!",
-            technicalError: true
-        };
-    };
-
-    return true;
-};
-
-const validateDateBirth = async (date_birth: string): Promise<boolean | ErrorValidate> => {
-    const regexDate = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-
-    if (!date_birth) {
-        return {
-            field: "date_birth",
-            issue: "ERROR_EMPTY_INPUT",
-            message: "o campo (data de nascimento) não pode estar vazio!",
-            error: true
-        };
-    };
-
-    if (date_birth.length < 10 || !regexDate.test(date_birth)) {
-        return {
-            field: "date_birth",
-            issue: "ERROR_INVALID_DATE",
-            message: "formato de data inválido!",
-            error: true
-        };
-    };
-
-    const [dia, mes, ano] = date_birth.split('/').map(Number);
-    const day = dia;
-    const month = Number(mes);
-    const year = Number(ano);
-    const dateObj = new Date(year, month - 1, day);
-
-    const validDate = (
-        dateObj.getDate() === day && dateObj.getMonth() === month - 1 && dateObj.getFullYear() === year
-    );
-
-    const today = new Date();
-
-    if (!validDate || dateObj > today) {
-        return {
-            field: "date_birth",
-            issue: "ERROR_INVALID_DATE",
-            message: "data inexistente!",
-            error: true
-        };
-    };
-
-    const minAge = 18;
-    const age = today.getFullYear() - year;
-    const hadBirthDayThisYear = (today.getMonth() > month - 1 || (today.getMonth() === month - 1 && today.getDate() >= day));
-    const realAge = hadBirthDayThisYear ? age : age - 1;
-    if (realAge < minAge) {
-        return {
-            field: "date_birth",
-            issue: "ERROR_MIN_AGE",
-            message: `é preciso ter a idade mínima de ${minAge} anos para comprar produtos nessa loja!`,
-            error: true
-        };
-    };
-
-    return true;
-};
-
-const validateEmail = async (email: string): Promise<boolean | ErrorValidate> => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    if (!email) {
-        return {
-            field: "email",
-            issue: "ERROR_EMPTY_INPUT",
-            message: "o campo (email) não pode estar vazio!",
-            error: true
-        };
-    };
-
-    if (email.length > 255) {
-        return {
-            field: "email",
-            issue: "ERROR_SIZE_REQUIRED",
-            message: "o campo (email) precisa ter no máximo 255 caracteres!",
-            error: true
-        };
-    };
-
-    if (!emailRegex.test(email)) {
-        return {
-            field: "email",
-            issue: "ERROR_EMAIL_FORMAT",
-            message: "formato de e-mail inválido!",
-            error: true
-        };
-    };
-
-    return true;
-};
-
-const validatePassword = async (password: string, confirm_password: string): Promise<boolean | ErrorValidate> => {
-
-    if (!password) {
-        return {
-            field: "password",
-            issue: "ERROR_EMPTY_INPUT",
-            message: "o campo (senha) não pode estar vazio!",
-            error: true
-        };
-    };
-
-    if (password.length < 8 || password.length > 15) {
-        return {
-            field: "password",
-            issue: "ERROR_SIZE_REQUIRED",
-            message: "o campo (senha) precisa ter no mínimo 8 caracteres e no máximo 15 caracteres!",
-            error: true
-        };
-    };
-    
-    if (password.includes(" ")) {
-        return {
-            field: "password",
-            issue: "ERROR_SPACE_BETWEEN",
-            message: "não pode haver espaços entre os caracteres da senha!",
-            error: true
-        };
-    };
-
-    if (password !== confirm_password) {
-        return {
-            field: "confirm_password",
-            issue: "ERROR_PASSWORD_MISMATCH",
-            message: "senhas não coincidem! confirme a sua senha",
-            error: true
-        }
-    }
-
-    return true;
-};
-
-const validateData = async (userData: UserDataRegister, confirm_password: string): Promise<ErrorValidate | boolean> => {
+export const validateDataRegister = async (userData: UserDataRegister, confirm_password: string): Promise<ErrorValidate | boolean> => {
 
     const {full_name, gender, date_birth, email, password} = userData;
 
-    const validations = await Promise.all([
-        validateName(full_name),
-        validateGender(gender),
-        validateDateBirth(date_birth),
-        validateEmail(email),
-        validatePassword(password, confirm_password),
-    ]); 
+    if (password !== confirm_password) {
+        return {
+            error: true,
+            field: "confirm_password",
+            issue: "password_mismatch",
+            message: "As senhas não coincidem!"
+        }
+    }
 
-    const errors = validations.filter((v): v is ErrorValidate => v !== true);
+    try {
+        UserDataRegisterSchema.parse({
+            full_name: full_name,
+            gender: gender,
+            date_birth: date_birth,
+            email: email,
+            password: password
+        });
 
-    if (errors.length > 0) return errors[0]!;
+        return true;
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            const firstError = error.issues[0];
+            return {
+                error: true,
+                field: firstError.path[0] as string,
+                issue: firstError.code,
+                message: firstError.message
+            }
+        }
 
-    return true;
+        throw error;
+    }
 };
 
-export default validateData
+export const UserDataLoginSchema = z.object({
+    email: z.email("Formato de email inválido!").max(255, "Não exagere no tamanho do email!"),
+    password: z.string("formato de senha inválido!").min(1, "O campo senha é obrigatório!").min(6, "Sua senha precisa ter no mínimo 6 caracteres!").max(255, "Não exagere no tamanho da senha!").refine((val) => !val.includes(" "), "Não pode haver espaços entre os caracteres da senha!")
+});
+
+export const validateDataLogin = async (userData: UserDataLogin): Promise<ErrorValidate | boolean> => {
+    const { email, password } = userData;
+
+    try {
+        UserDataLoginSchema.parse({
+            email: email,
+            password: password
+        });
+
+        return true;
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            const firstError = error.issues[0];
+            return {
+                error: true,
+                field: firstError.path[0] as string,
+                issue: firstError.code,
+                message: firstError.message
+            }
+        }   
+
+        throw error;
+    }
+}
