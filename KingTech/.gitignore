@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 .env
 .vercel
+
+# Coverage reports
+coverage
+
+# TypeScript build info
+*.tsbuildinfo
