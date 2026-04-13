@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { createClient } from "@supabase/supabase-js";
 
-import type { User, UserDataLogin, UserDataRegister } from "@/types/userData.ts";
-import type { FailedRequest} from "@/types/api.ts";
+import type { User, UserDataLogin, UserDataRegister } from "@/types/userData";
+import type { FailedRequest} from "@/types/api";
 
-import { AuthContext } from "./useAuth.ts";
+import { AuthContext } from "./useAuth";
 
 interface AuthProviderProps {
     children: React.ReactNode;

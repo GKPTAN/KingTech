@@ -6,9 +6,9 @@ import { HiMiniIdentification } from "react-icons/hi2";
 import { BiMoney } from "react-icons/bi";
 import { GiConfirmed } from "react-icons/gi";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import { CartSteps } from "@/types/steps.ts";
+import { CartSteps } from "@/types/steps";
 
 
 interface StepsProps {

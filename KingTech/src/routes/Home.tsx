@@ -3,12 +3,12 @@ import { TbCrown } from 'react-icons/tb';
 import { LiaSearchDollarSolid } from 'react-icons/lia';
 import { BsFillLightningChargeFill } from 'react-icons/bs';
 
-import { useWidthWindow } from '@/hooks/useWindowWidth.tsx';
+import { useWidthWindow } from '@/hooks/useWindowWidth';
 
-import { CardMode } from '@/types/products.ts';
+import { CardMode } from '@/types/products';
 
-import BannerCarrossel from '@/components/layout/banners/BannerCarrossel.tsx';
-import CarrosselOffers from '@/components/layout/CarrosselOffers.tsx';
+import BannerCarrossel from '@/components/layout/banners/BannerCarrossel';
+import CarrosselOffers from '@/components/layout/CarrosselOffers';
 
 import '@/style/Home.css';
 import '@/style/responsive/routes/Home/Home.responsive.css';

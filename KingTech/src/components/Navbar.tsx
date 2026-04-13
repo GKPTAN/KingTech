@@ -3,9 +3,9 @@ import { RiAccountBoxFill, RiShoppingBasketFill } from "react-icons/ri";
 import { TbCrown, TbHeartFilled, TbHomeFilled } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import Search from "./Search.tsx";
+import Search from "./Search";
 
 import logo from "@/assets/logo.png";
 

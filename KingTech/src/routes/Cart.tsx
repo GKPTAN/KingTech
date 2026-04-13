@@ -1,21 +1,20 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDeleteSweep, MdLocalOffer } from "react-icons/md";
 import { TbCrown } from "react-icons/tb";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
-import { useForm } from "@/hooks/useStep.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
+import { useForm } from "@/hooks/useStep";
 
-import { CartSteps } from "@/types/steps.ts";
-import { CardMode } from "@/types/products.ts";
+import { CartSteps } from "@/types/steps";
+import { CardMode } from "@/types/products";
 
-import BasketTech from "@/components/layout/pages/Cart/BasketTech.tsx";
-import Button from "@/components/layout/Button.tsx";
-import Steps from "@/components/layout/pages/Cart/Steps.tsx";
-import CarrosselOffers from "@/components/layout/CarrosselOffers.tsx";
-import AddressBuy, { type AddressData } from "@/components/layout/pages/Cart/Address/AddressBuy.tsx";
-import DeliveryBuy from "@/components/layout/pages/Cart/Delivery/DeliveryBuy.tsx";
+import BasketTech from "@/components/layout/pages/Cart/BasketTech";
+import Button from "@/components/layout/Button";
+import Steps from "@/components/layout/pages/Cart/Steps";
+import CarrosselOffers from "@/components/layout/CarrosselOffers";
+import AddressBuy, { type AddressData } from "@/components/layout/pages/Cart/Address/AddressBuy";
+import DeliveryBuy from "@/components/layout/pages/Cart/Delivery/DeliveryBuy";
 
 import "@/style/Cart.css";
 import "@/style/responsive/routes/Cart/Cart.responsive.css";

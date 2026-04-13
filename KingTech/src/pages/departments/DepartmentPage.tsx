@@ -4,16 +4,16 @@ import { useParams } from "react-router-dom";
 import { BsRocketTakeoff } from "react-icons/bs";
 import { TbTopologyStar3 } from "react-icons/tb";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import { CardMode } from "@/types/products.ts";
+import { CardMode } from "@/types/products";
 
-import PaginationNavbar from "@/components/layout/pages/PaginationNavbar.tsx";
-import Filter from "@/components/layout/Filter.tsx";
-import ProductCard from "@/components/layout/ProductCard.tsx";
-import CarrosselOffers from "@/components/layout/CarrosselOffers.tsx";
+import PaginationNavbar from "@/components/layout/pages/PaginationNavbar";
+import Filter from "@/components/layout/Filter";
+import ProductCard from "@/components/layout/ProductCard";
+import CarrosselOffers from "@/components/layout/CarrosselOffers";
 
-import { categoryFilters } from "@/data/departmentsData.ts";
+import { categoryFilters } from "@/data/departmentsData";
 import "@/style/pages/departments/DepartmentPage.css";
 import "@/style/responsive/pages/departments/DepartmentPage.responsive.css";
 

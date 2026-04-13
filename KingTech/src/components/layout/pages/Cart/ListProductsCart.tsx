@@ -2,7 +2,7 @@ import { TiDelete } from "react-icons/ti";
 
 import type { ProductsInCart } from "@/types/products.ts";
 
-import Button from "@/components/layout/Button.tsx";
+import Button from "@/components/layout/Button";
 
 interface ListProductsCartProps {
     products: ProductsInCart[];

@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 // import { useContext } from 'react';
 import { MdLocalOffer } from 'react-icons/md';
 
-import { useWidthWindow } from '@/hooks/useWindowWidth.tsx';
+import { useWidthWindow } from '@/hooks/useWindowWidth';
 
 // import { useAuth } from '@/context/useAuth.ts';
  
-import { CardMode } from '@/types/products.ts';
+import { CardMode } from '@/types/products';
 
-import ProductCard from '@/components/layout/ProductCard.tsx';
+import ProductCard from '@/components/layout/ProductCard';
 
 import '@/style/Favorites.css';
 import '@/style/responsive/routes/Favorites/Favorites.responsive.css';

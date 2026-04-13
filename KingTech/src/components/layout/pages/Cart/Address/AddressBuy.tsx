@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import Search from "@/components/Search.tsx";
+import Search from "@/components/Search";
 import "@/style/components/layout/pages/Cart/AddressBuy.css";
 
 interface ViaCepResponse {

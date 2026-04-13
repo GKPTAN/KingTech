@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 
 import { validateDataLogin } from "@/utils/validateData";
 
-import { useAuth } from "@/context/useAuth.ts";
+import { useAuth } from "@/context/useAuth";
 
-
-import Form from "@/components/Form.tsx";
+import Form from "@/components/Form";
 
 import styles from "@/style/pages/auth/Login.module.css";
 

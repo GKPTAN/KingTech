@@ -4,7 +4,7 @@ import { GiPartyPopper } from "react-icons/gi";
 import { PiSealWarningFill } from "react-icons/pi";
 import { AiOutlineClose } from "react-icons/ai";
 
-import Button from "@/components/layout/Button.tsx";
+import Button from "@/components/layout/Button";
 
 interface PromoConditionsModalProps {
   onClose: () => void;

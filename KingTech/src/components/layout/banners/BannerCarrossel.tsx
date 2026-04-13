@@ -6,7 +6,7 @@ import {
 import { MdEdit } from "react-icons/md";
 import SliderSlick from "react-slick";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
 import type { Settings } from "react-slick";
 

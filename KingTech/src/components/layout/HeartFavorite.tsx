@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import Button from "./Button.tsx";
+import Button from "./Button";
 
 import "@/style/components/layout/HeartFavorite.css";
 

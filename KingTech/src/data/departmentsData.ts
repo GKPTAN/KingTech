@@ -1,4 +1,4 @@
-import type { CategoryFilters, DepartmentsData, Product } from "@/types/products.ts";
+import type { CategoryFilters, DepartmentsData, Product } from "@/types/products";
 
 export const departmentsData: DepartmentsData = {
   "Computadores e acessórios": {

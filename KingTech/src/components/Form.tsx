@@ -5,7 +5,7 @@ import { PiWarning } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { RingLoader } from "react-spinners";
 
-import Button from "./layout/Button.tsx";
+import Button from "./layout/Button";
 
 interface FormProps {
   onSubmit: (formData: FormData) => Promise<{message: string, error: boolean, technicalError?: boolean, location?: string, field?: string, issue?: string}>;

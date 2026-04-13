@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdArrowDropDown } from 'react-icons/md';
 
-import Button from '@/components/layout/Button.tsx';
+import Button from '@/components/layout/Button';
 import '@/style/components/Select.css';
 
 interface SelectProps {

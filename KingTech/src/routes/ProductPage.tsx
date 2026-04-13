@@ -6,25 +6,25 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import { formatarMoeda } from "@/utils/formatCurrency.ts";
+import { formatarMoeda } from "@/utils/formatCurrency";
 
-import { CardMode, StockStatus } from "@/types/products.ts";
+import { CardMode, StockStatus } from "@/types/products";
 
-import PromoConditionsModal from "@/components/layout/pages/ProductPage/Modals/PromoConditionsModal.tsx";
-import ImageSlideModal from "@/components/layout/pages/ProductPage/Sliders/ImageSlideModal.tsx";
-import Button from "@/components/layout/Button.tsx";
-import HeartFavorite from "@/components/layout/HeartFavorite.tsx";
-import ProductVariants from "@/components/layout/pages/ProductPage/Product/ProductVariants.tsx";
-import StoreAdvantages from "@/components/layout/pages/ProductPage/StoreAdvantages.tsx";
-import CarrosselOffers from "@/components/layout/CarrosselOffers.tsx";
-import QuestionsAndAnswers from "@/components/layout/pages/ProductPage/Questions/QuestionsAndAnswers.tsx";
-import PaymentMethods from "@/components/layout/pages/ProductPage/Payment/PaymentMethods.tsx";
-import Reviews from "@/components/layout/pages/ProductPage/Reviews/Reviews.tsx";
+import PromoConditionsModal from "@/components/layout/pages/ProductPage/Modals/PromoConditionsModal";
+import ImageSlideModal from "@/components/layout/pages/ProductPage/Sliders/ImageSlideModal";
+import Button from "@/components/layout/Button";
+import HeartFavorite from "@/components/layout/HeartFavorite";
+import ProductVariants from "@/components/layout/pages/ProductPage/Product/ProductVariants";
+import StoreAdvantages from "@/components/layout/pages/ProductPage/StoreAdvantages";
+import CarrosselOffers from "@/components/layout/CarrosselOffers";
+import QuestionsAndAnswers from "@/components/layout/pages/ProductPage/Questions/QuestionsAndAnswers";
+import PaymentMethods from "@/components/layout/pages/ProductPage/Payment/PaymentMethods";
+import Reviews from "@/components/layout/pages/ProductPage/Reviews/Reviews";
 
-import { brandIcons } from "@/data/brandIcons.tsx";
-import { product } from "@/data/departmentsData.ts";
+import { brandIcons } from "@/data/brandIcons";
+import { product } from "@/data/departmentsData";
 import "@/style/ProductPage.css";
 import "@/style/responsive/routes/ProductPage/ProductPage.responsive.css";
 

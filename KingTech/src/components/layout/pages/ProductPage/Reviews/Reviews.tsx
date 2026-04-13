@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { ReviewSortOrder } from "@/types/filters.ts";
+import { ReviewSortOrder } from "@/types/filters";
 
 import type { Comment } from "./ReviewComments.tsx";
 import type { Product } from "@/types/products.ts";
 
-import ReviewSummary from "./ReviewSummary.tsx";
-import ReviewFilters from "./ReviewFilters.tsx";
-import ReviewComments from "./ReviewComments.tsx";
+import ReviewSummary from "./ReviewSummary";
+import ReviewFilters from "./ReviewFilters";
+import ReviewComments from "./ReviewComments";
 
 
 interface ReviewsProps {

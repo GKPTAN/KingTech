@@ -3,7 +3,7 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { TbCrown } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
-import { CardMode } from "@/types/products.ts";
+import { CardMode } from "@/types/products";
 
 import Button from './Button.js';
 import HeartFavorite from './HeartFavorite.js';

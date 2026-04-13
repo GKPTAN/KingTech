@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import type { User, UserDataLogin, UserDataRegister } from "./userData.ts";
+import type { User, UserDataLogin, UserDataRegister } from "./userData";
 
 type ServerErrorLog = string | Record<string, unknown> | null;
 

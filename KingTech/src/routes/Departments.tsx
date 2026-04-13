@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import { departmentsData } from "@/data/departmentsData.ts";
+import { departmentsData } from "@/data/departmentsData";
 
 import styles from "@/style/Departments.module.css";
 

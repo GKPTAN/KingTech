@@ -5,7 +5,7 @@ import { BsTrash } from "react-icons/bs";
 import { ImExit } from "react-icons/im";
 import { LuCrown } from "react-icons/lu";
 
-import AdminOnly from "@/components/AdminOnly.tsx";
+import AdminOnly from "@/components/AdminOnly";
 
 import styles from "@/style/pages/auth/Dashboard.module.css";
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { formatarMoeda } from "@/utils/formatCurrency.ts";
+import { formatarMoeda } from "@/utils/formatCurrency";
 
 import type { ProductsInCart } from "@/types/products.ts";
 
-import Button from "@/components/layout/Button.tsx";
+import Button from "@/components/layout/Button";
 
 interface SummaryCartProps {
   products: ProductsInCart[];

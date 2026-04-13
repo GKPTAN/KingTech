@@ -3,7 +3,7 @@ import { CiCreditCard2 } from "react-icons/ci";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPix } from "@fortawesome/free-brands-svg-icons";
 
-import Button from "@/components/layout/Button.tsx";
+import Button from "@/components/layout/Button";
 
 enum PaymentMethod {
   STORE_CARD = "storeCard",

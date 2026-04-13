@@ -3,9 +3,9 @@ import { Swiper, type SwiperClass, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { RiCloseFill, RiShoppingBasketFill } from "react-icons/ri";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import Button from "@/components/layout/Button.tsx";
+import Button from "@/components/layout/Button";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";

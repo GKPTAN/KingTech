@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoInfo } from "react-icons/go";
 
-import { validateDataRegister } from "@/utils/validateData.js";
+import { validateDataRegister } from "@/utils/validateData";
 
-import { useAuth } from "@/context/useAuth.ts";
+import { useAuth } from "@/context/useAuth";
 
-import Form from "@/components/Form.tsx";
-import Select from "@/components/layout/form/Select.tsx";
+import Form from "@/components/Form";
+import Select from "@/components/layout/form/Select";
 
 import styles from "@/style/pages/auth/Registro.module.css";
 

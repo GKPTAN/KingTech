@@ -1,7 +1,7 @@
 import type { ProductsInCart } from "@/types/products.ts";
 
-import ListProductsCart from "./ListProductsCart.tsx";
-import SummaryCart from "./SummaryCart.tsx";
+import ListProductsCart from "./ListProductsCart";
+import SummaryCart from "./SummaryCart";
 
 interface BasketTechProps {
   products: ProductsInCart[];

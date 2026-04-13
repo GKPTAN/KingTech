@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 
-import { ReviewSortOrder } from "@/types/filters.ts";
+import { ReviewSortOrder } from "@/types/filters";
 
-import Select from "@/components/layout/form/Select.tsx";
+import Select from "@/components/layout/form/Select";
 
 interface ReviewFiltersProps {
   onFilterChange: (value: ReviewSortOrder) => void;

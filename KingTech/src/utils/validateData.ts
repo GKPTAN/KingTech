@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import type { UserDataLogin, UserDataRegister } from "../types/userData.ts";
+import type { UserDataLogin, UserDataRegister } from "../types/userData";
 
 interface ErrorValidate {
     error: boolean;

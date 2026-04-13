@@ -8,14 +8,14 @@ import { TbArrowBigRightLines } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import SliderSlick from "react-slick";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth.tsx";
+import { useWidthWindow } from "@/hooks/useWindowWidth";
 
-import { CardMode } from "@/types/products.ts";
+import { CardMode } from "@/types/products";
 
 import type { Settings } from "react-slick";
 import type { ArrowProps } from "./banners/BannerCarrossel.tsx";
 
-import ProductCard from "./ProductCard.tsx";
+import ProductCard from "./ProductCard";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

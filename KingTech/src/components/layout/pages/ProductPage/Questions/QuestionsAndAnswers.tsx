@@ -2,8 +2,8 @@ import { useState } from "react";
 import { MdCreate } from "react-icons/md";
 import { BiDislike, BiLike, BiSolidDislike, BiSolidLike } from "react-icons/bi";
 
-import Search from "@/components/Search.tsx";
-import Button from "@/components/layout/Button.tsx";
+import Search from "@/components/Search";
+import Button from "@/components/layout/Button";
 
 interface Answer {
   id: number;

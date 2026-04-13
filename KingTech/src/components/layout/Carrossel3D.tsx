@@ -1,9 +1,9 @@
 import { Autoplay, EffectCoverflow, EffectCube, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { CardMode } from "@/types/products.ts";
+import { CardMode } from "@/types/products";
 
-import ProductCard from './ProductCard.tsx';
+import ProductCard from './ProductCard';
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
