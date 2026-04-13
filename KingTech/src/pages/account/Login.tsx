@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { validateDataLogin } from "@/utils/validateData";
+
 import { useAuth } from "@/context/useAuth.ts";
+
 
 import Form from "@/components/Form.tsx";
 
@@ -18,6 +21,13 @@ const Login = () => {
     const userData = {
       email,
       password
+    }
+
+    const validation = await validateDataLogin(userData);
+
+    if (typeof validation === "object") {
+      setDisabled(false);
+      return validation;
     }
 
     const result = await login(userData);

@@ -37,6 +37,7 @@
     width: 2rem;
     height: 2rem;
     flex-shrink: 0;
+    margin-right: 10px;
 }
 .login_form input {
     width: 100%;

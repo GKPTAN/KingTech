@@ -20,9 +20,10 @@
 }
 .registro_form p {
     width: 100%;
-    display: block;
+    display: flex;
     color: white;
     text-align: center;
+    align-items: center;
     padding: 10px 15px;
 }
 .registro_form p.error {
