@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, {type AxiosInstance} from "axios";
 
-const axiosConfig = axios.create({
+const axiosConfig: AxiosInstance = axios.create({
     baseURL: "https://ipinfo.io",
     headers: {
         "Content-Type": "application/json",

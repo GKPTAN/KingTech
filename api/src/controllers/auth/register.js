@@ -42,6 +42,8 @@ const registerController = async (request, reply, supabase) => {
       });
     }
 
+    const password_hash = hash(password);
+
     const { data: existingUser, error: findError } = await supabase
       .from("profiles")
       .select("id")
@@ -99,7 +101,7 @@ const registerController = async (request, reply, supabase) => {
           gender,
           date_birth,
           email,
-          password_hash: password,
+          password_hash,
           verification_code,
           ipUser,
           city,

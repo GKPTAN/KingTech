@@ -96,7 +96,7 @@ const Registro = () => {
 
   return (
     <>
-      <h2>Cadastrar conta</h2>
+      <h2 className={styles.titulo}>Cadastrar conta</h2>
       <section className={styles.registro}>
         <Form
           onSubmit={handleRegister}
@@ -152,8 +152,8 @@ const Registro = () => {
           />
           <span className={styles.info} onClick={() => setShowModal(true)}><GoInfo /></span>
           {showModal && (
-            <div className={styles.modal_overlay}>
-              <div className={styles.modal_content} onClick={() => setShowModal(false)}>
+            <main className={styles.modal_overlay}>
+              <article className={styles.modal_content} onClick={() => setShowModal(false)}>
                 <h3>Requisitos para a senha:</h3>
                 <ul>
                   <li>É recomendado que a sua senha deva ter números e simbolos</li>
@@ -163,8 +163,8 @@ const Registro = () => {
                   <li>Não use a mesma senha em outros sites!</li>
                 </ul>
                 <button onClick={() => setShowModal(false)}>Fechar</button>
-              </div>
-            </div>
+              </article>
+            </main>
           )}
           <input
             type="password"

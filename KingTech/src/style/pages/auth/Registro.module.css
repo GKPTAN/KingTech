@@ -54,7 +54,7 @@
     top: 61.5%;
     left: 94.5%;
     font-size: 1.5rem;
-    color: white;
+    color: #ffffff;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -62,8 +62,10 @@
     transform: scale(1.2);
 }
 .modal_overlay {
+    width: 600px;
     position: absolute;
-    top: 30%; left: 102%;
+    top: 30%; 
+    left: 102%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,12 +73,12 @@
     z-index: 1000;
 }
 .modal_content {
+    width: 100%;
     background: #fff;
     color: #233e4d;
     padding: 2rem 1.5rem;
     border-radius: 16px;
     box-shadow: 0 0 24px rgba(0,0,0,0.2);
-    min-width: 600px;
     text-align: left;
 }
 .modal_content h3 {
@@ -181,4 +183,34 @@
 }
 .hidden {
     display: none;
+}
+
+@media (max-width: 1440px) {
+    .registro_form .modal_overlay {
+        left: -10%;
+    }
+}
+@media (max-width: 600px) {
+    .registro_form .modal_overlay {
+        width: 80vw;
+        left: 0;
+    }
+}
+@media (max-width: 425px) {
+    .registro_form .info {
+        left: 92%;
+    }
+}
+@media (max-width: 375px) {
+    .titulo {
+        font-size: 1.5rem;
+    }
+    .registro p {
+        font-size: 14px;
+    }
+}
+@media (max-width: 320px) {
+    .registro_form .info {
+        left: 90%;
+    }
 }
