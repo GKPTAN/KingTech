@@ -1,10 +1,17 @@
-import { createClient } from "@supabase/supabase-js";
+import { EnvSupabase, type AuthClientReturn } from "@/types/auth/authClientVerify";
+import type { Database } from "@/types/database.types";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 class AuthClient {
+  private supabase: SupabaseClient<Database>;
   constructor() {
+    if (!EnvSupabase.SUPABASE_URL || !EnvSupabase.SUPABASE_KEY) {
+      throw new Error("variáveis de ambiente Supabase não encontradas!");
+    }
+
     this.supabase = createClient(
-      process.env.VITE_SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY,
+      EnvSupabase.SUPABASE_URL,
+      EnvSupabase.SUPABASE_KEY,
     );
   };
 /**
@@ -13,7 +20,7 @@ class AuthClient {
  * @param {String} verificationCode - código de verificação fornecido pelo usuário
  * @returns {Object} - resultado da verificação e criação do usuário
  */
-  async verifyAndCreateUser(userId, verificationCode) {
+  async verifyAndCreateUser(userId: string, verificationCode: string): Promise<AuthClientReturn> {
     try {
       // buscar(fetch) perfil não verificado
       const {data: pendingUser, error: fetchError} = await this.supabase
@@ -88,7 +95,7 @@ class AuthClient {
 
             if (deleteError) { throw deleteError; };
             return {
-              sucess: true,
+              success: true,
               userId: authUser.user.id,
               message: "Usuário verificado e criado com sucesso."
             }

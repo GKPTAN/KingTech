@@ -1,34 +1,26 @@
+import type { FastifyRequest, FastifyReply } from "fastify";
+import { SupabaseClient } from "@supabase/supabase-js";
 import { hash } from "bcrypt";
 import { pwnedPassword } from "hibp";
-import validateData from "../../utils/validateData.js";
-import getLocationUser from "../../services/locationService.js";
+import type { Database, TablesInsert } from "@/types/database.types.js";
+import { UserDataRegisterSchema, type RegisterInput } from "@/utils/validateData.js";
+import getLocationUser from "@/services/locationService.js";
 import generateCode from "../../utils/generateCode.js";
 import sendEmailToUser from "../../services/emailService.js";
 import getEmailTemplate from "../../utils/emailTemplate.js";
 
-const registerController = async (request, reply, supabase) => {
-  const { full_name, gender, date_birth, email, password } = request.body;
+const registerController = async (
+  request: FastifyRequest<{Body: RegisterInput}>, 
+  reply: FastifyReply, 
+  supabase: SupabaseClient<Database>) => {
 
-  const analyzeData = await validateData(
-    full_name,
-    gender,
-    date_birth,
-    email,
-    password
-  );
+  const {full_name, gender, date_birth, email, password} = request.body;
 
-  if (analyzeData !== true) {
-    console.error("Erro: ", analyzeData.message);
-    return reply
-      .status(400)
-      .send({ message: analyzeData, error: true, technicalError: true });
-  }
-
-  const ipUser = request.ip || request.headers["x-forwarded-for"];
+  const ipUser =  request.ip ?? "";
   const location = await getLocationUser(ipUser);
 
   const { city, region, country, loc } = location;
-  const verification_code = generateCode();
+  const verification_code = String(generateCode());
 
   try {
     const wasLeaked = await pwnedPassword(password);
@@ -42,7 +34,7 @@ const registerController = async (request, reply, supabase) => {
       });
     }
 
-    const password_hash = hash(password);
+    const password_hash = await hash(password, 10);
 
     const { data: existingUser, error: findError } = await supabase
       .from("profiles")
@@ -84,7 +76,7 @@ const registerController = async (request, reply, supabase) => {
       });
     }
 
-    const username = full_name.split(" ")[0];
+    const username = full_name.split(" ")[0] || "Usuário";
     const emailTemplate = await getEmailTemplate(
       username,
       verification_code,
@@ -94,24 +86,23 @@ const registerController = async (request, reply, supabase) => {
 
     const { data, error } = await supabase
       .from("unverified_profiles")
-      .insert([
-        {
-          full_name,
-          username,
-          gender,
-          date_birth,
-          email,
-          password_hash,
-          verification_code,
-          ipUser,
-          city,
-          region,
-          country,
-          loc,
+      .insert({
+          full_name: full_name,
+          username: username,
+          gender: gender,
+          date_birth: date_birth,
+          email: email,
+          password_hash: password_hash,
+          verification_code: verification_code,
+          ipUser: ipUser,
+          city: city,
+          region: region,
+          country: country,
+          loc: loc,
           verified: false,
-        },
-      ])
-      .select("id");
+        })
+      .select("id")
+      .single();
 
     if (error) {
       console.error("Detailed Supabase Error:", {
@@ -140,7 +131,7 @@ const registerController = async (request, reply, supabase) => {
       html: emailTemplate,
     });
 
-    reply.setCookie("user_id", data[0].id, {
+    reply.setCookie("user_id", data.id, {
       httpOnly: true,
       secure: true,
       sameSite: "none",

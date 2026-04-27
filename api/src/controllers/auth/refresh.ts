@@ -1,9 +1,13 @@
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+import type { FastifyRequest, FastifyReply } from "fastify";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { EnvSupabase } from "@/types/auth/authClientVerify";
 
-const refreshController = async (request, reply, supabase) => {
+const refreshController = async (
+    request: FastifyRequest, 
+    reply: FastifyReply, 
+    supabase: SupabaseClient) => {
 
-    if (!SUPABASE_URL || !SERVICE_ROLE_KEY) {
+    if (!EnvSupabase.SUPABASE_URL || !EnvSupabase.SUPABASE_KEY) {
         console.error("Variáveis de ambiente da Supabase não estão definidas.");
         return reply.status(500).send({
             message: "Configuração do servidor inválida",
@@ -23,24 +27,9 @@ const refreshController = async (request, reply, supabase) => {
             });
         };
 
-        const tokenUrl = `${SUPABASE_URL.replace(/\/$/, "")}/auth/v1/token`;
-        const params = new URLSearchParams({
-            grant_type: 'refresh_token',
-            refresh_token: refreshToken
-        });
+        const {data, error} = await supabase.auth.refreshSession({refresh_token: refreshToken});
 
-        const response = await fetch(tokenUrl, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
-            },
-            body: params.toString(),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.access_token) {
+        if (error || !data.session) {
             console.error("Refresh falhou: ", data);
             reply.clearCookie("token", {
                 path: "/",
@@ -63,7 +52,8 @@ const refreshController = async (request, reply, supabase) => {
             });
         };
 
-        const { access_token, refresh_token, expires_in } = data;
+        const { access_token, refresh_token, expires_in } = data.session;
+        const user = data.user;
 
         reply.setCookie("token", access_token, {
             path: "/",
@@ -73,16 +63,13 @@ const refreshController = async (request, reply, supabase) => {
             maxAge: expires_in || 60 * 60 * 8,
         });
 
-        reply.setCookie("refresh_token", refreshToken, {
+        reply.setCookie("refresh_token", refresh_token, {
             httpOnly: true,
             secure: true,
             sameSite: "none",
             path: "/",
             maxAge: 60 * 60 * 24 * 30, // 30 dias
         });
-
-        const getUserResponse = await supabase.auth.getUser(access_token);
-        const user = getUserResponse?.data?.user ?? null;
 
         const resultUser = user ? {
             id: user.id,

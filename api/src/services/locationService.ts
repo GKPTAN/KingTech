@@ -1,6 +1,7 @@
+import type { locationUser } from "@/types/auth/location.js";
 import axiosConfig from "../config/axiosConfig.js";
 
-const getLocationUser = async (ip) => {
+const getLocationUser = async (ip: string): Promise<locationUser> => {
     try {
         const response = await axiosConfig.get(`/lite/${ip}/json?token=${process.env.IP_TOKEN}`);
         const data = await response.data;

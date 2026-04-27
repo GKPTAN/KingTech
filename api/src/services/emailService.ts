@@ -1,6 +1,7 @@
+import type { SendMailOptions } from 'nodemailer';
 import transporter from "../config/emailConfig.js";
 
-const sendEmailToUser = async ({from, to, subject, text, html}) => {
+const sendEmailToUser = async ({from, to, subject, text, html}: SendMailOptions) => {
     try {
         const info = await transporter.sendMail({ from, to, subject, text, html });
         console.log("Email enviado com sucesso, id: ", info.messageId);

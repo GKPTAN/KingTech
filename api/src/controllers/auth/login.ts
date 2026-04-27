@@ -1,6 +1,14 @@
 import { hash, compare } from "bcrypt";
+import type { FastifyRequest, FastifyReply } from "fastify";
+import { SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@/types/database.types";
+import type { LoginInput } from "@/utils/validateData";
 
-const loginController = async (request, reply, supabase) => {
+const loginController = async (
+    request: FastifyRequest<{Body: LoginInput}>, 
+    reply: FastifyReply,
+    supabase: SupabaseClient<Database>,
+) => {
     const { email, password } = request.body;
     if (!email || !password) {
         return reply.status(400).send({
@@ -11,18 +19,6 @@ const loginController = async (request, reply, supabase) => {
     };
 
     try {
-        const { data: user, error: profileError } = await supabase
-            .from("profiles")
-            .select("id, email")
-            .eq("email", email)
-            .single();
-        if (profileError || !user) {
-            return reply.status(401).send({
-                message: "Usuário não encontrado ou senha incorreta.",
-                error: true,
-                technicalError: false,
-            });
-        };
 
         const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email,
@@ -35,14 +31,14 @@ const loginController = async (request, reply, supabase) => {
                 message: "Erro ao autenticar usuário.",
                 error: true,
                 technicalError: true,
-                details: error.message,
+                details: authError.message,
             });
         };
 
         const { data: profileData, error: detailsError } = await supabase
             .from("profiles")
             .select("full_name, username, gender, city, region, country")
-            .eq("id", user.id)
+            .eq("id", authData.user.id)
             .single();
 
         if (detailsError || !profileData) {

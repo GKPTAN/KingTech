@@ -1,6 +1,9 @@
-import { ROLES } from '../utils/roles.js';
+import type { FastifyRequest, FastifyReply } from 'fastify';
+import { type VALID_ROLES, ROLES } from '@/utils/roles';
 
-export const verifySupabaseToken = async (request, reply) => {
+export const verifySupabaseToken = async (
+    request: FastifyRequest, 
+    reply: FastifyReply) => {
     try {
         const supabase = request.server?.supabase;
         if (!supabase) {
@@ -40,13 +43,14 @@ export const verifySupabaseToken = async (request, reply) => {
         .eq("id", user.id)
         .maybeSingle();
 
-        const role = profile?.role || user.user_metadata?.role || "user";
+        const role = (profile?.role || user.user_metadata?.role || ROLES.USER) as ROLES;
 
-        request.user = {
-            id: user.id,
-            email: user.email,
-            role,
-        };
+        if (user.email) {
+            request.user = {
+                ...user,
+                role: role
+            }
+        }
 
         return;
     } catch (error) {
@@ -59,8 +63,10 @@ export const verifySupabaseToken = async (request, reply) => {
     };
 };
 
-export const requireRole = (...allowedRoles) => {
-    return async (request, reply) => {
+export const requireRole = (...allowedRoles: VALID_ROLES[]) => {
+    return async (
+        request: FastifyRequest, 
+        reply: FastifyReply) => {
         if (!request.user) {
             return reply.status(401).send({
                 message: "Usuário não autenticado",

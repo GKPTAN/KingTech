@@ -1,35 +1,16 @@
-const meController = async (request, reply, supabase) => {
+import type { FastifyRequest, FastifyReply } from "fastify";
+import type { Database } from "@/types/database.types";
+import { SupabaseClient } from "@supabase/supabase-js";
+
+interface MeBody {};
+
+const meController = async (
+  request: FastifyRequest<{Body: MeBody}>, 
+  reply: FastifyReply, 
+  supabase: SupabaseClient<Database>
+) => {
   try {
-    let token = null;
-    if (request.cookies && request.cookies.token) {
-      token = request.cookies.token;
-    } else if (request.headers && request.headers.authorization) {
-      const auth = request.headers.authorization;
-      if (typeof auth === 'string' && auth.startsWith('Bearer ')) {
-        token = auth.split(' ')[1];
-      };
-    };
-
-    if (!token) {
-      return reply.status(401).send({
-        message: "Não autenticado",
-        error: false,
-        technicalError: true,
-      });
-    }
-
-    const { data: userData, error: userError } = await supabase.auth.getUser(token);
-    
-    if (userError || !userData?.user) {
-        console.error("Token inválido: ", userError);
-        return reply.status(401).send({
-            message: "Usuário não autenticado",
-            error: false,
-            technicalError: true,
-        });
-    };
-
-    const user = userData.user;
+    const user = request.user;
     console.log("usuário: ", user);
 
     const { data: profile, error: profileError } = await supabase

@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const getEmailTemplate = async (name, codeConfirm, city, region) => {
+const getEmailTemplate = async (name: string, codeConfirm: string, city: string, region: string) => {
     try {
         const confirmEmail = path.join(__dirname, "../templates/email.html");
 
