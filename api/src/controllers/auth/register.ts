@@ -3,7 +3,8 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { hash } from "bcrypt";
 import { pwnedPassword } from "hibp";
 import type { Database, TablesInsert } from "@/types/database.types.js";
-import { UserDataRegisterSchema, type RegisterInput } from "@/utils/validateData.js";
+import type { SucessResponse, ErrorResponse, RegisterData } from "@/types/response.js";
+import { type RegisterInput } from "@/utils/validateData.js";
 import getLocationUser from "@/services/locationService.js";
 import generateCode from "../../utils/generateCode.js";
 import sendEmailToUser from "../../services/emailService.js";
@@ -11,7 +12,7 @@ import getEmailTemplate from "../../utils/emailTemplate.js";
 
 const registerController = async (
   request: FastifyRequest<{Body: RegisterInput}>, 
-  reply: FastifyReply, 
+  reply: FastifyReply<{Reply: SucessResponse<RegisterData> | ErrorResponse}>, 
   supabase: SupabaseClient<Database>) => {
 
   const {full_name, gender, date_birth, email, password} = request.body;
@@ -25,7 +26,7 @@ const registerController = async (
   try {
     const wasLeaked = await pwnedPassword(password);
 
-    if (wasLeaked) {
+    if (wasLeaked > 0) {
       return reply.status(400).send({
         message:
           "A senha informada foi encontrada em vazamentos de dados. Por favor, escolha uma senha diferente.",
@@ -59,6 +60,7 @@ const registerController = async (
       .select("id")
       .eq("email", email)
       .maybeSingle();
+    
     if (pendingErr) {
       console.error("Erro ao checar unverified_profiles:", pendingErr);
       return reply.status(500).send({
@@ -66,7 +68,8 @@ const registerController = async (
         error: true,
         technicalError: false,
       });
-    }
+    };
+    
     if (pending) {
       return reply.status(400).send({
         message:
@@ -105,12 +108,6 @@ const registerController = async (
       .single();
 
     if (error) {
-      console.error("Detailed Supabase Error:", {
-        code: error.code,
-        message: error.message,
-        details: error.details,
-        hint: error.hint,
-      });
       throw error;
     }
 
@@ -140,8 +137,7 @@ const registerController = async (
     });
 
     return reply.status(200).send({
-      message:
-        "Aguarde..., Você receberá um e-mail com o código de confirmação",
+      message: "Aguarde..., Você receberá um e-mail com o código de confirmação",
       error: false,
       technicalError: false,
     });

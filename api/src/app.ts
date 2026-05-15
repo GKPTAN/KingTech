@@ -1,5 +1,5 @@
-import supabase from "./plugins/supabaseClient.js";
-import AuthRoutes from "./routes/authRoutes.js";
+import AuthRoutes from "./routes/authRoutes";
+import supabase from "./plugins/supabaseClient";
 import fastifyCors from "@fastify/cors";
 import fastifyCookie from "@fastify/cookie";
 import dotenv from "dotenv";

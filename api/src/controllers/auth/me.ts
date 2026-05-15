@@ -25,6 +25,8 @@ const meController = async (
             message: "Erro ao buscar perfil", 
             error: true, technicalError: true
         });
+    } else if (profileError && profileError.code === "PGRST116") {
+      throw new Error("Perfil não encontrado: ", profileError);
     }
 
     const resultUser = {

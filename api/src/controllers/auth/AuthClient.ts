@@ -29,6 +29,8 @@ class AuthClient {
         .eq("id", userId)
         .single();
 
+        console.log('DEBUG MOCK:', { pendingUser, fetchError });
+
         if (fetchError || !pendingUser) {
           throw new Error("Usuário não encontrado ou erro ao buscar dados.");
         };

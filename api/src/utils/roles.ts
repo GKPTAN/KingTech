@@ -5,6 +5,6 @@ export enum ROLES {
 
 export type VALID_ROLES = ROLES;
 
-export const isValidRole = (role: ROLES) => {
-    return  Object.values(ROLES).includes(role as ROLES) ? true : false;
+export const isValidRole = (role: string): role is ROLES => {
+    return  Object.values(ROLES).includes(role as ROLES);
 }

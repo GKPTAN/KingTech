@@ -13,8 +13,17 @@ const logoutController = async (
 
     const user = request.user;
 
-    await supabase.auth.admin.signOut(user.id, 'global');
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.admin.signOut(user.id, 'global');
+
+    if (error) {
+      console.error("Erro ao realizar logout:", error);
+
+      return reply.status(500).send({
+        message: "Logout error",
+        error: false,
+        technicalError: true,
+      });
+    };
 
     const cookieOptions: CookieSerializeOptions = {
       path: "/",

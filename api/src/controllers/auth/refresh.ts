@@ -7,15 +7,6 @@ const refreshController = async (
     reply: FastifyReply, 
     supabase: SupabaseClient) => {
 
-    if (!EnvSupabase.SUPABASE_URL || !EnvSupabase.SUPABASE_KEY) {
-        console.error("Variáveis de ambiente da Supabase não estão definidas.");
-        return reply.status(500).send({
-            message: "Configuração do servidor inválida",
-            error: false,
-            technicalError: true
-        });
-    };
-
     try {
         const refreshToken = request.cookies?.refresh_token || (request.headers?.authorization && request.headers.authorization.startsWith("Bearer ") ? request.headers.authorization.split(" ")[1] : null);
 

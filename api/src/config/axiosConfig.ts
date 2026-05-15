@@ -1,7 +1,7 @@
 import axios, {type AxiosInstance} from "axios";
 
 const axiosConfig: AxiosInstance = axios.create({
-    baseURL: "https://ipinfo.io",
+    baseURL: "http://ip-api.com",
     headers: {
         "Content-Type": "application/json",
     }

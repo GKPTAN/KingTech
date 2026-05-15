@@ -1,11 +1,12 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import { SupabaseClient } from "@supabase/supabase-js";
 import type { VerifyInput } from "@/utils/validateData";
+import type { SucessResponse, ErrorResponse, VerifyData } from "@/types/response";
 import AuthClient from "./AuthClient";
 
 const verifyController = async (
   request: FastifyRequest<{ Body: VerifyInput }>,
-  reply: FastifyReply,
+  reply: FastifyReply<{Reply: SucessResponse<VerifyData> | ErrorResponse}>,
   supabase: SupabaseClient,
 ) => {
   const { code } = request.body;

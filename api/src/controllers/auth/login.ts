@@ -3,10 +3,11 @@ import type { FastifyRequest, FastifyReply } from "fastify";
 import { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/database.types";
 import type { LoginInput } from "@/utils/validateData";
+import type { SucessResponse, ErrorResponse, LoginData } from "@/types/response";
 
 const loginController = async (
     request: FastifyRequest<{Body: LoginInput}>, 
-    reply: FastifyReply,
+    reply: FastifyReply<{Reply: SucessResponse<LoginData> | ErrorResponse}>,
     supabase: SupabaseClient<Database>,
 ) => {
     const { email, password } = request.body;
@@ -14,7 +15,7 @@ const loginController = async (
         return reply.status(400).send({
             message: "E-mail e senha são obrigatórios.",
             error: true,
-            technicalError: false,
+            technicalError: true,
         });
     };
 
@@ -77,6 +78,10 @@ const loginController = async (
                 maxAge: 60 * 60 * 24 * 30,
             });
         };
+
+        if (!session?.user.email) {
+            throw new Error("a propriedade e-mail está indefinida no objeto session");
+        }
 
         return reply.status(200).send({
             message: "Login realizado com sucesso.",
