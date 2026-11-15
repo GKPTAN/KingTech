@@ -1,0 +1,112 @@
+.variants_edit {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 450px;
+    margin: 15px 0;
+}
+.variant_form {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+}
+.variants_edit h2 {
+    margin: 0 !important;
+    font-size: 1.2rem;
+    color: #334155;
+}
+.variants_edit .add_variant_btn {
+    background-color: #04797357;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+.variants_edit .add_variant_btn:hover {
+    background-color: #d1eceb;
+}
+.variant_form .option_input_group {
+    display: flex;
+    gap: 5px;
+}
+.variant_form .option_input_group .add_option_btn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+.variant_form .option_input_group .add_option_btn > svg {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.variant_form .option_input_group .add_option_btn > svg:hover {
+    color: #058b85;
+}
+.variant_form .options_tags_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 5px 0;
+}
+.variant_form .options_tags_container .variant_tag {
+    background-color: #e2e8f0;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.variant_form .options_tags_container .variant_tag > svg {
+    cursor: pointer;
+    color: #9a031e;
+}
+
+.variant_form .opt_buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.variant_form .save_variant_btn, .variants_edit .cancel_variant_btn {
+    background-color: #c8cdd477;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+}
+.variant_form .save_variant_btn:hover {
+    background-color: #D7EBD7;
+}
+.variants_edit .cancel_variant_btn:hover {
+    background-color: #f5d6d6;
+}
+.saved_variants_list h3 {
+    margin-bottom: 10px;
+}
+.variants_edit .saved_variants_list ul {
+    list-style: none;
+    list-style-position: inside;
+}
+.variants_edit .saved_variants_list ul li {
+    border: 1px solid #000;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.variants_edit .saved_variants_list ul li > svg {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.variants_edit .saved_variants_list ul li > svg:hover {
+    color: #9a031e;
+}

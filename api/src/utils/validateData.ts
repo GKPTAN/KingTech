@@ -57,3 +57,225 @@ export const UserVerifySchema = z.object({
 });
 
 export type VerifyInput = z.infer<typeof UserVerifySchema>;
+
+// Validação de dados para criação de produtos
+
+export const departmentsData = {
+  "Computadores e acessórios": {
+    id: 1,
+    subcategories: [
+      { id: 1, name: "Notebooks", slug: "notebooks" },
+      { id: 2, name: "Desktops", slug: "desktops" },
+      { id: 3, name: "Tablets", slug: "tablets" },
+      { id: 4, name: "Monitores", slug: "monitores" },
+      { id: 5, name: "Teclados e Mouses", slug: "teclados_e_mouses" },
+      {
+        id: 6,
+        name: "Componentes de Hardware",
+        slug: "componentes_de_hardware",
+      },
+      { id: 7, name: "Armazenamento", slug: "armazenamento" },
+    ],
+  },
+  "Smartphones e acessórios": {
+    id: 2,
+    subcategories: [
+      { id: 1, name: "Smartphones", slug: "smartphones" },
+      { id: 2, name: "Smartwatches", slug: "smartwatches" },
+      { id: 3, name: "Fones de ouvido", slug: "fones" },
+      { id: 4, name: "Capas e protetores", slug: "capas_e_protetores" },
+      { id: 5, name: "Carregadores e cabos", slug: "carregadores_e_cabos" },
+      { id: 6, name: "Baterias externas", slug: "baterias_externas" },
+    ],
+  },
+  "Áudio e video": {
+    id: 3,
+    subcategories: [
+      { id: 1, name: "Televisores", slug: "televisores" },
+      { id: 2, name: "Home Theaters", slug: "home_teathers" },
+      { id: 3, name: "Caixas de Som", slug: "caixas_de_som" },
+      { id: 4, name: "Soundbars", slug: "soundbars" },
+      { id: 5, name: "Projetores", slug: "projetores" },
+    ],
+  },
+  "Gaming": {
+    id: 4,
+    subcategories: [
+      { id: 1, name: "Consoles", slug: "consoles" },
+      { id: 2, name: "Jogos", slug: "jogos" },
+      { id: 3, name: "Acessórios para jogos", slug: "acessorios_para_jogos" },
+      { id: 4, name: "PC gamer", slug: "pc_gamer" },
+      { id: 5, name: "Cadeiras e mesas gamer", slug: "cadeiras_e_mesas" },
+    ],
+  },
+  "Fotografia e Filmagem": {
+    id: 5,
+    subcategories: [
+      { id: 1, name: "Câmeras digitais", slug: "cameras_digitais" },
+      { id: 2, name: "Lentes", slug: "lentes" },
+      { id: 3, name: "Tripés e Suportes", slug: "tripes_e_suportes" },
+      {
+        id: 4,
+        name: "Acessórios para Câmeras",
+        slug: "acessorios_para_cameras",
+      },
+      { id: 5, name: "Drones", slug: "drones" },
+      {
+        id: 6,
+        name: "Equipamentos de iluminação",
+        slug: "equipamentos_de_iluminacao",
+      },
+    ],
+  },
+  "Casa Inteligente": {
+    id: 6,
+    subcategories: [
+      { id: 1, name: "Assistentes Virtuais", slug: "assistentes_virtuais" },
+      { id: 2, name: "Lâmpadas inteligentes", slug: "lampadas_inteligentes" },
+      {
+        id: 3,
+        name: "Termostatos inteligentes",
+        slug: "termostatos_inteligentes",
+      },
+      {
+        id: 4,
+        name: "Fechaduras e Câmeras de segurança",
+        slug: "fechaduras_e_cameras_de_seguranca",
+      },
+      {
+        id: 5,
+        name: "Tomadas e interruptores inteligentes",
+        slug: "tomadas_e_interruptores_inteligentes",
+      },
+    ],
+  },
+  "Eletrodomésticos": {
+    id: 7,
+    subcategories: [
+      { id: 1, name: "Aspirador de pó", slug: "aspirador_de_po" },
+      { id: 2, name: "Cafeteiras", slug: "cafeteiras" },
+    ],
+  },
+  "Wearables": {
+    id: 8,
+    subcategories: [
+      { id: 1, name: "Fitness Trackers", slug: "fitness_trackers" },
+      { id: 2, name: "Óculos inteligentes", slug: "oculos_inteligentes" },
+    ],
+  },
+  "Automotivo": {
+    id: 9,
+    subcategories: [
+      { id: 1, name: "Sistemas de Navegação", slug: "sistemas_de_navegacao" },
+      {
+        id: 2,
+        name: "Câmeras de segurança para veículos",
+        slug: "cameras_de_seguranca_para_veiculos",
+      },
+      {
+        id: 3,
+        name: "Sistemas de som automotivo",
+        slug: "sistemas_de_som_automotivo",
+      },
+      { id: 4, name: "Acessórios", slug: "acessórios" },
+    ],
+  },
+  "Conectividade e Redes": {
+    id: 10,
+    subcategories: [
+      { id: 1, name: "Roteadores", slug: "roteadores" },
+      { id: 2, name: "Modems", slug: "modems" },
+      { id: 3, name: "Repetidores de sinal", slug: "repetidores_de_sinal" },
+      { id: 4, name: "Adaptadores de Rede", slug: "adaptadores_de_rede" },
+      { id: 5, name: "Switches", slug: "switches" },
+    ],
+  },
+  "Acessórios gerais": {
+    id: 11,
+    subcategories: [
+      {
+        id: 1,
+        name: "Carregadores universais",
+        slug: "carregadores_universais",
+      },
+      {
+        id: 2,
+        name: "Adaptadores e conversores",
+        slug: "adaptadores_e_conversores",
+      },
+      {
+        id: 3,
+        name: "Baterias e Carregadores",
+        slug: "baterias_e_carregadores",
+      },
+      { id: 4, name: "Hub USB", slug: "hub_usb" },
+    ],
+  },
+}
+
+const validDepartments = Object.keys(departmentsData) as [string, ...string[]];
+const validSubcategories = Object.values(departmentsData).flatMap(dept => dept.subcategories.map(sub => sub.slug)) as [string, ...string[]];
+
+const VariantsProductSchema = z.object({
+  category: z.string().trim().min(2, "A categoria é obrigatória"),
+  options: z.array(z.string().trim().min(1, "A opção de variante não pode ficar vazia.")).min(1, "Adicione pelo menos uma opção de variante!")
+});
+
+const MainInfoProductShema = z.object({
+  id: z.number(),
+  title: z.string().trim().min(2, "O titulo é obrigatório!"),
+  info: z.string().trim().min(3, "A informação é obrigatória"),
+});
+
+export const createProductSchema = z.object({
+    brand: z.string().trim().min(2, "A marca é obrigatória").max(100, "O nome da marca é muito longo! Simplifique"),
+    name: z.string().trim().min(3, "O nome do produto precisa ter no mínimo 3 caracteres").max(100, "O nome do produto deve ter no máximo 100 caracteres"),
+    code: z.string().trim().length(10, "O código precisa ter exatamente 10 caracteres"),
+    quantity: z.number().min(0, "A quantidade não pode ser negativa").int("A quantidade precisa ser um número inteiro"),
+    department: z.enum(validDepartments, {error: "Selecione um departamento válido da lista!"}),
+    subcategory: z.enum(validSubcategories, {error: "Selecione uma subcategoria válida da lista!"}),
+    tags: z.array(z.string()).min(1, "Adicione pelo menos uma tag no produto!"),
+    images: z.array(z.url("Formato de link de imagem inválido!")).min(1, "Adicione pelo menos 1 imagem do produto!"),
+    prev_price: z.number().min(1, "O preço antigo não pode ter um valor inferior a 1").optional().nullable(),
+    descount: z.number().min(0, "O desconto não pode ser negativo").max(100, "O desconto não pode passar de 100").optional().nullable(),
+    price_in_card_store: z.number({error: "Preço no cartão da loja é obrigatório"}).min(1, "Preço inválido"),
+    price_part_in_card_store: z.number({error: "O preço total parcelado no cartão da loja é obrigatório!"}).min(1, "Preço obrigatório"),
+    price_pix: z.number({error: "O preço no pix é obrigatório"}).min(1, "Preço inválido"),
+    descount_pix: z.number().min(0, "O desconto no pix não pode ser negativo").max(100, "O desconto no pix não pode passar de 100").optional().nullable(),
+    variants: z.array(VariantsProductSchema).default([]),
+    main_informations: z.array(MainInfoProductShema).default([]),
+    specs: z.record(z.string(), z.string()).refine((obj) => Object.keys(obj).length > 0, {error: "Adicione pelo menos uma especificação técnica na ficha do produto"})
+}).refine((data) => {
+  const department = departmentsData[data.department as keyof typeof departmentsData];
+  if (!department) return false;
+  const subcategoryExists = department.subcategories.some(sub => sub.slug === data.subcategory);
+  
+  return subcategoryExists;
+}, {
+  error: "A subcategoria selecionada não pertence ao departamento escolhido!",
+  path: ["subcategory"]
+});
+
+export type CreateProductInput = z.infer<typeof createProductSchema>;
+
+export const fastifyFileSchema = z.object({
+  filename: z.string().min(1, "O nome do arquivo é inválido!"),
+  mimetype: z.string().refine((type) => type.startsWith("image/"), {error: "Apenas arquivos de imagem são permitidos!"}),
+  file: z.any(),
+  _buf: z.any().optional()
+})
+
+export const uploadProductImagesSchema = z.object({
+  code: z.preprocess((val: any) => {
+    if (val && typeof val === "object" && "value" in val) {
+      return val.value;
+    }
+
+    return val;
+  }, z.string().trim().length(10, "O código precisa ter exatamente 10 caracteres")),
+  images: z.union([fastifyFileSchema, z.array(fastifyFileSchema)]).transform((val) => {
+    return Array.isArray(val) ? val : [val];
+  }).refine((files) => files.length > 0, {error: "Adicione pelo menos 1 imagem do produto!"})
+});
+
+export type uploadProductImagesInput = z.infer<typeof uploadProductImagesSchema>;

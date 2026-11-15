@@ -1,3 +1,8 @@
+import type { Department, Subcategory } from "@/data/departmentsData";
+import type { Variant } from "@/components/layout/form/Variants";
+import type { UploadedFile } from "@/components/layout/form/ImageUploader";
+import type { MainInfo } from "@/components/layout/form/MainInformation";
+
 export interface ProductsInCart {
   id: string | number;
   name: string;
@@ -13,25 +18,33 @@ export interface ProductsInCart {
 }
 
 export interface Product {
+  id: string;
   brand: string;
-  rating: number;
-  numberRating: number;
-  compositionRating: {
-    [key: number]: number;
-  }
-  img: string[];
   name: string;
   code: string;
+  quantity: number;
+  rating: number;
+  number_rating: number;
+  composition_rating: {
+    [key: number]: number;
+  }
+  section: {
+    department: Department,
+    subcategory: Subcategory,
+  }
+  tags: string[];
+  img: string[];
   variations?: {
     category: string;
     options: string[];
   }[];
-  mainInformations?: {
+  main_informations?: {
     id: number;
     title: string;
     information: string;
   }[];
-  texts?: {
+  content?: {
+    layout_type: string;
     category?: string;
     title: string;
     text?: string;
@@ -39,17 +52,16 @@ export interface Product {
     imgSm?: string;
   }[];
   typeDelivery?: string;
-  prevPrice?: number | null;
+  prev_price?: number | null;
   descount?: string;
-  priceInCardStore?: number;
-  pricePartInCardStore?: number;
-  discountPix: string;
-  pricePix: number;
-  stock: boolean;
+  price_in_card_store?: number;
+  price_part_in_card_store?: number;
+  discount_pix: string;
+  price_pix: number;
   specs?: {
     [key: string]: string;
   }
-  reviewComments?: {
+  review_comments?: {
     id: number;
     name: string;
     date: string;
@@ -57,6 +69,32 @@ export interface Product {
     rating: number;
     comment?: string;
   }[];
+}
+
+export interface CreateProduct {
+  brand: string;
+  name: string;
+  code: string;
+  quantity: number;
+  prev_price?: number | null;
+  descount?: number | null;
+  price_in_card_store: number | null;
+  price_part_in_card_store: number | null;
+  price_pix: number | null;
+  descount_pix?: number | null;
+  department: Department;
+  subcategory: Subcategory;
+  tags: string[];
+  images: UploadedFile[] | string[];
+  variants: Variant[];
+  main_informations: MainInfo[];
+  specs: {
+    [key: string]: string;
+  };
+}
+
+export interface UploadImageResponse {
+  urls: string[];
 }
 
 // departamentos
@@ -83,11 +121,6 @@ export interface CategoryFilters {
   }[];
 }
 
-export enum StockStatus {
-  IN_STOCK = "in-stock",
-  OUT_OF_STOCK = "out-of-stock",
-}
-
 // Product Card
 
 export enum CardMode {
@@ -95,3 +128,4 @@ export enum CardMode {
   LANDSCAPE = "landscape",
   LIST = "list",
 }
+

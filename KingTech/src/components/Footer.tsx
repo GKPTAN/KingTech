@@ -9,9 +9,9 @@ import Logo from '@/assets/logo.png';
 
 import styles from '@/style/components/Footer.module.css';
 
-const Footer = () => {
+const Footer = ({ hidden }: { hidden?: boolean }) => {
   return (
-    <footer className={styles.footer}>
+    <footer className={`${hidden ? styles.hidden : styles.footer}`}>
         <div className={styles.logo}>
             <img src={Logo} alt="logo da loja" />
         </div>

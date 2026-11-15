@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { useState } from "react";
-import { PiWarning } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { RingLoader } from "react-spinners";
+
+import { useAuth } from "@/context/useAuth";
 
 import Button from "./layout/Button";
 
@@ -13,38 +14,32 @@ interface FormProps {
   classname?: string;
   buttonAction: string | React.ReactNode;
   disabled: boolean;
-  styles?: {[error: string]: string};
 }
 
-const Form = ({ onSubmit, children, classname = "", buttonAction, disabled, styles }: FormProps) => {
+const Form = ({ onSubmit, children, classname = "", buttonAction, disabled }: FormProps) => {
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const { setGlobalMessage } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
+    setGlobalMessage("");
 
     try {
       const result = await onSubmit(new FormData(e.currentTarget));
       if (result.technicalError === true) {
         console.log("Resposta da Api: ", result.message);
-        setMessage("Ocorreu um erro!, tente novamente mais tarde.");
-        setError("error");
+        setGlobalMessage("Ocorreu um erro!, tente novamente mais tarde.");
         return;
       }
-      setMessage(result?.message || "Operação realizada com sucesso");
-      setError(result?.error === true ? "error" : "sucess");
-      if (!error) {
-        if (result.location) {
-          navigate(result.location);
-        }; 
+      setGlobalMessage(result?.message || "Operação realizada com sucesso");
+      if (!result.error && result.location) {
+        navigate(result.location);
       }
     } catch (error) {
-      setMessage("Ocorreu um erro no servidor!, tente novamente mais tarde.");
+      setGlobalMessage("Ocorreu um erro no servidor!, tente novamente mais tarde.");
       console.error("Erro no formulário: ", error);
     } finally {
       setLoading(false);
@@ -56,11 +51,11 @@ const Form = ({ onSubmit, children, classname = "", buttonAction, disabled, styl
 
   return (
     <form onSubmit={handleSubmit} className={classname}>
-      {message && <p className={styles ? styles[error] : error}>{error ? <PiWarning /> : ""} {message}</p>}
       {children}
       <Button className="button-form" type="submit" nameAction={loading ? 
       <RingLoader
         className="loader"
+        color="var(--loader-color)"
         size={27}
         aria-label="Loading Spinner"
       /> : buttonAction} disabled={disabled}/>

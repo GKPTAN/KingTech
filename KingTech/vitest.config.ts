@@ -12,9 +12,9 @@ export default mergeConfig(viteConfig, defineConfig({
             provider: "v8",
             reporter: ["text", "json", "html"],
             reportsDirectory: "./coverage",
-            include: ["src/utils/**"],
+            include: ["src/utils/**", "src/context/**", "src/pages/**"],
             clean: false,
             reportOnFailure: true
         }
-    },
+    }
 }));

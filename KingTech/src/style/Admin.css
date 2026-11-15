@@ -1,0 +1,195 @@
+.adminTech_page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #012B29;
+    width: 100%;
+    padding: 2rem;
+}
+.adminTech_page h1, header h1 {
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    color: #f9cb40;
+}
+header h1 .setting_icon {
+    vertical-align: -0.12em;
+    font-size: 0.9em;
+}
+header p {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+header button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+header button:hover {
+    border-color: #f9cb40;
+}
+.adminTech_page .manager_products {
+    background-color: #fff;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 20px;
+    box-shadow: 10px 15px 25px -10px rgba(0, 0, 0, 0.25),
+                10px 10px 15px -10px rgba(0, 0, 0, 0.25);
+    min-width: 643px;
+}
+.adminTech_page .manager_products h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+.adminTech_page .manager_options div[class$="_product"] {
+    border-bottom: 1px solid #000;
+}
+.adminTech_page .manager_products .manager_options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.adminTech_page .manager_products h3 {
+    cursor: pointer;
+    padding: 5px 5px 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.adminTech_page form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1.5rem;
+}
+.adminTech_page form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+}
+.adminTech_page form input.error {
+    border-color: #ad0000;
+}
+.adminTech_page .form_create #stock {
+    border: 1px solid #000;
+    border-radius: 0;
+}
+.adminTech_page .form_create #stock .button-select > svg {
+    font-size: 1.5rem;
+}
+.adminTech_page .form_create .button-form {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    align-self: center;
+    font-family: 1.2rem;
+    border: none;
+    width: 25%;
+    margin-top: 1rem;
+    background-color: #012B29;
+    cursor: pointer;
+    color: #f9cb40;
+    z-index: 1;
+}
+.adminTech_page .form_create .button-form::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 90px);
+    left: calc(50% - 90px);
+    width: 180px;
+    height: 180px;
+    background-color: transparent;
+    background-image: linear-gradient(#f9cb40, #f9cb40);
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+    background-position: 0 0;
+
+    z-index: -2;
+    opacity: 0;
+    animation: rotateEdge 4s linear infinite;
+    transition: opacity 0.3s ease;
+}
+.adminTech_page .form_create .button-form::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    background-color: #012B29;
+    border-radius: 9px;
+    z-index: -1;
+}
+.adminTech_page .form_create .button-form:hover::before {
+    opacity: 1;
+}
+.adminTech_page .form_create .button-form > .loader {
+    --loader-color: #f9cb40;
+}
+.adminTech_page form .input_container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+.adminTech_page form .input_container input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+.adminTech_page form .input_container .error_message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #ad0000;
+    font-weight: 600;
+    margin-top: 4px;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+    font-size: 0.85rem;
+}
+.adminTech_page .performance_analysis {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    border-radius: 20px;
+    box-shadow: 10px 15px 25px -10px rgba(0, 0, 0, 0.25),
+                10px 10px 15px -10px rgba(0, 0, 0, 0.25);
+    min-width: 643px;
+}
+.adminTech_page .performance_analysis h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.adminTech_page .performance_analysis article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.adminTech_page .performance_analysis p {
+    margin-bottom: 1rem;
+}
+
+@keyframes rotateEdge {
+    100% {
+        transform: rotate(1turn);
+    }
+}

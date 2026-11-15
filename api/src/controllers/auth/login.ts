@@ -1,15 +1,29 @@
 import { hash, compare } from "bcrypt";
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/database.types";
 import type { LoginInput } from "@/utils/validateData";
 import type { SucessResponse, ErrorResponse, LoginData } from "@/types/response";
+import { ROLES } from "@/utils/roles";
+import { EnvSupabase } from "@/types/auth/authClientVerify";
 
 const loginController = async (
     request: FastifyRequest<{Body: LoginInput}>, 
     reply: FastifyReply<{Reply: SucessResponse<LoginData> | ErrorResponse}>,
-    supabase: SupabaseClient<Database>,
 ) => {
+
+    const loginSupabase = createClient<Database>(
+        EnvSupabase.SUPABASE_URL as string,
+        EnvSupabase.SUPABASE_ANON_KEY as string,
+        {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false,
+                detectSessionInUrl: false,
+            },
+        },
+    );
+
     const { email, password } = request.body;
     if (!email || !password) {
         return reply.status(400).send({
@@ -21,24 +35,25 @@ const loginController = async (
 
     try {
 
-        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        const { data: authData, error: authError } = await loginSupabase.auth.signInWithPassword({
             email,
             password,
         });
 
         if (authError) {
             console.error("Erro na autenticação: ", authError);
-            return reply.status(500).send({
-                message: "Erro ao autenticar usuário.",
+            return reply.status(400).send({
+                message: "E-mail ou senha estão incorretos",
                 error: true,
-                technicalError: true,
+                technicalError: false,
                 details: authError.message,
+                field: "email"
             });
         };
 
-        const { data: profileData, error: detailsError } = await supabase
+        const { data: profileData, error: detailsError } = await       loginSupabase
             .from("profiles")
-            .select("full_name, username, gender, city, region, country")
+            .select("full_name, username, gender, city, region, country, role")
             .eq("id", authData.user.id)
             .single();
 
@@ -65,10 +80,6 @@ const loginController = async (
             throw new Error("Token de acesso não encontrado na sessão.");
         }
 
-        console.log("token: ", session?.access_token);
-
-        console.log("Token refresh: ", session?.refresh_token);
-
         if (session?.refresh_token) {
             reply.setCookie("refresh_token", session.refresh_token, {
                 path: "/",
@@ -91,7 +102,7 @@ const loginController = async (
                 id: session?.user.id,
                 name: profileData.username,
                 email: session?.user.email,
-                role: session?.user.user_metadata?.role,
+                role: profileData?.role as ROLES ?? "user",
                 raw: profileData
             },
             expiresIn: session.expires_in,

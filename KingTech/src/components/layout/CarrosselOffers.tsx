@@ -12,9 +12,10 @@ import { useWidthWindow } from "@/hooks/useWindowWidth";
 
 import { CardMode } from "@/types/products";
 
-import type { Settings } from "react-slick";
 import type { ArrowProps } from "./banners/BannerCarrossel.tsx";
+import type { Product } from "@/types/products";
 
+import AdminOnly from "../AdminOnly.js";
 import ProductCard from "./ProductCard";
 
 import "slick-carousel/slick/slick.css";
@@ -22,13 +23,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "@/style/components/layout/CarrosselOffers.css";
 import "@/style/responsive/components/layout/CarrosselOffers.responsive.css";
 
-const Slider = SliderSlick as Settings as React.ElementType;
+const Slider = (SliderSlick as any).default;
 
 interface CarrosselOffersProps {
   titleHidden: boolean;
   className?: string;
   ariaLabel: string;
   title: string;
+  products: ProductCarrossel[];
   icon: React.ReactNode;
   dots: boolean;
   infinite: boolean;
@@ -43,88 +45,23 @@ interface CarrosselOffersProps {
   cart?: boolean;
 }
 
-const products = [
-  {
-    id: 0,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 1,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 2,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 3,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 4,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 5,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 6,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 7,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 8,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-  {
-    id: 9,
-    name: "Produto",
-    img: "https://placehold.co/150x150/jpg",
-    prevPrice: null,
-    price: 999.99,
-    alt: "imagem do produto",
-  },
-];
+export type ProductCarrossel = Pick<Product, "id" | "name"> & {
+  img: string;
+  alt: string;
+  prevPrice: number | null;
+  price: number;
+}
+
+// const _productsd = [
+//   {
+//     id: 0,
+//     name: "Produto",
+//     img: "https://placehold.co/150x150/jpg",
+//     prevPrice: null,
+//     price: 999.99,
+//     alt: "imagem do produto",
+//   },
+// ];
 
 const SamplePrevArrow = (props: ArrowProps) => {
   const { className, style, onClick } = props;
@@ -170,6 +107,7 @@ const CarrosselOffers = ({
   className,
   ariaLabel,
   title,
+  products = [],
   icon,
   dots,
   infinite,
@@ -209,7 +147,7 @@ const CarrosselOffers = ({
 
   return (
     <>
-      {products && products.length > 0 && (
+      {products.length > 0 && (
         <div
           className={`offers-${className} ${autoplay ? "automated" : ""}`}
           aria-label={ariaLabel}
@@ -223,9 +161,11 @@ const CarrosselOffers = ({
                 Ver mais <TbArrowBigRightLines />
               </Link>
             </div>
-            <span className="edit-adm">
-              <MdEdit fill="#fff" size={mediaQuery} />
-            </span>
+            <AdminOnly>
+              <span className="edit-adm">
+                <MdEdit fill="#fff" size={mediaQuery} />
+              </span>
+            </AdminOnly>
           </div>
           <div className={`products-${className}`}>
             <Slider {...settings}>

@@ -1,6 +1,6 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import type { Database } from "@/types/database.types";
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 interface MeBody {};
 
@@ -11,8 +11,7 @@ const meController = async (
 ) => {
   try {
     const user = request.user;
-    console.log("usuário: ", user);
-
+  
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("full_name, username, gender, city, region, country, id, email")

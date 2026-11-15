@@ -5,6 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth";
 
+import { useAuth } from "@/context/useAuth";
+
 import Search from "./Search";
 
 import logo from "@/assets/logo.png";
@@ -14,11 +16,13 @@ interface NavbarProps {
   search: boolean;
   nav: boolean;
   isNavMobile: boolean;
+  hidden?: boolean;
 }
 
-const Navbar = ({ img, search, nav, isNavMobile }: NavbarProps) => {
+const Navbar = ({ img, search, nav, isNavMobile, hidden }: NavbarProps) => {
 
   const location = useLocation();
+  const { user } = useAuth();
   let widthWindow = useWidthWindow();
   let mediaQuery = 0;
 
@@ -27,7 +31,7 @@ const Navbar = ({ img, search, nav, isNavMobile }: NavbarProps) => {
   }
 
   return (
-    <nav className={`navbar ${isNavMobile ? "nav-bottom" : ""}`}>
+    <nav className={`navbar ${isNavMobile ? "nav-bottom" : ""} ${hidden ? 'hidden' : ''}`}>
       {img && <img src={logo} alt="logomarca da loja KingTech" />}
       {search && <Search />}
       {nav && (
@@ -44,7 +48,7 @@ const Navbar = ({ img, search, nav, isNavMobile }: NavbarProps) => {
           </li>
           <li>
             <Link
-              to="/account/login"
+              to={user?.id && user ? "/account/dashboard" : "/account/login"}
               className={
                 location.pathname.startsWith("/account") ? "active" : ""
               }

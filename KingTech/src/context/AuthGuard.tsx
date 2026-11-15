@@ -3,7 +3,10 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import type { UserRole } from "@/types/userData";
 
+import LoadingPage from "@/components/layout/loading/LoadingPage";
+
 import { useAuth } from "./useAuth";
+
 
 interface AuthGuardProps {
     children: React.ReactNode;
@@ -14,7 +17,7 @@ const AuthGuard = ({children, roles = [] }: AuthGuardProps) => {
     const { user, loading } = useAuth();
     const location = useLocation();
 
-    if (loading) return null;
+    if (loading) return <LoadingPage />;
 
     if(!user) {
         return <Navigate to="/account/login" state={{ from: location }} replace />

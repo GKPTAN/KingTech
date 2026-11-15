@@ -1,48 +1,21 @@
 /* eslint-disable no-undef */
-import { validateDataLogin } from "../src/utils/validateData";
-
-const validData = {
-    email: "teste@gmail.com",
-    password: "senha123"
-}
-
-const invalidEmail = {
-    email: "invalid-email@g",
-    password: "senha123"
-}
-
-const bigEmail = {
-    email: "teste".repeat(300) + "@gmail.com",
-    password: "senha123"
-}
-const voidPass = {
-    email: "teste@gmail.com",
-    password: ""
-}
-const shortPass = {
-    email: "teste@gmail.com",
-    password: "sen1"
-}
-const bigPass = {
-    email: "teste@gmail.com",
-    password: "senha123".repeat(300)
-}
-const invalidPass = {
-    email: "teste@gmail.com",
-    password: "senha 123"
-}
-const numberPass = {
-    email: "teste@gmail.com",
-    password: 18486448
-}
+import { validateDataLogin } from "@/utils/validateData";
 
 describe("validateDataLogin", () => {
     test("Retornar true para dados válidos", async () => {
-        const result = await validateDataLogin(validData);
+        const mockValidData = {
+            email: "teste@gmail.com",
+            password: "senha123"
+        }
+        const result = await validateDataLogin(mockValidData);
         expect(result).toBe(true);
     });
     test("Retornar erro para e-mail inválido", async () => {
-        const result = await validateDataLogin(invalidEmail);
+        const mockInvalidEmail = {
+            email: "invalid-email@g",
+            password: "senha123"
+        }
+        const result = await validateDataLogin(mockInvalidEmail);
         expect(result).toEqual({
             error: true,
             field: "email",
@@ -51,17 +24,25 @@ describe("validateDataLogin", () => {
         });
     });
     test("Retornar erro para e-mail maior que 255 caracteres", async () => {
-        const result = await validateDataLogin(bigEmail);
+        const mockBigEmail = {
+            email: "teste".repeat(300) + "@gmail.com",
+            password: "senha123"
+        }
+        const result = await validateDataLogin(mockBigEmail);
         expect(result).toEqual({
             error: true,
             field: "email",
             issue: "too_big",
             message: "Não exagere no tamanho do email!"
         });
-        console.log("email length: ", bigEmail.email.length);
+        console.log("email length: ", mockBigEmail.email.length);
     });
     test("Retornar erro para senha vazia", async () => {
-        const result = await validateDataLogin(voidPass);
+        const mockVoidPass = {
+            email: "teste@gmail.com",
+            password: ""
+        }
+        const result = await validateDataLogin(mockVoidPass);
         expect(result).toEqual({
             error: true,
             field: "password",
@@ -70,7 +51,11 @@ describe("validateDataLogin", () => {
         });
     });
     test("Retornar erro para senha maior que 1 caractere e menor que 6 caracteres", async () => {
-        const result = await validateDataLogin(shortPass);
+        const mockShortPass = {
+            email: "teste@gmail.com",
+            password: "sen1"
+        }
+        const result = await validateDataLogin(mockShortPass);
         expect(result).toEqual({
             error: true,
             field: "password",
@@ -79,7 +64,11 @@ describe("validateDataLogin", () => {
         });
     });
     test("Retornar erro para senha maior que 255 caractere", async () => {
-        const result = await validateDataLogin(bigPass);
+        const mockBigPass = {
+            email: "teste@gmail.com",
+            password: "senha123".repeat(300)
+        }
+        const result = await validateDataLogin(mockBigPass);
         expect(result).toEqual({
             error: true,
             field: "password",
@@ -88,7 +77,11 @@ describe("validateDataLogin", () => {
         });
     });
     test("Retornar erro para senha com espaços vazios", async () => {
-        const result = await validateDataLogin(invalidPass);
+        const mockInvalidPass = {
+            email: "teste@gmail.com",
+            password: "senha 123"
+        }
+        const result = await validateDataLogin(mockInvalidPass);
         expect(result).toEqual({
             error: true,
             field: "password",
@@ -97,7 +90,11 @@ describe("validateDataLogin", () => {
         });
     });
     test("Retornar erro para senha do tipo number", async () => {
-        const result = await validateDataLogin(numberPass);
+        const mockNumberPass = {
+        email: "teste@gmail.com",
+        password: 18486448
+    }
+        const result = await validateDataLogin(mockNumberPass as any);
         expect(result).toEqual({
             error: true,
             field: "password",

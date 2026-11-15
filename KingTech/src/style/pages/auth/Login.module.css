@@ -11,7 +11,7 @@
     width: 100%;
     max-width: 500px;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.8rem;
     background-color: #012B29;
     padding: 2rem;
     border-radius: 24px;
@@ -50,6 +50,30 @@
     font-family: "Kulim Park", sans-serif;
     font-weight: 600;
 }
+.login_form :global(.input_container) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+}
+.login_form :global(.input_container) :global(.input_password) {
+    width: 86%;
+    order: 1;
+}
+.login_form :global(.input_container) button {
+    order: 2;
+}
+.login_form :global(.input_container) :global(.error_message) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #ff9494;
+    font-weight: 600;
+    margin-top: 4px;
+    pointer-events: none;
+    font-size: 0.85rem;
+}
 .login_form button {
     display: flex;
     justify-content: center;
@@ -65,6 +89,9 @@
 .login_form button:hover {
     background-color: #f9cb40;
     color: black;
+}
+.login_form :global(.button-form) > :global(.loader) {
+    --loader-color: #012B29;
 }
 .login div {
     display: flex;

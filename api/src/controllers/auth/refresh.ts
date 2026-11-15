@@ -1,11 +1,24 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@/types/database.types";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { EnvSupabase } from "@/types/auth/authClientVerify";
 
 const refreshController = async (
     request: FastifyRequest, 
     reply: FastifyReply, 
     supabase: SupabaseClient) => {
+
+    const refreshSupabase = createClient<Database>(
+        EnvSupabase.SUPABASE_URL!,
+        EnvSupabase.SUPABASE_ANON_KEY!,
+        {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false,
+                detectSessionInUrl: false,
+            },
+        },
+    );
 
     try {
         const refreshToken = request.cookies?.refresh_token || (request.headers?.authorization && request.headers.authorization.startsWith("Bearer ") ? request.headers.authorization.split(" ")[1] : null);
@@ -18,7 +31,7 @@ const refreshController = async (
             });
         };
 
-        const {data, error} = await supabase.auth.refreshSession({refresh_token: refreshToken});
+        const {data, error} = await refreshSupabase.auth.refreshSession({refresh_token: refreshToken});
 
         if (error || !data.session) {
             console.error("Refresh falhou: ", data);

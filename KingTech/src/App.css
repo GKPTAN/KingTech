@@ -13,6 +13,9 @@
   background-color: #012B29;
   width: 100vw;
 }
+.navbar.hidden {
+  display: none;
+}
 .navbar img {
   width: 100px;
   height: 100px;
@@ -118,6 +121,40 @@
 }
 a {
   text-decoration: none;
+}
+
+.message {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  max-width: 400px;
+  padding: 0.5rem;
+  background-color: #012B29;
+  opacity: 0;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25),
+              0 10px 10px -5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  border-left: 5px solid transparent;
+  z-index: 9999;
+  transform: translateX(-50%);
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), opacity 0.3s ease;
+}
+.message p {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.message.sucess {
+  top: 152px;
+  border-left-color: #4ade80;
+  opacity: 1;
+}
+.message.error {
+  top: 152px;
+  border-left-color: #f87171;
+  opacity: 1;
 }
 @media (max-width: 768px) {
   .navbar {

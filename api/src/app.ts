@@ -1,22 +1,20 @@
-import AuthRoutes from "./routes/authRoutes";
+import path from "path";
 import supabase from "./plugins/supabaseClient";
 import fastifyCors from "@fastify/cors";
 import fastifyCookie from "@fastify/cookie";
-import dotenv from "dotenv";
-import { hash } from "bcrypt";
+import fastifyMultipart from "@fastify/multipart";
+import AuthRoutes from "./routes/authRoutes";
+import ProductRoutes from "./routes/productRoutes";
 import { fileURLToPath } from "url";
-import path from "path";
 import fastify, {type FastifyError} from "fastify";
 import fs from "fs";
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
 
-dotenv.config({path: ".env"});
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const cert = fs.readFileSync(path.join(__dirname, "src/certificates/cert.pem"));
-const key = fs.readFileSync(path.join(__dirname, "src/certificates/key.pem"));
+const cert = fs.readFileSync(path.join(__dirname, "/certificates/cert.pem"));
+const key = fs.readFileSync(path.join(__dirname, "/certificates/key.pem"));
 
 const secret = process.env.SECRET_COOKIE;
 
@@ -25,7 +23,16 @@ if (!secret) {
 }
 
 const app = fastify({
-    logger: true,
+    logger: {
+        transport: {
+            target: 'pino-pretty',
+            options: {
+                translateTime: 'HH:MM:ss Z',
+                ignore: 'pid, hostname',
+                errorLikeObjectKeys: ['err', 'error']
+            }
+        }
+    },
     https: {
         key,
         cert,
@@ -35,6 +42,12 @@ const app = fastify({
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
+app.register(fastifyMultipart, {
+    attachFieldsToBody: true,
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+    }
+})
 app.register(fastifyCors, {
     origin: ["http://localhost:5173"],
     credentials: true,
@@ -45,11 +58,13 @@ app.register(fastifyCookie, {
     secret: secret
 });
 app.register(AuthRoutes, { prefix: "/auth" });
+app.register(ProductRoutes, { prefix: "/product" });
 app.decorate('supabase', supabase);
 
 app.setErrorHandler((error: FastifyError, request, reply) => {
 
     if (error.validation) {
+        console.error("Erro ocorrido: ", error)
         return reply.status(400).send({
             message: error.message,
             error: true,

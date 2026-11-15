@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { hash } from "bcrypt";
 import { pwnedPassword } from "hibp";
 import type { Database, TablesInsert } from "@/types/database.types.js";
@@ -32,6 +32,7 @@ const registerController = async (
           "A senha informada foi encontrada em vazamentos de dados. Por favor, escolha uma senha diferente.",
         error: true,
         technicalError: false,
+        field: "password"
       });
     }
 
@@ -48,6 +49,7 @@ const registerController = async (
         message: "E-mail já cadastrado!",
         error: true,
         technicalError: false,
+        field: "email"
       });
     }
 
@@ -73,7 +75,7 @@ const registerController = async (
     if (pending) {
       return reply.status(400).send({
         message:
-          "Já existe um registro pendente para esse e-mail. Verifique seu e-mail.",
+          "Já existe um registro pendente para esse e-mail. Verifique seu e-mail ou tente novamente mais tarde.",
         error: true,
         technicalError: false,
       });

@@ -10,3 +10,7 @@ declare module "swiper/css";
 declare module "swiper/css/*"
 declare module "slick-carousel/slick/slick.css";
 declare module "slick-carousel/slick/slick-theme.css";
+
+interface Window {
+    dataLayer: any[];
+}

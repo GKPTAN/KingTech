@@ -1,0 +1,106 @@
+.specs_edit {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 450px;
+    margin: 15px 0;
+}
+.specs_edit h2 {
+    margin: 0 !important;
+    font-size: 1.2rem;
+    color: #334155;
+}
+.specs_edit .mode_buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.specs_edit .mode_buttons button {
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.specs_edit .mode_buttons button:hover {
+    background-color: #D1ECEB !important;
+    border: 1px solid #62a8d4 !important;
+}
+.specs_edit .manual_spec_edit {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    max-width: 600px;
+}
+.specs_edit .manual_spec_edit button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+.specs_edit .manual_spec_edit button > svg {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.specs_edit .manual_spec_edit button > svg:hover {
+    color: #058b85;
+}
+.specs_edit .file_spec_edit {
+    background-color: #D7EBD7;
+    padding: 15px;
+    border-radius: 6px;
+    border: 2px dashed #828e82;
+    text-align: center;
+}
+.specs_edit .file_spec_edit .info_file_edit {
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.specs_edit .specs_preview .container {
+    max-height: 250px;
+    overflow-y: auto;
+}
+.specs_edit .specs_preview h4 {
+    margin-bottom: 10px;
+}
+.specs_edit .specs_preview .list_of_specs {
+    width: 100%;
+    border-collapse: collapse;
+}
+.specs_edit .specs_preview .list_of_specs th, .specs_edit .specs_preview .list_of_specs td {
+    padding: 0.5rem 1rem;
+    text-align: left;
+}
+.specs_edit .specs_preview .list_of_specs th {
+    width: 30%;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.specs_edit .specs_preview .list_of_specs td {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+}
+.specs_edit .specs_preview .list_of_specs tr {
+    transition: all 0.3s ease-in-out;
+}
+.specs_edit .specs_preview .list_of_specs tr:nth-child(even) {
+    background-color: #e9e7e7;
+}
+.specs_edit .specs_preview .list_of_specs tr:hover {
+    background-color: #cecdcd;
+}
+.specs_edit .specs_preview .list_of_specs .remove_spec_btn {
+    fill: #9a031e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.specs_edit .specs_preview .list_of_specs .remove_spec_btn:hover {
+    fill: #f31d44;
+}

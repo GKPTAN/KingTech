@@ -1,18 +1,13 @@
 import React from "react";
-type ButtonType = "button" | "submit" | "reset";
 
-interface ButtonProps {
-  type: ButtonType;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   nameAction: string | React.ReactNode;
-  className?: string;
-  disabled: boolean;
-  onClick?: () => void;
   icon?: React.ReactNode;
 }
 
-const Button = ({type, nameAction, className, disabled, onClick, icon}: ButtonProps) => {
+const Button = ({ nameAction, icon, ...props}: ButtonProps) => {
   return (
-    <button className={className} type={type} disabled={disabled} onClick={onClick}>{nameAction} {icon}</button>
+    <button {...props}>{nameAction} {icon}</button>
   );
 };
 

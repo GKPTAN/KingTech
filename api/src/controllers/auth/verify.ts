@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import type { VerifyInput } from "@/utils/validateData";
 import type { SucessResponse, ErrorResponse, VerifyData } from "@/types/response";
 import AuthClient from "./AuthClient";
@@ -11,8 +11,6 @@ const verifyController = async (
 ) => {
   const { code } = request.body;
   const { user_id } = request.cookies;
-
-  console.log("id do usuário: ", user_id, "Código: ", code);
 
   if (!user_id) {
     return reply

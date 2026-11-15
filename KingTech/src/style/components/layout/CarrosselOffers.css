@@ -59,13 +59,16 @@ div[class^="products-"] {
 div[class^="offers-"] .product-card{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 0.4rem;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
-    padding: 1rem 0px;
+    padding: 1rem 5px;
     border-radius: 5px;
+}
+div[class^="offers-"] .product-card.portrait {
+    height: 420px;
 }
 div[class^="offers-"] .product-card:hover {
     background-color: #012B29;
@@ -149,6 +152,12 @@ div[class^="offers-"] .product-card .name-product:after {
 div[class^="offers-"] .product-card:hover .name-product:after {
     width: 0;
     background-color: #fff;
+}
+div[class^="offers-"] .product-card .prev-price del {
+   text-decoration-line: line-through;
+   text-decoration-color: #5c5b5b;
+   text-decoration-thickness: 2px;
+   opacity: 0.8;
 }
 div[class^="offers-"] .product-card .price-product {
     font-size: 18px;

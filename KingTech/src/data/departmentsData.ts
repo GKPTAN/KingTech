@@ -1,6 +1,6 @@
 import type { CategoryFilters, DepartmentsData, Product } from "@/types/products";
 
-export const departmentsData: DepartmentsData = {
+export const departmentsData = {
   "Computadores e acessórios": {
     id: 1,
     subcategories: [
@@ -151,7 +151,11 @@ export const departmentsData: DepartmentsData = {
       { id: 4, name: "Hub USB", slug: "hub_usb" },
     ],
   },
-};
+} as const satisfies DepartmentsData;
+
+export type Department = keyof typeof departmentsData;
+
+export type Subcategory = typeof departmentsData[Department]["subcategories"][number]["slug"];
 
 export const categoryFilters: CategoryFilters[] = [
   {
@@ -171,7 +175,7 @@ export const categoryFilters: CategoryFilters[] = [
       {
         category: "Cupom de desconto",
         filters: [
-          { id: 1, rowData: "discount_coupon", name: "Setembro premiado" },
+          { id: 1, rowData: "discount_coupon", name: "Agosto premiado" },
         ],
       },
       {
@@ -179,7 +183,7 @@ export const categoryFilters: CategoryFilters[] = [
         filters: [
           { id: 1, rowData: "conections", name: "HDMI 2.1" },
           { id: 2, rowData: "conections", name: "USB-C" },
-          { id: 3, rowData: "conections", name: "Wi-FI 6E" },
+          { id: 3, rowData: "conections", name: "Wi-Fi 6E" },
           { id: 4, rowData: "conections", name: "Bluetooth 5.2" },
           { id: 5, rowData: "conections", name: "DisplayPort 1.4" },
         ],
@@ -223,11 +227,11 @@ export const categoryFilters: CategoryFilters[] = [
       {
         category: "Sincronização Adaptativa",
         filters: [
-          { id: 1, rowData: "adaptive_sync", name: "AMD FreeSync" },
-          { id: 2, rowData: "adaptive_sync", name: "AMD FreeSync Premium" },
-          { id: 3, rowData: "adaptive_sync", name: "NVIDIA G-Sync" },
-          { id: 4, rowData: "adaptive_sync", name: "NVIDIA G-Sync Compatible" },
-          { id: 5, rowData: "adaptive_sync", name: "VESA Adaptive-Sync" },
+          { id: 1, rowData: "adaptive_sync", name: "FreeSync" },
+          { id: 2, rowData: "adaptive_sync", name: "FreeSync Premium" },
+          { id: 3, rowData: "adaptive_sync", name: "G-Sync" },
+          { id: 4, rowData: "adaptive_sync", name: "G-Sync Compatible" },
+          { id: 5, rowData: "adaptive_sync", name: "Adaptive-Sync" },
           { id: 6, rowData: "adaptive_sync", name: "VRR" },
           { id: 7, rowData: "adaptive_sync", name: "Compatível com PS5/Xbox" },
         ],
@@ -237,16 +241,25 @@ export const categoryFilters: CategoryFilters[] = [
 ];
 
 export const product: Product = {
+  id: "095345830",
   brand: "amd",
+  name: "Amd Radeon™ RX 9060 XT",
+  code: "599420",
+  quantity: 50,
   rating: 4.2,
-  numberRating: 217, // número de pessoas que avaliaram o produto
-  compositionRating: {
+  number_rating: 217, // número de pessoas que avaliaram o produto
+  composition_rating: {
     5: 50,
     4: 30,
     3: 9,
     2: 7,
     1: 4,
   },
+  section: {
+    department: "Computadores e acessórios",
+    subcategory: "componentes_de_hardware"
+  },
+  tags: ["Super desconto", "Top ofertas", "Campeão de vendas", ""],
   img: [
     "/image/amd1.avif",
     "/image/amd2.jpg",
@@ -258,15 +271,13 @@ export const product: Product = {
     "/image/amd8.jpg",
     "/image/amd9.webp",
   ],
-  name: "Amd Radeon™ RX 9060 XT",
-  code: "599420",
   variations: [
     {
       category: "memória",
       options: ["8GB", "16GB"],
     },
   ],
-  mainInformations: [
+  main_informations: [
     {
       id: 1,
       title: "Arquitetura",
@@ -288,8 +299,9 @@ export const product: Product = {
       information: "Com um novo mecanismo AMD Radiance Display™ e mecanismo de mídia avançado, experimente gravação e streaming de nível profissional como nunca antes. Entregue uma qualidade visual avançada para a sua comunidade durante streamings e gravações com taxas de bit mais baixas, assim você pode focar mais na sua jogada.",
     },
   ],
-  texts: [
+  content: [
     {
+      layout_type: "layout_4",
       category: "introduction",
       title: "Apresentamos a AMD Radeon™ RX 9060 XT",
       text: "As placas de vídeo AMD Radeon™ RX 9060 XT foram projetadas para proporcionar tudo o que você precisa para garantir jogos ultrarrápidos, com recursos visuais de alto nível e recursos prontos para o futuro turbinados com IA.",
@@ -297,6 +309,7 @@ export const product: Product = {
       imgSm: "https://www.amd.com/content/dam/amd/en/images/products/desktops/3269802-radeon-ryzen-products.png",
     },
     {
+      layout_type: "layout_5",
       category: "architecture",
       title: "Arquitetura AMD RDNA™ 4 ",
       text: "Feita para jogadores",
@@ -304,6 +317,7 @@ export const product: Product = {
       imgSm: "https://www.amd.com/content/dam/amd/en/images/products/processors/2922918-rdna-chip-cropped.png",
     },
     {
+      layout_type: "layout_5",
       category: "ultrafast",
       title: "Tudo de que você precisa para jogos ultrarrápidos",
       text: "Quer você precise de taxas de atualização ultra-altas para eSports ou de todas as configurações para explorar seus mundos favoritos, as placas de vídeo AMD Radeon™ RX Série 9000 oferecem tudo de que você precisa para executar jogos ultrarrápidos. Turbine sua experiência com a AMD HYPR-RX1 e libere o verdadeiro potencial da GPU Radeon™ RX, aproveitando as forças combinadas das tecnologias avançadas de super-resolução, geração de frames e redução de latência.",
@@ -311,6 +325,7 @@ export const product: Product = {
       imgSm: "",
     },
     {
+      layout_type: "layout_5",
       category: "perfomance",
       title: "AMD HYPR-RX com AMD Fluid Motion Frames 2.1",
       text: "Desempenho instantâneo para todos os seus jogos",
@@ -318,6 +333,7 @@ export const product: Product = {
       imgSm: "/image/perfomance.png",
     },
     {
+      layout_type: "layout_5",
       category: "quality",
       title: "1440p nativo Ultra - Em média 46% mais rápida que a RX 7600 XT em mais de 30 jogos (16GB)",
       text: "",
@@ -325,6 +341,7 @@ export const product: Product = {
       imgSm: "/image/quality.png",
     },
     {
+      layout_type: "layout_5",
       category: "realismo",
       title: "Traçado de raios realista",
       text: "Os poderosos aceleradores de traçado de raios na placa de vídeo AMD Radeon™ RX Série 9000 trazem níveis impressionantes de detalhes para iluminação, sombras e reflexos em jogos compatíveis.",
@@ -332,6 +349,7 @@ export const product: Product = {
       imgSm: "/image/realismo.png",
     },
     {
+      layout_type: "layout_5",
       category: "streaming",
       title: "Transmita como um profissional",
       text: "Com um novo mecanismo AMD Radiance Display™ e mecanismo de mídia avançado, experimente gravação e streaming de nível profissional como nunca antes. Entregue uma qualidade visual avançada para a sua comunidade durante streamings e gravações com taxas de bit mais baixas, assim você pode focar mais na sua jogada.",
@@ -339,6 +357,7 @@ export const product: Product = {
       imgSm: "",
     },
     {
+      layout_type: "layout_4",
       category: "video-streaming",
       title: "Streaming de alta qualidade com AV13",
       text: "Desbloqueie novas experiências multimídia com suporte total a codificação/decodificação AV1, projetado para oferecer uma qualidade de imagem incrível com taxas de bits mais baixas e tamanhos de arquivo menores.",
@@ -347,13 +366,12 @@ export const product: Product = {
     },
   ],
   typeDelivery: "flash",
-  prevPrice: 3310.99,
+  prev_price: 3310.99,
   descount: "10%",
-  priceInCardStore: 2979.89,
-  pricePartInCardStore: 3145.44,
-  discountPix: "25%",
-  pricePix: 2483.24,
-  stock: true,
+  price_in_card_store: 2979.89,
+  price_part_in_card_store: 3145.44,
+  discount_pix: "25%",
+  price_pix: 2483.24,
   specs: {
     "Nome": "AMD Radeon™ RX 9060 XT",
     "Familia": "Radeon RX",
@@ -402,7 +420,7 @@ export const product: Product = {
     "TPP": "1641",
     "Densidade de TPP": "8.52",
   },
-  reviewComments: [
+  review_comments: [
     {
       id: 1,
       name: "Guilherme",

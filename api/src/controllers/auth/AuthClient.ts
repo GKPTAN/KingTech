@@ -1,17 +1,17 @@
 import { EnvSupabase, type AuthClientReturn } from "@/types/auth/authClientVerify";
 import type { Database } from "@/types/database.types";
-import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 class AuthClient {
   private supabase: SupabaseClient<Database>;
   constructor() {
-    if (!EnvSupabase.SUPABASE_URL || !EnvSupabase.SUPABASE_KEY) {
+    if (!EnvSupabase.SUPABASE_URL || !EnvSupabase.SUPABASE_SERVICE_ROLE_KEY) {
       throw new Error("variáveis de ambiente Supabase não encontradas!");
     }
 
     this.supabase = createClient(
       EnvSupabase.SUPABASE_URL,
-      EnvSupabase.SUPABASE_KEY,
+      EnvSupabase.SUPABASE_SERVICE_ROLE_KEY,
     );
   };
 /**
@@ -29,8 +29,6 @@ class AuthClient {
         .eq("id", userId)
         .single();
 
-        console.log('DEBUG MOCK:', { pendingUser, fetchError });
-
         if (fetchError || !pendingUser) {
           throw new Error("Usuário não encontrado ou erro ao buscar dados.");
         };
@@ -46,7 +44,7 @@ class AuthClient {
         // criar usuário em auth.users
         const { data: authUser, error: authError } = await this.supabase.auth.admin.createUser({
           email: pendingUser.email,
-          password: pendingUser.password_hash,
+          password_hash: pendingUser.password_hash,
           email_confirm: true,
           user_metadata: {
             full_name: pendingUser.full_name,

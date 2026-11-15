@@ -10,7 +10,7 @@ import { useWidthWindow } from "@/hooks/useWindowWidth";
 
 import { formatarMoeda } from "@/utils/formatCurrency";
 
-import { CardMode, StockStatus } from "@/types/products";
+import { CardMode } from "@/types/products";
 
 import PromoConditionsModal from "@/components/layout/pages/ProductPage/Modals/PromoConditionsModal";
 import ImageSlideModal from "@/components/layout/pages/ProductPage/Sliders/ImageSlideModal";
@@ -52,7 +52,7 @@ const ProductPage = () => {
   let widthWindow = useWidthWindow();
   const [image, setImage] = useState(0);
 
-  const stockClass = product.stock ? StockStatus.IN_STOCK : StockStatus.OUT_OF_STOCK;
+  const stockClass = product.quantity > 0 ? "in" : "out";
 
   return (
     <div className="product-page">
@@ -77,7 +77,7 @@ const ProductPage = () => {
           <ImageSlideModal
             images={product.img ?? []}
             onClose={() => setShowImageModal(false)}
-            price={product.pricePix ?? ""}
+            price={product.price_pix ?? ""}
             alt={product.name ?? ""}
           />
         )}
@@ -129,16 +129,16 @@ const ProductPage = () => {
               readOnly={true}
             />
             <span className="rating-value">{product.rating ?? ""}</span>
-            <span className="rating-count">({product.numberRating ?? ""})</span>
+            <span className="rating-count">({product.number_rating ?? ""})</span>
             <a href="#reviews" className="see-all-reviews">
               Ver todas as avaliações
             </a>
           </div>
           <h1 className="product-name">{product.name ?? ""}</h1>
           <span className="product-code">Cód: {product.code ?? ""}</span>
-          {product?.mainInformations && product.mainInformations.length > 0 && (
+          {product?.main_informations && product.main_informations.length > 0 && (
             <ul className="main-infos">
-              {product.mainInformations.map((info) => (
+              {product.main_informations.map((info) => (
                 <li key={info.id}>
                   <strong>{info.title}:</strong> {info.information}
                 </li>
@@ -158,22 +158,22 @@ const ProductPage = () => {
           <div className="warranty">12 meses de garantia</div>
           <div className="prices">
             <span className="prev-price">
-              De: {(product?.prevPrice && formatarMoeda(product.prevPrice)) ?? ""}
+              De: {(product?.prev_price && formatarMoeda(product.prev_price)) ?? ""}
             </span>
             <span className="price-card">
               <p>
-                No cartão da loja: {(product?.priceInCardStore && formatarMoeda(product.priceInCardStore)) ?? ""}
+                No cartão da loja: {(product?.price_in_card_store && formatarMoeda(product.price_in_card_store)) ?? ""}
                 <span className="discount">-{product.descount ?? ""}</span>
               </p>
             </span>
             <span className="price-card-part">
               ou 10x de {" "}
-              {(product?.pricePartInCardStore && formatarMoeda(product.pricePartInCardStore / 10)) ?? ""}
+              {(product?.price_part_in_card_store && formatarMoeda(product.price_part_in_card_store / 10)) ?? ""}
             </span>
             <span className="price-pix">
               No Pix: {" "}
-              {(product?.pricePix && formatarMoeda(product.pricePix)) ?? ""}{" "}
-              <span className="discount-pix">-{product.discountPix ?? ""}</span>
+              {(product?.price_pix && formatarMoeda(product.price_pix)) ?? ""}{" "}
+              <span className="discount-pix">-{product.discount_pix ?? ""}</span>
             </span>
             <a href="#payment-methods" className="see-more-payments">
               Ver mais opções de pagamento
@@ -181,7 +181,7 @@ const ProductPage = () => {
           </div>
 
           <div className={`stock ${stockClass}`}>
-            {product.stock ? "Em estoque" : "Esgotado"}
+            {product.quantity > 0 ? "" : "Esgotado"}
           </div>
 
           <div className="shipping-calc">
@@ -247,111 +247,6 @@ const ProductPage = () => {
         cart={false}
       />
 
-      {product.code === "599420" && (
-        <section className="product-details">
-          <article className={product?.texts ? product.texts[0]?.category : ""}>
-            <div>
-              <h2>{product?.texts?.[0]?.title ?? ""}</h2>
-              <p>{product?.texts?.[0]?.text ?? ""}</p>
-            </div>
-            <div>
-              <img
-                src={product?.texts?.[0]?.imgSm ?? ""}
-                alt="pc gamer - imagem imeramente ilustrativa"
-              />
-            </div>
-          </article>
-          <article className={product?.texts?.[1]?.category ?? ""}>
-            <div>
-              <h2>{product?.texts?.[1]?.title ?? ""}</h2>
-              <p>{product?.texts?.[1]?.text ?? ""}</p>
-            </div>
-            <div>
-              <img
-                src={product?.texts?.[1]?.imgSm ?? ""}
-                alt="chip - imagem meramente ilustrativa"
-              />
-            </div>
-          </article>
-          <article className={product?.texts?.[2]?.category ?? ""}>
-            <div>
-              <h2>{product?.texts?.[2]?.title ?? ""}</h2>
-              <p>{product?.texts?.[2]?.text ?? ""}</p>
-              <h2>{product?.texts?.[3]?.title ?? ""}</h2>
-              <p>{product?.texts?.[3]?.text ?? ""}</p>
-            </div>
-            <div>
-              <img
-                src={product?.texts?.[3]?.imgSm ?? ""}
-                alt="Desempenho das placas de videos AMD Radeon RX Série 9000"
-              />
-            </div>
-            <div>
-              <h2>{product?.texts?.[4]?.title ?? ""}</h2>
-            </div>
-            <div>
-              <img
-                src={product?.texts?.[4]?.imgSm ?? ""}
-                alt="Desempenho da placa de video AMD Radeon RX 9060 XT onde possui 157 FPS no Fórmula 1, 104 FPS no God Of War Ragnarok, 92 FPS no Horizon Zero Dawn Remastered, 77 FPS no Call of Duty: Black Ops 6, 72 FPS no Dragon Age: The Veilguard, 98 FPS no Assassins Creed Mirage, 79 FPS no Resident Evil 4 e 136 FPS no Doom Eternal"
-              />
-            </div>
-          </article>
-          <article className={product?.texts?.[5]?.category ?? ""}>
-            <div>
-              <h2>{product?.texts?.[5]?.title ?? ""}</h2>
-              <p>{product?.texts?.[5]?.text ?? ""}</p>
-            </div>
-            <div className="realismo-perfomance">
-              <div className="statistic">
-                <h3>F1 24</h3>
-                <div className="formula1">
-                  <p>65 FPS</p>
-                </div>
-                <h3>Indiana Jones and the Great Circle</h3>
-                <div className="indiana">
-                  <p>64 FPS</p>
-                </div>
-                <h3>Shadow of the Tomb Raider</h3>
-                <div className="shadow">
-                  <p>88 FPS</p>
-                </div>
-                <h3>Far Cry 6</h3>
-                <div className="far">
-                  <p>111 FPS</p>
-                </div>
-                <h3>Forza Horizon 5</h3>
-                <div className="forza">
-                  <p>114 FPS</p>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article className={product?.texts?.[6]?.category ?? ""}>
-            <div>
-              <h2>{product?.texts?.[6]?.title ?? ""}</h2>
-              <p>{product?.texts?.[6]?.text ?? ""}</p>
-            </div>
-          </article>
-          <article className={product?.texts?.[7]?.category ?? ""}>
-            <div>
-              <h2>{product?.texts?.[7]?.title ?? ""}</h2>
-              <p>{product?.texts?.[7]?.text ?? ""}</p>
-            </div>
-            <div className="video-img">
-              <img
-                src={product?.texts?.[7]?.imgSm ?? ""}
-                alt="streamer jogando no pc - imagem meramente ilustrativa"
-              />
-            </div>
-          </article>
-          {/* Carrossel personalizado */}
-          {/* <div className='category-buttons'>
-          <Button />
-          <Button />
-        </div> */}
-        </section>
-      )}
-
       <section className="product-sheet">
         <h2>Ficha Técnica</h2>
         <table>
@@ -398,10 +293,10 @@ const ProductPage = () => {
       <QuestionsAndAnswers maxQuestions={50} questions={questions} />
 
       <PaymentMethods 
-        prevPrice={product.prevPrice ?? null} 
-        pricePix={product.pricePix ?? null} 
-        priceInCardStore={product.priceInCardStore ?? null} 
-        pricePartInCardStore={product.pricePartInCardStore ?? 0}
+        prevPrice={product.prev_price ?? null} 
+        pricePix={product.price_pix ?? null} 
+        priceInCardStore={product.price_in_card_store ?? null} 
+        pricePartInCardStore={product.price_part_in_card_store ?? 0}
       />
     </div>
   );

@@ -37,11 +37,11 @@ const Reviews = ({product}: ReviewsProps) => {
       <h2>Avaliações</h2>
       <ReviewSummary
         rating={product.rating ?? 0}
-        numberRating={product.numberRating ?? 0}
-        breakdown={product.compositionRating ?? []}
+        numberRating={product.number_rating ?? 0}
+        breakdown={product.composition_rating ?? []}
       />
       <ReviewFilters onFilterChange={setFilter}/>
-      <ReviewComments comments={sortComments(product.reviewComments ?? [], filter)} />
+      <ReviewComments comments={sortComments(product.review_comments ?? [], filter)} />
     </section>
   );
 };

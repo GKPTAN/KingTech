@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+    PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
@@ -40,27 +40,128 @@ export type Database = {
           },
         ]
       }
-      products: {
+      product_reviews: {
         Row: {
-          department: string | null
-          id: string
-          image_url: string | null
+          comment: string | null
+          date: string
+          id: number
           name: string
-          price: number | null
+          product_id: string
+          rating: number
+          verified: boolean
         }
         Insert: {
-          department?: string | null
-          id?: string
-          image_url?: string | null
+          comment?: string | null
+          date?: string
+          id?: number
           name: string
-          price?: number | null
+          product_id: string
+          rating: number
+          verified?: boolean
         }
         Update: {
-          department?: string | null
-          id?: string
-          image_url?: string | null
+          comment?: string | null
+          date?: string
+          id?: number
           name?: string
-          price?: number | null
+          product_id?: string
+          rating?: number
+          verified?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_reviews_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          brand: string
+          code: string
+          content: Json[] | null
+          department: string
+          descount: string | null
+          descount_pix: string | null
+          id: string
+          img: string[]
+          main_informations: Json[] | null
+          name: string
+          number_rating: number
+          prev_price: number | null
+          price_in_card_store: number
+          price_part_in_card_store: number
+          price_pix: number | null
+          quantity: number | null
+          rating: number
+          specs: Json | null
+          star_1: number
+          star_2: number
+          star_3: number
+          star_4: number
+          star_5: number
+          subcategory: string
+          tags: string[] | null
+          variations: Json[] | null
+        }
+        Insert: {
+          brand: string
+          code: string
+          content?: Json[] | null
+          department: string
+          descount?: string | null
+          descount_pix?: string | null
+          id?: string
+          img: string[]
+          main_informations?: Json[] | null
+          name: string
+          number_rating?: number
+          prev_price?: number | null
+          price_in_card_store: number
+          price_part_in_card_store: number
+          price_pix?: number | null
+          quantity?: number | null
+          rating?: number
+          specs?: Json | null
+          star_1?: number
+          star_2?: number
+          star_3?: number
+          star_4?: number
+          star_5?: number
+          subcategory: string
+          tags?: string[] | null
+          variations?: Json[] | null
+        }
+        Update: {
+          brand?: string
+          code?: string
+          content?: Json[] | null
+          department?: string
+          descount?: string | null
+          descount_pix?: string | null
+          id?: string
+          img?: string[]
+          main_informations?: Json[] | null
+          name?: string
+          number_rating?: number
+          prev_price?: number | null
+          price_in_card_store?: number
+          price_part_in_card_store?: number
+          price_pix?: number | null
+          quantity?: number | null
+          rating?: number
+          specs?: Json | null
+          star_1?: number
+          star_2?: number
+          star_3?: number
+          star_4?: number
+          star_5?: number
+          subcategory?: string
+          tags?: string[] | null
+          variations?: Json[] | null
         }
         Relationships: []
       }
@@ -77,6 +178,7 @@ export type Database = {
           ip_user: string
           loc: string
           region: string
+          role: string | null
           username: string
         }
         Insert: {
@@ -91,6 +193,7 @@ export type Database = {
           ip_user: string
           loc: string
           region: string
+          role?: string | null
           username: string
         }
         Update: {
@@ -105,6 +208,7 @@ export type Database = {
           ip_user?: string
           loc?: string
           region?: string
+          role?: string | null
           username?: string
         }
         Relationships: []

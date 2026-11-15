@@ -6,6 +6,10 @@ import { validateDataRegister } from "@/utils/validateData";
 
 import { useAuth } from "@/context/useAuth";
 
+import type { UserDataRegister } from "@/types/userData";
+import type { ErrorApiResponse } from "@/types/api";
+
+import CustomInput from "@/components/layout/form/CustomInput";
 import Form from "@/components/Form";
 import Select from "@/components/layout/form/Select";
 
@@ -13,11 +17,17 @@ import styles from "@/style/pages/auth/Registro.module.css";
 
 type gender = "masculino" | "feminino" | "binary" | "non-binary" | "outros";
 
+type FormErrors = Partial<Record<keyof UserDataRegister | "confirm_password", string>>;
+type ErrorApi = Partial<ErrorApiResponse>;
+
 const Registro = () => {
   const [date, setDate] = useState("");
   const [gender, setGender] = useState<gender>("outros");
   const [disabled, setDisabled] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [registerConfirmed, setRegisterConfirmed] = useState(false);
+  const [error, setError] = useState<FormErrors>({});
+  const [errorApi, setErrorApi] = useState<ErrorApi>({});
 
   const options = [
     { value: "masculino", label: "Masculino" },
@@ -56,6 +66,8 @@ const Registro = () => {
     const password = String(formData.get("password"));
     const confirm_password = String(formData.get("password_confirm"));
 
+    setError({});
+
     const userData = {
       full_name,
       gender,
@@ -70,15 +82,34 @@ const Registro = () => {
 
     if (typeof validation === "object") {
       setDisabled(false);
+      setError({
+        [validation.field]: validation.message || "campo inválido"
+      });
       return validation;
     }
 
+    setDisabled(true);
+
     const result = await register(userData);
 
-    if (!result.error) {
-      setDisabled(true);
+    if (result.error) {
+      setDisabled(false);
+      console.log("Campo que deu erro: ", result.field)
+      if (result.field === "email") {
+        setErrorApi({
+          field: result.field,
+          message: result.message
+        });
+      } else if (result.field === "password") {
+        setErrorApi({
+          field: result.field,
+          message: result.message
+        })
+      }
     } else {
       setDisabled(false);
+      setRegisterConfirmed(true);
+      setErrorApi({});
     };
 
     return result;
@@ -89,7 +120,16 @@ const Registro = () => {
 
     console.log("Código de confirmação sendo analisado!");
 
+    setDisabled(true);
+
     const result = await verify(code);
+
+    if (result.error) {
+      setDisabled(false);
+    } else {
+      setDisabled(false);
+      setRegisterConfirmed(false);
+    }
 
     return result;
   };
@@ -102,38 +142,49 @@ const Registro = () => {
           onSubmit={handleRegister}
           buttonAction="Continuar"
           classname={styles.registro_form}
-          disabled={disabled}
-          styles={styles}
+          disabled={disabled || registerConfirmed} // disabled || registerConfirmed
         >
-          <input
+          <CustomInput 
+            errorZod={error.full_name}
+            className={styles.input_container}
             type="text"
             name="full_name"
             id="fullname_user"
             placeholder="Nome Completo"
             required
           />
-          <Select
-            id="gender"
-            options={options}
-            nameDefault="Gênero"
-            onChange={(v) => setGender(String(v) as gender)}
-          />
-          <input
+          <CustomInput
+            errorZod={error.gender}
+          >
+            <Select
+              id="gender"
+              options={options}
+              nameDefault="Gênero"
+              onChange={(v) => setGender(String(v) as gender)}
+            />
+          </CustomInput>
+
+          <CustomInput 
+            errorZod={error.date_birth}
+            className={styles.input_container}
             type="text"
             name="date_birth"
             id="birth_user"
             placeholder="Data de nascimento"
             maxLength={10}
             value={date}
-            required
             onChange={handleDataChange}
             onKeyDown={(e) => {
               if (!/[0-9]|Tab|Backspace|Delete|Arrow/.test(e.key)) {
                 e.preventDefault();
               }
             }}
+            required
           />
-          <input
+          <CustomInput 
+            errorZod={error.email}
+            errorApi={errorApi.field === "email" ? errorApi.message : undefined}
+            className={styles.input_container}
             type="email"
             name="email"
             id="email_user"
@@ -141,8 +192,11 @@ const Registro = () => {
             maxLength={255}
             required
           />
-          <input
-            type="password"
+          <CustomInput 
+            errorZod={error.password}
+            errorApi={errorApi.field === "password" ? errorApi.message : undefined}
+            className={styles.input_container}
+            type={!error.password && !error.confirm_password ? "password" : "text"}
             name="password"
             id="pass"
             placeholder="Senha"
@@ -166,11 +220,13 @@ const Registro = () => {
               </article>
             </main>
           )}
-          <input
-            type="password"
+          <CustomInput 
+            errorZod={error.confirm_password}
+            className={styles.input_container}
+            type={!error.confirm_password ? "password" : "text"}
             name="password_confirm"
             id="confirm_pass"
-            placeholder="Confirmar senha"
+            placeholder="Confirmar Senha"
             minLength={8}
             maxLength={16}
             required
@@ -179,7 +235,7 @@ const Registro = () => {
         <p>
           Já tem uma conta? <Link to="/account/login">Faça Login</Link>
         </p>
-        <Form onSubmit={handleConfirm} buttonAction="Confirmar" classname={disabled ? styles.confirm_form : styles.hidden} disabled={disabled}>
+        <Form onSubmit={handleConfirm} buttonAction="Confirmar" classname={registerConfirmed ? styles.confirm_form : styles.hidden} disabled={disabled}>
             <h2>código de confirmação</h2>
             <input 
               type="text"

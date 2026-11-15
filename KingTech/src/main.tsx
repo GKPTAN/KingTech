@@ -1,8 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { AuthProvider } from './context/AuthContext';
+import AppAdmin from './AppAdmin';
 import AuthGuard from './context/AuthGuard';
 import Account from './routes/Account';
 import Cart from './routes/Cart';
@@ -77,20 +79,36 @@ const router = createBrowserRouter([
         element: <Support />,
       },
       {
-        path: "/admin",
-        element: (
-          <AuthGuard roles={["admin"]}>
-            <Admin />
-          </AuthGuard>
-        ),
-      },
-      {
         path: "/product/:id/:name",
         element: <ProductPage />,
       }
     ],
   },
+  {
+    path: "/admin",
+    element: (
+      <AuthGuard roles={["admin"]}>
+        <AppAdmin />
+      </AuthGuard>
+    ),
+    errorElement: <Error404 />,
+    children: [
+      {
+        path: "",
+        element: <Admin />
+      }
+    ]
+  }
 ]);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 30 * 60 * 1000,
+    },
+  },
+});
 
 const container = document.getElementById('root');
 if (!container) {
@@ -99,8 +117,10 @@ if (!container) {
 
 createRoot(container).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

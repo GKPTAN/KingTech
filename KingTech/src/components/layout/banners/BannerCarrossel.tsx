@@ -4,18 +4,17 @@ import {
   LiaAngleDoubleRightSolid,
 } from "react-icons/lia";
 import { MdEdit } from "react-icons/md";
-import SliderSlick from "react-slick";
+// @ts-ignore
+import SliderSlick from "react-slick/lib/slider";
 
 import { useWidthWindow } from "@/hooks/useWindowWidth";
-
-import type { Settings } from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/style/components/layout/Banner.css";
 import "@/style/responsive/components/layout/Banner.responsive.css";
 
-const Slider = SliderSlick as Settings as React.ElementType;
+const Slider = (SliderSlick as any).default;
 
 export interface ArrowProps {
   className?: string;

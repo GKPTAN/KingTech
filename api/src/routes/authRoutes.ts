@@ -19,20 +19,20 @@ const AuthRoutes = async (fastify: FastifyInstance, options: FastifyPluginOption
 
   const app = fastify.withTypeProvider<ZodTypeProvider>();
 
-  app.post("/register",{schema: {
-    body: UserDataRegisterSchema,
-    response: {200: ResponseSucessRegisterSchema, default: ResponseErrorSchema}
-  }}, (request, reply) => registerController(request, reply, fastify.supabase));
+  // app.post("/register",{schema: {
+  //   body: UserDataRegisterSchema,
+  //   response: {200: ResponseSucessRegisterSchema, default: ResponseErrorSchema}
+  // }}, (request, reply) => registerController(request, reply, fastify.supabase));
 
   app.post("/verify", {schema: {
     body: UserVerifySchema,
     response: {200: ResponseSucessVerifySchema, default: ResponseErrorSchema}
   }}, (request, reply) => verifyController(request, reply, fastify.supabase));
 
-  app.post("/login", {schema: {
-    body: UserDataLoginSchema, 
-    response: {200: ResponseSucessLoginSchema, default: ResponseErrorSchema}
-  }}, (request, reply) => loginController(request, reply, fastify.supabase));
+  // app.post("/login", {schema: {
+  //   body: UserDataLoginSchema, 
+  //   response: {200: ResponseSucessLoginSchema, default: ResponseErrorSchema}
+  // }}, (request, reply) => loginController(request, reply));
 
   fastify.post("/refresh", (request, reply) => refreshController(request, reply, fastify.supabase));
 

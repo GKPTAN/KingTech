@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import type { CookieSerializeOptions } from "@fastify/cookie";
 
 interface logoutBody {}
@@ -11,9 +11,21 @@ const logoutController = async (
 ) => {
   try {
 
-    const user = request.user;
+    const accessToken =
+      request.cookies?.token ||
+      (request.headers.authorization?.startsWith("Bearer ")
+        ? request.headers.authorization.slice("Bearer ".length)
+        : null);
 
-    const { error } = await supabase.auth.admin.signOut(user.id, 'global');
+    if (!accessToken) {
+      return reply.status(401).send({
+        message: "Token de acesso não fornecido",
+        error: true,
+        technicalError: true,
+      });
+    }
+
+    const { error } = await supabase.auth.admin.signOut(accessToken, "global");
 
     if (error) {
       console.error("Erro ao realizar logout:", error);

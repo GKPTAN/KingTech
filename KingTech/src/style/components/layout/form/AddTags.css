@@ -1,0 +1,62 @@
+.tags_edit {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 450px;
+    margin: 15px 0;
+}
+.tags_edit h2 {
+    margin: 0 !important;
+    font-size: 1.2rem;
+    color: #334155;
+}
+.tags_edit .add_tags_btn {
+    background-color: #04797357;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+.tags_edit .add_tags_btn:hover {
+    background-color: #d1eceb;
+}
+.box_add_tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-height: 44px;
+    cursor: text;
+}
+.tag_input_embedded {
+    border: none !important;
+    outline: none;
+    flex: 1;
+    min-width: 60px;
+    font-size: 0.95rem;
+    padding: 4px 0px;
+}
+
+.tag_badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #012b29;
+    color: #f9cb40;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.remove_tag_btn {
+    fill: #fff;
+    cursor: pointer;
+}

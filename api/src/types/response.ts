@@ -9,6 +9,7 @@ export const ResponseErrorSchema = z.object({
     /** em caso de erro técnico, uma mensagem genérica será enviada para o front-end para não gerar dúvidas nos usuários */
     technicalError: z.boolean().optional(),
     details: z.string().optional(),
+    field: z.string().optional(),
 });
 
 export const UserLoginResponseSchema = z.object({
@@ -41,13 +42,16 @@ export const ResponseSucessVerifySchema = z.object({
     location: z.string(),
 });
 
-export type SucessResponse<T> = {
+export type SucessResponse<T = unknown> = {
     message: string;
     error: false;
     technicalError: false;
 } & T;
 
-export type ErrorResponse = z.infer<typeof ResponseErrorSchema>;
+export type ErrorResponse = z.infer<typeof ResponseErrorSchema & {error: true}>;
 export type LoginData = z.infer<typeof ResponseSucessLoginSchema>;
 export type RegisterData = z.infer<typeof ResponseSucessRegisterSchema>;
 export type VerifyData = z.infer<typeof ResponseSucessVerifySchema>
+
+// Criação | Atualização | Remoção de produtos
+

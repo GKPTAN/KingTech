@@ -41,6 +41,15 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
   const navigate = useNavigate();
   const rating = 4;
 
+  const handleBuyClick = () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'click_compre_agora',
+      product_name: 'produto',
+      value: '999.99'
+    })
+  }
+
   return (
     <div className={`product-card ${mode === CardMode.PORTRAIT ? "portrait" : "landscape"}`} id={`prod-${id}`} onClick={() => navigate(`/product/${id}/${name}`)}>
         {mode === CardMode.PORTRAIT && (
@@ -53,7 +62,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
             <HeartFavorite />
           </div>
         )}
-        <img src={img} alt={alt} />
+        <img className="img_product" src={img} width={150} height={150} alt={alt} />
         {(mode === CardMode.PORTRAIT || mode === CardMode.LIST) && (
           <h3 className="name-product">
             <div className='royalty'>
@@ -97,11 +106,11 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
                 <HeartFavorite />
               </div>
             )}
-            <p className="prev-price">{prevPrice ?? ""}</p>
-            <p className="price-product">R$ {price}</p>
+            <p className="prev-price"><del>{prevPrice ? (prevPrice).toLocaleString("pt-BR", {minimumFractionDigits: 2}): ""}</del></p>
+            <p className="price-product">R$ {price < 1 || !price ? "" : (price).toLocaleString("pt-BR", {minimumFractionDigits: 2})}</p>
             <p>
                 Á vista <br />
-                ou 10x de R$ {(Math.floor((price / 10) * 100) / 100).toLocaleString("pt-BR", {minimumFractionDigits: 2})} sem juros
+                ou 10x de R$ {price && (Math.floor((price / 10) * 100) / 100).toLocaleString("pt-BR", {minimumFractionDigits: 2})} sem juros
             </p>
           </div>
         </div>
@@ -110,7 +119,7 @@ const ProductCard = ({mode, name, id, img, price, alt, prevPrice, button, cart}:
             type="button"
             nameAction="Compre agora"
             disabled={false}
-            onClick={() => {}}
+            onClick={handleBuyClick}
             className={`btn-buy ${!button ? 'hidden' : ""}`}
           />
         )}

@@ -5,6 +5,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tsParser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
+import vitest from "eslint-plugin-vitest";
 
 export default [
   { ignores: ["dist"] },
@@ -127,4 +128,16 @@ export default [
       ],
     },
   },
+  {
+    files: ["__tests__/**/*.{test,spec}", "__tests__/**/*.{tsx,ts}"],
+    plugins: {
+      vitest,
+    },
+    rules: {
+      ...vitest.configs.all.rules,
+      "vitest/no-hooks": "off",
+      "vitest/prefer-lowercase-title": "off",
+      "vitest/prefer-expect-assertions": "off",
+    }
+  }
 ];

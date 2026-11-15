@@ -1,12 +1,42 @@
-.error {
+.error_page {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 }
-.error h1 {
-    background-color: black;
-    color: white;
-    padding: 30px;
+
+.error_page h1 {
     font-size: 3rem;
+    position: relative;
+    color: #047973;
+}
+.error_page h1 > svg {
+    rotate: -40deg;
+    position: absolute;
+    top: -40%;
+    left: -30%;
+    color: #ddb437;
+}
+.error_page p {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+.error_page button {
+    background-color: #012B29;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.error_page button:hover {
+    background-color: #E0E0E0;
+    color: black;
+    box-shadow: 0px 2px 3px #012b29ad;
 }
