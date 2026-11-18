@@ -1,9 +1,10 @@
 import type { FastifyInstance, FastifyPluginOptions } from "fastify";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
-import { createProductSchema, uploadProductImagesSchema } from "@/utils/validateData";
+import { createProductSchema, uploadProductImagesSchema, displayProductsDepartmentsQuerySchema } from "@/utils/validateData";
 import { ResponseErrorSchema } from "@/types/response";
 import { SucessResponseProductSchema, SucessUploadImageResponseSchema } from "@/types/products/product";
 import createProductController from "@/controllers/products/register/createProduct";
+import displayProductsDepartmentsController from "@/controllers/products/read/displayProductsDepartments";
 import displayProductsHomeController from "@/controllers/products/read/displayProductsHome";
 import uploadImagesProductController from "@/controllers/products/register/uploadImagesProduct";
 
@@ -21,8 +22,24 @@ const ProductRoutes = async (fastify: FastifyInstance, options: FastifyPluginOpt
     }}, (request, reply) => uploadImagesProductController(request, reply, fastify.supabase));
 
     app.register(
-        async (dysplayRoutes) => {
-            dysplayRoutes.get("/home", (request, reply) => displayProductsHomeController(request, reply, fastify.supabase));
+        async (displayRoutes) => {
+            const displayApp = displayRoutes.withTypeProvider<ZodTypeProvider>();
+
+            displayApp.get("/home", (request, reply) => displayProductsHomeController(request, reply, fastify.supabase));
+
+            displayApp.get(
+                "/department",
+                {
+                    schema: {
+                        querystring: displayProductsDepartmentsQuerySchema,
+                    },
+                },
+                (request, reply) => displayProductsDepartmentsController(
+                    request.query,
+                    reply,
+                    fastify.supabase,
+                ),
+            )
         },
         { prefix: "/display" }
     );

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDeleteSweep, MdLocalOffer } from "react-icons/md";
-import { TbCrown } from "react-icons/tb";
+// import { TbCrown } from "react-icons/tb";
 
-import { useWidthWindow } from "@/hooks/useWindowWidth";
+// import { useWidthWindow } from "@/hooks/useWindowWidth";
 import { useForm } from "@/hooks/useStep";
 
 import { CartSteps } from "@/types/steps";
-import { CardMode } from "@/types/products";
+// import { CardMode } from "@/types/products";
 
 import BasketTech from "@/components/layout/pages/Cart/BasketTech";
 import Button from "@/components/layout/Button";
 import Steps from "@/components/layout/pages/Cart/Steps";
-import CarrosselOffers from "@/components/layout/CarrosselOffers";
+// import CarrosselOffers from "@/components/layout/CarrosselOffers";
 import AddressBuy, { type AddressData } from "@/components/layout/pages/Cart/Address/AddressBuy";
 import DeliveryBuy from "@/components/layout/pages/Cart/Delivery/DeliveryBuy";
 
@@ -59,7 +59,7 @@ const products = [
 
 const Cart = () => {
   const handleRemove = () => {};
-  let widthWindow = useWidthWindow();
+  // let widthWindow = useWidthWindow();
   const [addressData, setAddressData] = useState({
     cep: "",
     street: "",
@@ -143,7 +143,7 @@ const Cart = () => {
               />
             </div>
           </form>
-          {isFirstStep && (
+          {/* {isFirstStep && (
             <CarrosselOffers
             titleHidden={false}
             className="recommend"
@@ -162,7 +162,7 @@ const Cart = () => {
             button={true}
             cart={true}
           />
-          )}
+          )} */}
         </>
       )}
     </div>

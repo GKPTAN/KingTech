@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PiShareNetwork } from "react-icons/pi";
 import { RiFlashlightFill, RiShoppingBasketFill } from "react-icons/ri";
-import { LiaSearchDollarSolid } from "react-icons/lia";
+// import { LiaSearchDollarSolid } from "react-icons/lia";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
@@ -10,7 +10,7 @@ import { useWidthWindow } from "@/hooks/useWindowWidth";
 
 import { formatarMoeda } from "@/utils/formatCurrency";
 
-import { CardMode } from "@/types/products";
+// import { CardMode } from "@/types/products";
 
 import PromoConditionsModal from "@/components/layout/pages/ProductPage/Modals/PromoConditionsModal";
 import ImageSlideModal from "@/components/layout/pages/ProductPage/Sliders/ImageSlideModal";
@@ -18,7 +18,7 @@ import Button from "@/components/layout/Button";
 import HeartFavorite from "@/components/layout/HeartFavorite";
 import ProductVariants from "@/components/layout/pages/ProductPage/Product/ProductVariants";
 import StoreAdvantages from "@/components/layout/pages/ProductPage/StoreAdvantages";
-import CarrosselOffers from "@/components/layout/CarrosselOffers";
+// import CarrosselOffers from "@/components/layout/CarrosselOffers";
 import QuestionsAndAnswers from "@/components/layout/pages/ProductPage/Questions/QuestionsAndAnswers";
 import PaymentMethods from "@/components/layout/pages/ProductPage/Payment/PaymentMethods";
 import Reviews from "@/components/layout/pages/ProductPage/Reviews/Reviews";
@@ -228,7 +228,7 @@ const ProductPage = () => {
         <StoreAdvantages />
       </section>
 
-      <CarrosselOffers
+      {/* <CarrosselOffers
         titleHidden={false}
         className="related"
         ariaLabel="Produtos relacionados"
@@ -245,7 +245,7 @@ const ProductPage = () => {
         cardPreviewMode={CardMode.PORTRAIT}
         button={false}
         cart={false}
-      />
+      /> */}
 
       <section className="product-sheet">
         <h2>Ficha Técnica</h2>
@@ -267,7 +267,7 @@ const ProductPage = () => {
         <img src="/image/banner2.jpg" alt="Banner promocional" />
       </section>
 
-      <CarrosselOffers
+      {/* <CarrosselOffers
         titleHidden={false}
         className="most-wanted"
         ariaLabel="Produtos mais procurados"
@@ -284,7 +284,7 @@ const ProductPage = () => {
         cardPreviewMode={CardMode.PORTRAIT}
         button={true}
         cart={false}
-      />
+      /> */}
 
       <Reviews
         product={product}

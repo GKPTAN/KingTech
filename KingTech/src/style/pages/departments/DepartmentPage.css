@@ -10,6 +10,12 @@
     width: 100%;
     height: 100%;
 }
+.products-content .skeleton_slider.landscape {
+    width: 60%;
+    margin: 0px auto 2rem;
+    border-radius: 20px;
+    height: 324px;
+}
 .products-content div[class*="automated"] {
     width: 60%;
     margin: 0px auto 2rem;
@@ -200,4 +206,13 @@
 .products-content .catalog .catalog-products.list .product-card .info-prod {
     display: flex;
     justify-content: space-between;
+}
+
+/* Carregamento */
+
+.products-content .catalog-products .load_animation {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
 }

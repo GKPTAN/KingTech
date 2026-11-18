@@ -7,6 +7,7 @@ import { useAuth } from "@/context/useAuth";
 import type { ErrorApiResponse, SucessApiResponse } from "@/types/api";
 import type { AxiosError } from "axios";
 import type { CreateProduct } from "@/types/products";
+import type { Department, Subcategory } from "@/data/departmentsData";
 import type { UploadedFile } from "@/components/layout/form/ImageUploader";
 import type { UploadImageResponse } from "@/types/products";
 
@@ -25,6 +26,21 @@ export interface HomeProductsResponse {
     mostWanted: CarouselProduct[];
     recommendations: CarouselProduct[];
   } 
+}
+
+export interface DepartmentProductsResponse {
+  data: {
+    releases: CarouselProduct[];
+    products: CarouselProduct[];
+    totalCount: number;
+  }
+}
+
+interface DepartmentsInfo {
+  department: Department;
+  subcategory: Subcategory;
+  page: number;
+  limit: number;
 }
 
 export const useProductService = () => {
@@ -110,5 +126,34 @@ export const useProductService = () => {
     }
   }, []);
 
-  return { createProduct, uploadProductImages, getProductsForHome };
+  const getProductsForDepartments = useCallback(async ({
+    department,
+    subcategory,
+    page,
+    limit
+  }: DepartmentsInfo): Promise<SucessApiResponse<DepartmentProductsResponse> | ErrorApiResponse> => {
+    try {
+      const response = await AxiosConfig.get(`product/display/department`, {
+        params: {
+          department,
+          subcategory,
+          page,
+          limit,
+        },
+      });
+
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as AxiosError<ErrorApiResponse>;
+      console.error("Erro ao buscar produtos no departamento: ", err);
+
+      return {
+        error: true,
+        message: err.response?.data.message || "Erro ao conectar com o servidor, tente novamente mais tarde",
+        technicalError: false
+      };
+    };
+  }, [])
+
+  return { createProduct, uploadProductImages, getProductsForHome, getProductsForDepartments };
 };
